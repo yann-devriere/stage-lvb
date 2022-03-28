@@ -1,0 +1,43 @@
+
+ .photoModal{
+    height: 100%; 
+    width: 100%;
+} 
+
+.modal .modal-dialog {
+    max-width: 70%; }
+
+
+.card{
+    width:45%;
+}
+
+@media (max-width:1200px) {
+    .card {
+        width:55%;
+}
+}
+
+@media (max-width:1000px) {
+    .card {
+        width:70% !important;
+}
+}
+
+/* @media (max-width:782px) {
+    .card {
+        width :90% !important;
+}
+}
+
+@media (max-width:600px) {
+    .card {
+        width:100% !important;
+        
+}
+} */
+
+.boby{
+    width: 100%;
+}
+

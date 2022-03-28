@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Newsletter administrateur{% endblock %}
+
+{% block body %}
+{{form(formContenuMail)}}
+<a href="{{path('admin')}}" class="btn btn-success">Retour à l'interface d'administration</a>
+{% endblock %}

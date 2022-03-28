@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ActuController!{% endblock %}
+
+{% block body %}
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="JLTZojyA"></script>
+
+<div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a></blockquote></div>
+
+
+{{form(formFiltres)}}
+
+{% for message in app.flashes('inscriptionNL') %}
+    <div class="flash-notice">
+        {{ message }}
+    </div>
+{% endfor %}
+<div class="bg-success">
+{{form(formNewsletter)}}
+</div>
+
+{% for article in articles %}
+
+
+
+    <div class="d-flex  justify-content-center boby texteArticles">
+        <div class="card mb-4 " >
+            <img src="/uploads/{{article.photo}}" class="card-img-top boby" alt="photo de l'article">
+            <div class="card-body boby ">
+                <b><p class="card-title ">{{article.nom}}</p></b>
+                <p class="card-text">{{article.texte|slice(0,200)|raw}}...</p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}">
+                  Lire plus
+                </button>            </div>
+        </div>
+        <br>
+    </div> 
+
+        
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{article.id}}" tabindex="-1" aria-labelledby="exampleModal{{article.id}}Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
+
+        <h2>{{article.nom}}</h2><br>
+
+        {{article.texte|raw}} <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
