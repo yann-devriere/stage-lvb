@@ -1,0 +1,20 @@
+.fondIP{
+    background-color: lightgray;
+    font-size: medium;
+
+}
+
+.fondIP h3 {
+    text-decoration: underline;
+    text-align: center;
+}
+
+.fondIP h5{
+    text-decoration: underline;
+    text-align: center;
+}
+
+.horaires p {
+    text-align: center;
+}
+

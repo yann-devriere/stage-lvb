@@ -2,57 +2,6 @@
 
 {% block body %}
 
-
- <!----- carte js de la salle de vieux berquin -------->
-{# 
-<link rel="stylesheet" href="leaflet/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-
-    <script src="leaflet/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
-
-
-        <div id="carte" style="width:50%; height:450px;">
-        
-        </div>
-
-<script>
-
-initMap('carte');
-
-        function initMap(lat,lng){
-
-        const map = L.map('carte').setView([50.6940180068877, 2.64108085743208], 15);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-                L.marker([50.6940180068877, 2.64108085743208]).addTo(map)
-                    .bindPopup('La salle se trouve ici.')
-                    .openPopup();
-
-        const layerGroupMarker = L.layerGroup().addTo(map);
-
-        map.on('click', function (e) {
-            map.setZoom(17);
-            map.setView([e.latlng.lat,e.latlng.lng], 17);
-
-        });
-    }
-    </script>  #}
-
-
-
-
-
-
-
-
-
-
 <!-- Fonction JS qui permet de copier le texte d'un input peut servir pour une newsletter pour recup les mails-->
 
 
@@ -87,11 +36,14 @@ initMap('carte');
     </div>
 {% endfor %}
 
+<div class="row">
+
+  <div class="col-2"></div>
 
 
-<!-- Slide diapo page d'accueil a reporduir autant que nécessaire -->
-
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="col-8">
+  
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -101,8 +53,8 @@ initMap('carte');
 
 
    {% for key, photo in photoSlide %}
-        <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %}>
-            <img src="/uploads/{{photo.photo}}" class="d-block w-100" alt="...">
+        <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %} >
+            <img src="/uploads/{{photo.photo}}" class="d-block my-auto mx-auto" alt"" > 
         </div>
     {% endfor %}
   </div>
@@ -115,6 +67,15 @@ initMap('carte');
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+  </div>
+
+  <div class="col-2"></div>
+
+</div>
+
+<!-- Slide diapo page d'accueil a reporduir autant que nécessaire -->
+
+
 
 
 {% endblock %}

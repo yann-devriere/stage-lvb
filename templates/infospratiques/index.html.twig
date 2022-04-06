@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Infos pratiques{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row">
+
+
+        <div class="col-6 mt-3">
+            <div class="fondIP p-2">
+                <h3>Comment nous contacter ?</h3> 
+                <p  class="mt-4">Mail: exemple@gmail.com</p>
+                <p class="mt-3">Téléphone: XX-XX-XX-XX-XX</p>
+                <p class="mt-3"> <a href="https://www.facebook.com/lesvolantsberquinois/"> <img src="images/logoFB.svg" height="35px" alt="">Notre page Facebook</a> </p>
+
+            </div>
+
+            <div class="fondIP p-2 mt-4 horaires">
+                <h3>Les entrainements</h3> <br>
+
+                <h5>Les adultes</h5>
+                <p class="mt-3">Mercredi: 19h30 - 21h(ou plus)</p>
+                <p class="mt-3">Vendredi: 18h30 - 21h(ou plus)</p>
+                
+                <h5 class="mt-5">Les enfants</h5>
+                <p class="mt-3">Mercredi: 18h30 - 19h30 </p>
+            </div>
+        </div>
+
+        <div class="col-6 mt-3">
+            <div class="fondIP p-4">
+                                <!----- carte js de la salle de vieux berquin -------->
+
+                    <link rel="stylesheet" href="leaflet/leaflet.css"
+                            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+                            crossorigin="" />
+
+                        <script src="leaflet/leaflet.js"
+                            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                            crossorigin=""></script>
+
+
+                            <div id="carte" style="width:100%; height:350px;">
+                            
+                            </div>
+
+                    <script>
+
+                    initMap('carte');
+
+                            function initMap(lat,lng){
+
+                            const map = L.map('carte').setView([50.6940180068877, 2.64108085743208], 15);
+
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            }).addTo(map);
+
+                                    L.marker([50.6940180068877, 2.64108085743208]).addTo(map)
+                                        .bindPopup('La salle se trouve ici.')
+                                        .openPopup();
+
+                            const layerGroupMarker = L.layerGroup().addTo(map);
+
+                            map.on('click', function (e) {
+                                map.setZoom(17);
+                                map.setView([e.latlng.lat,e.latlng.lng], 17);
+
+                            });
+                        }
+                        </script>  
+
+                <!-- fin de la map ------------------------------>
+
+                        <div>
+                            <h3 class="mt-3">La salle </h3>
+                            <p class="mt-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus facilis laborum est alias nobis quas dignissimos reiciendis, tempore, quo eius, laudantium dolores. Optio deleniti accusamus, illum voluptas odio quo sapiente quod architecto quibusdam ex, iste possimus consequatur dignissimos qui id ab aspernatur maxime quam a, culpa fuga quia aperiam? Rerum!</p>
+                        </div>
+
+                        <div>
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+
+
+                            {% for key, photo in photoSlide %}
+                                    <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %} >
+                                        <img src="/uploads/{{photo.photo}}" class="d-block my-auto mx-auto" alt"" > 
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                            </div>
+                            </div>
+                        </div>
+
+
+            </div>
+        
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

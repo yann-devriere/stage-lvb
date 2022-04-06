@@ -23,6 +23,7 @@ class AdminNewsletterController extends AbstractController
     public function index(EntityManagerInterface $entityManager, Request $request ): Response
     {
 
+
             $formContenuMail = $this->createForm(ContenuMailType::class);
 
 

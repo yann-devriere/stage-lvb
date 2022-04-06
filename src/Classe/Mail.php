@@ -25,12 +25,9 @@ public function send($to_email , $to_name, $subject, $content)
                 'To' => [
                     [
                         'Email' => $to_email ,
-                        'Name' => $to_name
+                        'Name' => $to_name,
                     ],
-                    [
-                        'Email' => 'yanndev59@gmail.com' ,
-                        'Name' => 'pilou'
-                    ]
+                    
                     
                 ],
                 'TemplateID' => 3538596,
@@ -47,7 +44,7 @@ public function send($to_email , $to_name, $subject, $content)
 }
 
 
-public function sendMultiple($contacts , $subject, $content)
+public function sendMultiple($contacts , $to_name, $subject, $content)
 {
 
     foreach ($contacts as $contact){

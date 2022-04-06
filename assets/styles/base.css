@@ -2,8 +2,82 @@
     height: 150px;
     width : auto;
 }
-.fondNav {
+.bg-bleu {
     background-color: rgb(16, 16, 129);
+}
+ .ml-auto{
+     margin-left: auto;
+ }
+
+.conteneur-nav{
+    margin-top: 0;
+    box-shadow: 0px 0px 40px inset rgba(49, 2, 236, 0.69);
+
+}
+
+.photoNav{
+    height: 70px;
+}
+
+.navbar-collapse a {
+    font-size: larger;
 }
 
 
+@media (max-width: 450px) {
+    .photoNav{
+        height: 60px;
+    }
+    .navbar-collapse a {
+        font-size: medium;
+    }
+}
+
+@media (max-width: 400px) {
+    .photoNav{
+        height: 50px;
+    }
+    
+}
+
+@media (max-width: 350px) {
+    .photoNav{
+        height: 45px;
+    }
+    .navbar-collapse a {
+        font-size: smaller;
+    }
+}
+
+@media (max-width: 315px) {
+    .photoNav{
+        height: 40px;
+    }
+  
+}
+
+.nav-link{
+    margin-top: 0px !important ;
+    margin-bottom: 0px !important;
+}
+
+.navbar-nav{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.footer{
+    height: 70px;
+}
+
+.carousel-item{
+    /* height:500px; */
+} 
+
+.carousel-item img{
+    width:auto;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+}
