@@ -2,80 +2,259 @@
 
 {% block body %}
 
-<!-- Fonction JS qui permet de copier le texte d'un input peut servir pour une newsletter pour recup les mails-->
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="3wM3JQcY"></script>
 
 
-<!-- The text field -->
-{# <input type="text" value="Hello World" id="myInput">
+<div>
+<img src="images/group.jpg" alt="" width="100%" >
+</div>
 
-<!-- The button used to copy the text -->
-<button onclick="myFunction()">Copy text</button>
+{# <div class="container">
 
-<script>function myFunction() {
-  /* Get the text field */
-  var copyText = document.getElementById("myInput");
+  <div class="row">
 
-  /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-   /* Copy the text inside the text field */
-  navigator.clipboard.writeText(copyText.value);
-
-  /* Alert the copied text */
-  alert("Copied the text: " + copyText.value);
-}</script>
- #}
+      <div class="col-2"></div>
 
 
+      <div class="col-8">
+      
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
 
 
-{% for message in app.flashes('envoiNL') %}
+      {% for key, photo in photoSlide %}
+            <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %} >
+                <img src='/uploads/{{photo.photo}}' class="d-block my-auto mx-auto" alt"" > 
+            </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+      </div>
+
+      <div class="col-2"></div>
+
+  </div> #}
+
+<div class="container-fluid">
+
+  <div class="row d-flex justify-content-between">
+
+
+    <div class="col-lg-8 pb-0 mb-0 m-3 ms-0 ms-lg-4 h-50 p-3 p-lg-0 ">
+      {# <div class="col-12 fondIP rounded mx-auto my-auto p-0"> #}
+      <div class="d-flex justify-content-center mb-3">
+      <div class="bg-bleu text-light btn rounded ">
+        <h3>Les volants Berquinois</h3>
+      </div>
+      </div>
+  
+      <div class="texteHome bg-light b-shadow">
+              <h3 class="text-center">Plus qu'un club</h3>
+
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam laboriosam vitae sapiente facilis officiis nesciunt debitis quos alias? Distinctio quibusdam commodi veniam. Tempore quidem voluptas labore veritatis illo ullam natus nam. Enim, odio commodi inventore ad quibusdam possimus voluptatibus veniam quas quam, ea qui cum nihil iste voluptates odit provident neque saepe illum blanditiis ex. Quos eius tempore quibusdam laboriosam voluptatibus exercitationem, temporibus commodi soluta maxime est, cupiditate vero dignissimos.
+      </div>
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+
+{% for key,article in articlesSlide %}
+  
+    <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %}>
+
+        <div class="card m-3" >
+            {% set photocrop %}/uploads/{{article.photo}}{% endset %}
+
+            <img src="{{photocrop|imagine_filter('cropArticle4')}}" class="card-img-top" alt="photo de l'article">
+            <div class="card-body boby ">
+                <div class="d-flex">
+                {% for catégorie in article.categorie %}
+                 <a href="{{path('actu',{'categories':catégorie.id})}}" class="me-2 font-weight-light bleu-elec" style="font-size:12px;"> {{catégorie}} </a>
+                {% endfor %}
+                <hr>
+                </div>
+                <b><p class="card-title ">{{article.nom|raw}}</p></b>
+                <p class="card-text">{{article.texte|striptags|slice(0,200)}}...</p>
+                <button type="button" class="btn bg-bleu-clair text-light b d-sm-none ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}">
+                  Lire plus
+                </button>     
+                  <button type="button" class="btn bg-bleu text-light b d-none d-sm-block ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}large">
+                  Lire plus
+                </button> 
+            </div>
+        </div>
+        <br>
+
+    </div>
+{% endfor %}
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+{% for article in articlesSlide %}
+
+
+
+<!-- Modal -->
+<div class="modal fade modal-fullscreen no-gutter " id="exampleModal{{article.id}}" tabindex="-1" aria-labelledby="exampleModal{{article.id}}Label" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content modalArticles">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
+
+        <h2>{{article.nom|raw}}</h2><br>
+
+        {{article.texte|raw}} <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ferme</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade " id="exampleModal{{article.id}}large" tabindex="-1" aria-labelledby="exampleModal{{article.id}}largeLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content modalArticles">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
+
+        <h2 class="p-3">{{article.nom|raw}}</h2><br>
+
+        <div class="p-3">{{article.texte|raw}}</div> <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+{% endfor %}
+      <div class="texteHome  bg-light  b-shadow mb-3">
+      <h3 class="text-center">Test</h3>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur architecto dignissimos perspiciatis animi laboriosam, neque, aut delectus exercitationem culpa ab dolorum dolores modi eos obcaecati quaerat ea dicta corporis ex aliquam, accusantium sit optio? Consequatur, vero architecto delectus sapiente id laudantium laboriosam veniam aspernatur deserunt doloremque animi at in adipisci quo optio eaque amet aliquam modi! Unde alias reiciendis minima?
+      </div>
+
+      
+
+
+    </div>
+    
+  
+
+<div class="col-lg-3 p-0 mt-3 mb-5 me-3 b-shadow bg-light p-2 h-75 fbcenter d-none d-lg-block ">
+      
+       <div id="fb-root"></div>
+      {# <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="JLTZojyA"></script> #}
+      <div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-height="" data-width="500"data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore " ><a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a></blockquote></div> 
+<!-- fin script facebook ---->
+
+    <div class="bg-light b-shadow p-2 mt-5">
+    <h5 class="text-center bleu-elec">Newsletter</h3>
+    <p>Recevez les dernières informations à propos du club</p>
+
+{% for message in app.flashes('inscriptionNL') %}
     <div class="flash-notice">
         {{ message }}
     </div>
 {% endfor %}
 
-<div class="row">
-
-  <div class="col-2"></div>
-
-
-  <div class="col-8">
-  
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-
-
-   {% for key, photo in photoSlide %}
-        <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %} >
-            <img src="/uploads/{{photo.photo}}" class="d-block my-auto mx-auto" alt"" > 
-        </div>
-    {% endfor %}
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-  </div>
-
-  <div class="col-2"></div>
-
+{{form(formNewsletter)}}
 </div>
 
-<!-- Slide diapo page d'accueil a reporduir autant que nécessaire -->
+  <div class="">
+    <ul class="nav flex-column text-end mt-3">
+        <li class="nav-item mx-3" >
+          <a class="nav-link {% if app.request.get('_route') == 'actu' %} active {% endif %} " aria-current="page" href="{{path('actu')}}">Actus du club</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="#">Qui sommes-nous ?</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link" href="#">Galerie photo</a>
+        </li>
+        <li class="nav-item  mx-3 dropdown ">
+          <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Infos pratiques
+          </a>
+          <ul class="dropdown-menu mx-2" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item " href="#">La salle</a></li>
+            <li><a class="dropdown-item " href="#">Les entrainements</a></li>
+            <li><a class="dropdown-item " href="#">S'inscrire</a></li>      
+          </ul>
+        </li>
+      </ul>
+  </div>
+
+</div>
+</div>
+
+ <div class=" justify-content-center  d-none d-sm-flex d-lg-none ">
+      
+
+      <div style="width:500px;">
+      <div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-width="500" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore " ><a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a></blockquote></div>
+       </div>
+    </div>
+
+    
+    {# <div class="d-flex d-lg-none d-flex justify-content-center " > #}
+      <div class="bg-light b-shadow p-2 pt-1 pb-1 mt-3 d-lg-none">
+      <h5 class="text-center bleu-elec">Newsletter</h3>
+      <p>Recevez les dernières informations à propos du club</p>
+
+  {% for message in app.flashes('inscriptionNL2') %}
+      <div class="flash-notice">
+          {{ message }}
+      </div>
+  {% endfor %}
+
+  {{form(formNewsletter2)}}
+
+</div>
 
 
+  {# </div> #}
 
+</div>
 
 {% endblock %}
+
+
+
+

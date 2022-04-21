@@ -32,9 +32,8 @@ class ContenuMailType extends AbstractType
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'attr'=>[
                     'label'=>'Envoyer à tous les membres de la newsletter'
-                ]
+                
             ])
 
         ;

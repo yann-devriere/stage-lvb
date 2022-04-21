@@ -10,7 +10,8 @@ fos_ck_editor:
     configs:
         base_config:
             toolbar:
-                - { name: "styles", items: ['Bold', 'Italic', 'BulletedList', 'Link', 'Underline','TextColor','FontSize','Font', 'Format' ] }
+                - { name: "styles", items: ['Bold', 'Italic', 'BulletedList', 'Link', 'Underline','TextColor','FontSize','Font', 'Format','Image' ] }
+                
 
 easy_admin:
     entities:

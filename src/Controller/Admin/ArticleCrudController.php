@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -34,6 +35,11 @@ class ArticleCrudController extends AbstractCrudController
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(true),
             AssociationField::new('categorie'),
+            BooleanField::new('pageDAccueil'),
+            ImageField::new('pieceJointe')->setBasePath('piecesjointes/')
+            ->setUploadDir('public/piecesjointes/')
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            // ->setRequired(true),
         ];
     }
     

@@ -40,6 +40,17 @@ class AdminNewsletterController extends AbstractController
 
         $mail->sendMultiple($adressesCibles,$contenuMail->getObjet(), $contenuMail->getTexte());
 
+        $this->addFlash(
+            'envoi',
+            'Votre message a bien été envoyé aux abonnés de la newletter <img src="images/mail.png" alt="">'
+        );
+
+
+        unset($mail);
+        unset($formContenuMail);
+        $mail = new Mail();
+        $formContenuMail = $this->createForm(ContenuMailType::class);
+
         }
 
         

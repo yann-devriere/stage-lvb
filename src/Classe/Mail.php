@@ -8,13 +8,11 @@ use Mailjet\Resources;
 class Mail
 {
 
-private $api_key = 'ade395cc79649fa780fecd497b45a07c' ;
-private $api_key_secret = 'b41203509819c1e92623d3912c536016';
 
 public function send($to_email , $to_name, $subject, $content)
 {
 
-     $mj= new Client($this->api_key, $this->api_key_secret,true,['version' => 'v3.1']); 
+     $mj= new Client($_ENV['MJ_APIKEY_PUBLIC'], $_ENV['MJ_APIKEY_PRIVATE'],true,['version' => 'v3.1']); 
     $body = [
         'Messages' => [
             [
@@ -44,12 +42,12 @@ public function send($to_email , $to_name, $subject, $content)
 }
 
 
-public function sendMultiple($contacts , $to_name, $subject, $content)
+public function sendMultiple($contacts , $subject, $content)
 {
 
     foreach ($contacts as $contact){
 
-     $mj= new Client($this->api_key, $this->api_key_secret,true,['version' => 'v3.1']); 
+     $mj= new Client($_ENV['MJ_APIKEY_PUBLIC'], $_ENV['MJ_APIKEY_PRIVATE'],true,['version' => 'v3.1']); 
     $body = [
         'Messages' => [
             [

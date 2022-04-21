@@ -14,6 +14,6 @@ class Search
     /** 
     * @var Categorie[]
     */
-    public $categories = [];
+    public $categories = null;
 
 }

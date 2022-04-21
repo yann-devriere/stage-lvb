@@ -9,12 +9,13 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }} 
+            <link href="../node_modules/bootstrap-fs-modal/dist/css/fs-modal.min.css" rel="stylesheet">
 
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-
+            <script src="../node_modules/bootstrap-fs-modal/dist/js/fs-modal.min.js"></script>
         {% endblock %}
 
     </head>
@@ -59,8 +60,8 @@
     </button>
     <div class="collapse navbar-collapse my-auto" id="navbarNavDropdown">
       <ul class="navbar-nav text-light ml-auto ">
-        <li class="nav-item mx-3">
-          <a class="nav-link active " aria-current="page" href="{{path('actu')}}">Actus du club</a>
+        <li class="nav-item mx-3" >
+          <a class="nav-link {% if app.request.get('_route') == 'actu' %} active {% endif %} " aria-current="page" href="{{path('actu')}}">Actus du club</a>
         </li>
         <li class="nav-item mx-3">
           <a class="nav-link" href="#">Qui sommes-nous ?</a>
@@ -73,15 +74,33 @@
             Infos pratiques
           </a>
           <ul class="dropdown-menu mx-2" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item " href="#">La salle</a></li>
-            <li><a class="dropdown-item " href="#">Les entrainements</a></li>
-            <li><a class="dropdown-item " href="#">S'inscrire</a></li>
+            <li><a class="dropdown-item " href="{{path('infos-pratiques')}}#salle">La salle</a></li>
+            <li><a class="dropdown-item " href="{{path('infos-pratiques')}}#horaires">Les entrainements</a></li>
+            <li><a class="dropdown-item " href="{{path('infos-pratiques')}}#contact">Contact</a></li>
+            <li><a class="dropdown-item " href="{{path('infos-pratiques')}}">S'inscrire</a></li>
+
+
+
+
+            
           </ul>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+
+
+
+{# <li {% if app.request.get('_route') == 'home' %} class="ms-0 me-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('home')}}">Accueil </a></li>
+                        <li {% if app.request.get('_route') == 'catalogue' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('catalogue')}}" >Tous les produits</a></li>
+                        <li {% if app.request.get('_route') == 'Cartouches' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Cartouches')}}" >Cartouches</a></li>
+                        <li {% if app.request.get('_route') == 'Papeterie et Fournitures' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Papeterie et Fournitures')}}" >Papeterie & fournitures</a></li>
+                        <li {% if app.request.get('_route') == 'Activités' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Activités')}}" >Activités</a></li>
+                        <li {% if app.request.get('_route') == 'Peinture' %} class="mx-5 active" {% else %} class="mx-4"{% endif %} ><a href="{{path('Peinture')}}" >Peinture</a></li>
+                        <li {% if app.request.get('_route') == 'Fournitures Scolaires' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Fournitures Scolaires')}}" >Scolaire</a></li>
+                        <li {% if app.request.get('_route') == 'Mugs' %} class="mx-5 active" {% else %} class="ms-5 me-0"{% endif %} ><a href="{{path('Mugs')}}" >Mugs</a></li> #}
 
 
     

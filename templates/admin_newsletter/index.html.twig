@@ -3,6 +3,18 @@
 {% block title %}Newsletter administrateur{% endblock %}
 
 {% block body %}
-{{form(formContenuMail)}}
+
+{% for message in app.flashes('envoi') %}
+    <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+{% endfor %}
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6 ">
+            {{form(formContenuMail)}} 
+        </div>
+    </div>
+</div>
 <a href="{{path('admin')}}" class="btn btn-success">Retour à l'interface d'administration</a>
 {% endblock %}

@@ -7,6 +7,7 @@ use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,24 +43,40 @@ class SearchType extends AbstractType
                 ]),
                 'attr'=>[
                 'placeholder'=>'Votre recherche...',
-                'class'=>'form-control-sm'
+                'class'=>'form-control-sm my-auto'
                 ]
-            ])
-        
-            ->add('categories', EntityType::class,[
-                'label'=>false,
-                'required'=> false,
-                'class'=> Categorie::class,
-                'multiple'=> true,
-                'expanded'=> true
             ])
 
-            ->add('submit', SubmitType::class,[
-                'label'=>'Filtrer',
-                'attr'=>[
-                    'class'=>'btn btn-inscription ms-4'
-                ]
-            ])
+            ->add('categories', EntityType::class,[
+                'class'=> Categorie::class,
+                'placeholder'=>'Catégories',
+                'label'=>false,
+                'multiple'=>false,
+                'required'=> false,
+                'expanded' => false,
+            'attr'=>[
+                'class'=>'form-control-sm text-dark select my-auto',
+            ],
+                ])
+        
+            // ->add('categories', EntityType::class,[
+            //     'class'=> Categorie::class,
+            //     'label'=>false,
+            //     // 'required'=> false,
+            //     // 'multiple'=> false,
+            //     'attr'=> [
+            //         'class'=> 'form-control'
+            //     ],
+            //     // 'expanded'=> false
+            // ])
+        
+
+            // ->add('submit', SubmitType::class,[
+            //      'label'=>'Filtrer',
+            //     'attr'=>[
+            //         'class'=>'btn'
+            //     ]
+            // ])
         ;
     }
 

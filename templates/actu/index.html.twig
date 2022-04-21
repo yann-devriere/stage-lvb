@@ -4,133 +4,167 @@
 
 {% block stylesheets %}
             {{ encore_entry_link_tags('app') }} 
+            {# <link href="../node_modules/bootstrap-fs-modal/dist/css/fs-modal.min.css" rel="stylesheet"> #}
+    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.css">
+    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.css">
+    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
 {% endblock %}
 
 {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            {# <script src="fullcalendar/lib/locale-all.js"></script> #}
+            
+            {# <script src="../node_modules/bootstrap-fs-modal/dist/js/fs-modal.min.js"></script>  #}
 
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.js"></script>
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.js"></script>
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.js"></script>
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/interaction/main.min.js"></script>
+
 {% endblock %}
 
 {% block body %}
 
-<p class="h1">test</p>
 
+{
 
-<div class="conteneurCalendrier">
-<div id="calendar-holder" ></div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    var calendarEl = document.getElementById('calendar-holder');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-       locale: 'fr',
-        defaultView: 'dayGridMonth',
-        editable: false,
-        height: 300,
-        windowResize: true,
-        eventSources: [
-            {
-              locale: 'fr',
-                url: "/fc-load-events",
-                method: "POST",
-                extraParams: {
-                    filters: JSON.stringify({})
-                },
-                failure: () => {
-                    // alert("There was an error while fetching FullCalendar!");
-                },
-            },
-        ],
-        header: {
-            locale: 'fr',
-            left: 'prev,next today',
-            center: 'title',
-            // right: 'dayGridMonth,timeGridWeek,timeGridDay', 
-        },
-        plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
-        /* events: [
-    {
-      title: 'entrainement',
-      groupId: 'blueEvents', // recurrent events in this group move together
-      daysOfWeek: [ '3' ],
-      startTime: '19:00:00',
-      endTime: '21:30:00'
-    },
-    {
-      daysOfWeek: [ '5' ], // these recurrent events move separately
-      startTime: '18:00:00',
-      endTime: '20:30:00',
-    }
-  ], */
-        timeZone: 'UTC',
-        locale: 'fr',
-        
-    });
-    calendar.render();
-});
-
-
-</script>
-
-
-
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="JLTZojyA"></script>
-
-<div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a></blockquote></div>
-
-
-
-
-
-{{form(formFiltres)}}
-
-
-
-{% for message in app.flashes('inscriptionNL') %}
-    <div class="flash-notice">
-        {{ message }}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div id="calendar-holder" class="mb-5" ></div>
     </div>
-{% endfor %}
-<div class="bg-success">
-{{form(formNewsletter)}}
+      </div>
+  </div>
+
+<script type="text/javascript">
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                locale: 'fr',
+                editable: true,
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                },
+                events: {{data|raw}},
+                
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
+            calendar.render();
+        });
+    </script>
+
+
+<!-- formulaire de filtre pour les articles ---->
+
+    
+{{form_start(formFiltres)}}
+<div class="container d-none d-sm-flex mt-2 mb-2" >
+    <div class=" row d-flex justify-content-center">
+      <div class="col-3 ">{{form_row(formFiltres.string)}}</div>
+      <div class="col-3">{{form_row(formFiltres.categories)}}</div>
+      <div class="col-3"><button type="submit" class="btn bg-bleu-clair text-light btn-sm my-auto "><img src="images/volant.png" alt="volant" height="15px" class="me-1 hvr-buzz-out">Filtrer<img src="images/volant.png" alt="volant" height="15px"class="ms-1"></button></div>
+      
+      <a href="{{path('actu')}}" class="bleu-elec text-decoration-none col-3 align-self-top btn-sm">Réinitialiser</a>
+    </div>
 </div>
+
+<!-- Button trigger modal -->
+
+
+    {{form_end(formFiltres)}}
+
+ 
+{{form_start(formFiltres2)}}
+
+
+<div class="d-sm-none">
+  <button type="button" class="btn mt-2 ms-4 text-decoration-underline bleu-elec" data-bs-toggle="modal" data-bs-target="#filtres">
+    Filtrer les resultats &#8595;
+  </button>
+</div>
+  <!-- Modal -->
+<div class="container ">
+  <div class="modal fade" id="filtres" tabindex="-1" aria-labelledby="filtresLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content mt-4 ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Filtrer les resultats</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-4">{{form_row(formFiltres2.string)}}</div>
+        <div class="mb-4">{{form_row(formFiltres2.categories)}}</div>
+        </div>
+        <div class="modal-footer">
+            <a href="{{path('actu')}}" class="bleu-elec text-decoration-none">Réinitialiser</a>
+      <button type="submit" class="btn bg-bleu-clair text-light btn-sm "><img src="images/volant.png" alt="volant" height="15px" class="me-1">Filtrer<img src="images/volant.png" alt="volant" height="15px"class="ms-1"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {{form_end(formFiltres2)}} 
+
+
+     <hr width="80%" class="mx-auto mt-0 p-0">
+ 
+
+<!-- fin form filtres ---->
+
+
+
+
+
+<!-- Affichage des articles ---->
+<div class="container">
+<div class="row">
+ 
 
 {% for article in articles %}
 
 
+    <div class="d-flex  justify-content-center col-md-6 ">
+        <div class="card mb-4" >
+            {% set photocrop %}/uploads/{{article.photo}}{% endset %}
 
-    <div class="d-flex  justify-content-center boby texteArticles">
-        <div class="card mb-4 " >
-            <img src="/uploads/{{article.photo}}" class="card-img-top boby" alt="photo de l'article">
+            <img src="{{photocrop|imagine_filter('cropArticle4')}}" class="card-img-top" alt="photo de l'article">
             <div class="card-body boby ">
-                <b><p class="card-title ">{{article.nom}}</p></b>
-                <p class="card-text">{{article.texte|slice(0,200)|raw}}...</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}">
+                <div class="d-flex">
+                {% for catégorie in article.categorie %}
+                 <a href="{{path('actu',{'categories':catégorie.id})}}" class="me-2 font-weight-light bleu-elec" style="font-size:12px;"> {{catégorie}} </a>
+                {% endfor %}
+                <hr>
+                </div>
+                <b><p class="card-title ">{{article.nom|raw}}</p></b>
+                <p class="card-text">{{article.texte|striptags|slice(0,200)}}...</p>
+                <button type="button" class="btn bg-bleu-clair text-light b d-sm-none ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}">
                   Lire plus
-                </button>            </div>
+                </button>     
+                  <button type="button" class="btn bg-bleu-clair text-light b d-none d-sm-block ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}large">
+                  Lire plus
+                </button> 
+            </div>
         </div>
         <br>
     </div> 
-
+  
         
-<!-- Button trigger modal -->
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal{{article.id}}" tabindex="-1" aria-labelledby="exampleModal{{article.id}}Label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<div class="modal fade modal-fullscreen no-gutter " id="exampleModal{{article.id}}" tabindex="-1" aria-labelledby="exampleModal{{article.id}}Label" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content modalArticles">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -139,20 +173,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
 
-        <h2>{{article.nom}}</h2><br>
+        <h2>{{article.nom|raw}}</h2><br>
 
         {{article.texte|raw}} <br>
+
+             {% if article.pieceJointe %}
+        <div class="d-flex justify-content-end"><a href="piecesjointes/{{article.pieceJointe}}" download="{{article.pieceJointe}}">Télécharger la pièce jointe</a></div>
+        {% endif %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ferme</button>
       </div>
     </div>
   </div>
 </div>
 
+<div class="modal fade " id="exampleModal{{article.id}}large" tabindex="-1" aria-labelledby="exampleModal{{article.id}}largeLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content modalArticles">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
+
+        <h2 class="p-3">{{article.nom|raw}}</h2><br>
+
+        <div class="p-3">{{article.texte|raw}}</div> <br>
+
+        {% if article.pieceJointe %}
+        <div class="d-flex justify-content-end"><a href="piecesjointes/{{article.pieceJointe}}" download="{{article.pieceJointe}}">Télécharger la pièce jointe</a></div>
+        {% endif %}
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ferme</button>
+      </div>
+    </div>
+  </div>
 </div>
 
+
+
+
+
 {% endfor %}
+
+</div> <!-- fin de la row des articles ---->
+
+<div class="navigation d-flex justify-content-center">
+    {{ knp_pagination_render(articles, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+</div>
+</div>
+
+ <!-- fin affichage articles ---->
+
+ 
+
+
+
+
+<!-- inscription Newsletter ------>
+
+<!-- fin inscription Newsletter ---->
+
+
 
 {% endblock %}

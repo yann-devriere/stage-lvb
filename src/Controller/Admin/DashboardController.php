@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use App\Entity\Booking;
 use App\Entity\Categorie;
 use App\Entity\SlideAccueil;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,5 +46,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud("Articles", 'fas fa-list', Article::class);
         yield MenuItem::linkToCrud("Diaporama accueil", 'fas fa-list', SlideAccueil::class);
         yield MenuItem::linkToRoute("Newsletter",'fas fa-list','admin_newsletter' );
+        yield MenuItem::linkToCrud("Agenda",'fas fa-list',Booking::class );
     }
 }

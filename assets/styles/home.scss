@@ -1,0 +1,41 @@
+
+.texteHome{
+    font-size: 13px !important;
+    padding: 10px;
+
+
+@media(min-width:300px) {
+    
+    font-size: 15px !important;
+    
+}
+
+@media(min-width:450px) {
+    font-size: 17px !important;
+}
+
+@media(min-width:700px) {
+    font-size:20px !important;
+}
+@media(min-width:991px){
+    font-size: 22px !important;;
+}
+}
+
+
+@media (max-width:991px){
+    .fbcenter{
+    display:flex;
+    justify-content:center;
+        }
+    
+}
+
+
+
+
+.b-shadow{
+    box-shadow: 5px 5px 10px rgb(95, 93, 93);
+    border-radius: 0.5rem;
+  
+}

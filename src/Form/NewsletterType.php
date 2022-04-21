@@ -19,19 +19,20 @@ class NewsletterType extends AbstractType
                 'type'=> EmailType::class,
                 'invalid_message'=>'Les adresses doivent être identiques',
                 'required'=>true,
-                'first_options'=>['label'=>'Votre adresse email',
+                'first_options'=>['label'=>false,
             'attr'=>[
                 'placeholder'=>'Votre adresse email'
             ]],
-                'second_options'=>['label'=>'Vérifier adresse email',
+                'second_options'=>['label'=>false,
                 'attr'=>[
                     'placeholder'=>'Vérfiez votre adresse email'
                 ]]
 
                 ])
 
-            ->add('submit', SubmitType::class, [
-                'attr'=> ['placeholde'=>"S'inscrire à la newsletter"]
+            ->add('submit', SubmitType::class, ['label'=>"S'inscrire",
+                'attr'=> ['placeholde'=>"S'inscrire à la newsletter",
+                'class'=>'bg-bleu text-light']
             ])
 
         ;

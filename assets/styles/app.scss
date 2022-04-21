@@ -1,5 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
-@import "actualite.css";
-@import 'base.css';
-@import 'infospratiques.css';
-
+@import "actualite.scss";
+@import 'base.scss';
+@import 'infospratiques.scss';
+@import 'home.scss';
+@import "~hover.css/css/hover-min.css";
+@import "~bootstrap-fs-modal/dist/css/fs-modal.min.css";
