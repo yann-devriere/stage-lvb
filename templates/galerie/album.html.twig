@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Album{% endblock %}
+
+{% block body %}
+
+
+ <div class="d-flex justify-content-center">
+    <div>
+        <h2>Galerie photos</h2>
+    </div>
+</div>
+
+<div class="container fluid">
+    <div class="row  ">
+    {% for photo in photos %}
+        <div class="col-lg-4 col-md-6 p-0 row mb-3 mt-3 d-flex justify-content-center mx-0">
+            <div class="col-1 p-0"></div>
+            <div class="col-10 p-0 ">
+                <div class="photoGalerie">
+                {# <a href="#" data-bs-toggle="modal" data-bs-target="#modalPhotolarge" class="d-sm-none d-block repere test" data-id={{photo.id}}>
+                    <img src="{{asset('galerie/' ~ photo.nom)}}" alt=""class="photoGalerie" >
+                </a> #}
+
+                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalPhoto" class=" repere test" data-id={{photo.id}} >
+                    <img src="{{asset('galerie/' ~ photo.nom)}}" alt=""class="photoGalerie " >
+                </a>
+                </div>
+            </div>
+            <div class="col-1 p-0"></div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+<div class="navigation d-flex justify-content-center">
+    {{ knp_pagination_render(photos, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+</div>
+
+
+
+
+<!-- Modal -->
+{# <div class="modal fade modal-fullscreen no-gutter " id="modalPhotolarge" tabindex="-1" aria-labelledby="modalPhotolargeLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+
+
+
+
+    <div id="carousel1" class="carousel slide " data-bs-ride="carousel">
+  <div class="carousel-inner">
+  {# {% for key,photo in photos %}
+       <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %}id="{{photo.id}}" >
+      <img src="{{asset('galerie/' ~ photo.nom)}}" class="d-block w-100" alt="..." >
+    </div>
+  {% endfor %} #}
+
+{#   
+{% for photo in photos %}
+    
+  <div class="carousel-item" id="{{photo.id}}" >
+      <img src="{{asset('galerie/' ~ photo.nom)}}" class="d-block w-100" alt="..." >
+    </div>
+{% endfor %}
+
+    
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button> #}
+{# </div> # #}
+
+
+
+
+
+
+
+      {# </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div> #}
+
+<div class="modal  fade  "  id="modalPhoto" tabindex="-1" aria-labelledby="modalPhotoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-fullscreen-lg-down "  >
+    <div class="modal-content ">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+   
+
+{% for photo in photos %}
+    
+  <div class="carousel-item" id="{{photo.id}}" >
+  <div class="d-flex justify-content-center">
+      <img src="{{asset('galerie/' ~ photo.nom)}}" class="d-block h-75" alt="..." >
+  </div>
+    </div>
+{% endfor %}
+
+   
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+ 
+
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+ 
+<script>
+      {# create check function  #}
+        let items = document.getElementsByClassName('test');
+       
+
+
+      function check(param1) {
+
+          let all = document.getElementsByClassName('active')
+          console.log(all)
+          for ( const tout of all){
+              tout.removeAttribute("class")
+              tout.setAttribute("class", "carousel-item")
+          }
+         
+         
+     let b = document.getElementById(param1)
+       console.log(b)
+      b.setAttribute("class", "carousel-item active")
+
+      };
+
+       for (const item of items) {
+        
+        item.addEventListener('click', function(){check(item.dataset.id)});
+}
+
+
+
+</script> 
+
+
+
+
+
+{% endblock %}

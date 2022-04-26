@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie photos{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-center">
+    <div>
+        <h2>Galerie photos</h2>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+    {% set index = 0 %}
+    {% set index = index - 1 %}
+    {% for album in albums %}
+    {% set index = index + 1 %}
+    {% set image = photos[index] %}
+
+        <div class="col-4">
+            <div class="col-1"></div>
+            <div class="col-10">
+                 <div class="shop" >
+                 <a href="{{path('galerie_album',{'id':album.id})}}">
+                    <div class="shop-img">
+                        <img src="galerie/{{image}}" alt="" >
+                    </div>
+                    <div class="shop-body">
+                        <h2> {{album.nom}}</h2>
+                    </div>
+                </a>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
