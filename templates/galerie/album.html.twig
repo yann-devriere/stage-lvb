@@ -5,11 +5,18 @@
 {% block body %}
 
 
- <div class="d-flex justify-content-center">
-    <div>
-        <h2>Galerie photos</h2>
+<div class="container-fluid">
+  <div class="row mt-4 mb-5">
+    <div class="col-2 text-center"> 
+      <a href="{{path('galerie')}}" class="text-decoration-none"> <button class="btn bg-bleu d-flex text-light "> <img src="{{asset('images/volant.png')}}" alt="" class="my-auto" height="15" style="transform: rotate(45deg);">  <p class="my-auto ms-2 text-light text-decoration-none">Retour</p> </button></a>
+      
     </div>
+    <div class="col-8 text-center"><h2>Galerie photos</h2></div>
+    <div class="col-2"></div>
+  </div>
 </div>
+
+
 
 <div class="container fluid">
     <div class="row  ">
@@ -17,11 +24,7 @@
         <div class="col-lg-4 col-md-6 p-0 row mb-3 mt-3 d-flex justify-content-center mx-0">
             <div class="col-1 p-0"></div>
             <div class="col-10 p-0 ">
-                <div class="photoGalerie">
-                {# <a href="#" data-bs-toggle="modal" data-bs-target="#modalPhotolarge" class="d-sm-none d-block repere test" data-id={{photo.id}}>
-                    <img src="{{asset('galerie/' ~ photo.nom)}}" alt=""class="photoGalerie" >
-                </a> #}
-
+                <div class="photoGalerie p-1 shadow">
                  <a href="#" data-bs-toggle="modal" data-bs-target="#modalPhoto" class=" repere test" data-id={{photo.id}} >
                     <img src="{{asset('galerie/' ~ photo.nom)}}" alt=""class="photoGalerie " >
                 </a>
@@ -38,62 +41,6 @@
 </div>
 
 
-
-
-<!-- Modal -->
-{# <div class="modal fade modal-fullscreen no-gutter " id="modalPhotolarge" tabindex="-1" aria-labelledby="modalPhotolargeLabel" aria-hidden="true">
-  <div class="modal-dialog ">
-    <div class="modal-content ">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-
-
-
-
-
-    <div id="carousel1" class="carousel slide " data-bs-ride="carousel">
-  <div class="carousel-inner">
-  {# {% for key,photo in photos %}
-       <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %}id="{{photo.id}}" >
-      <img src="{{asset('galerie/' ~ photo.nom)}}" class="d-block w-100" alt="..." >
-    </div>
-  {% endfor %} #}
-
-{#   
-{% for photo in photos %}
-    
-  <div class="carousel-item" id="{{photo.id}}" >
-      <img src="{{asset('galerie/' ~ photo.nom)}}" class="d-block w-100" alt="..." >
-    </div>
-{% endfor %}
-
-    
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button> #}
-{# </div> # #}
-
-
-
-
-
-
-
-      {# </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div> #}
 
 <div class="modal  fade  "  id="modalPhoto" tabindex="-1" aria-labelledby="modalPhotoLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-fullscreen-lg-down "  >
@@ -147,16 +94,21 @@
 
       function check(param1) {
 
-          let all = document.getElementsByClassName('active')
+          let all = document.getElementsByClassName('carousel-item active')
           console.log(all)
+
           for ( const tout of all){
               tout.removeAttribute("class")
               tout.setAttribute("class", "carousel-item")
           }
+
+        
+
+
          
          
      let b = document.getElementById(param1)
-       console.log(b)
+   //    console.log(b)
       b.setAttribute("class", "carousel-item active")
 
       };

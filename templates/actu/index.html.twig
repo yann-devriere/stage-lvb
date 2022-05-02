@@ -2,65 +2,12 @@
 
 {% block title %}Hello ActuController!{% endblock %}
 
-{% block stylesheets %}
-            {{ encore_entry_link_tags('app') }} 
-            {# <link href="../node_modules/bootstrap-fs-modal/dist/css/fs-modal.min.css" rel="stylesheet"> #}
-    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.css">
-    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.css">
-    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.css">
 
-{% endblock %}
-
-{% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {# <script src="fullcalendar/lib/locale-all.js"></script> #}
-            
-            {# <script src="../node_modules/bootstrap-fs-modal/dist/js/fs-modal.min.js"></script>  #}
-
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.js"></script>
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.js"></script>
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.js"></script>
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/interaction/main.min.js"></script>
-
-{% endblock %}
 
 {% block body %}
 
 
-{
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div id="calendar-holder" class="mb-5" ></div>
-    </div>
-      </div>
-  </div>
-
-<script type="text/javascript">
-
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            var calendarEl = document.getElementById('calendar-holder');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                defaultView: 'dayGridMonth',
-                locale: 'fr',
-                editable: true,
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
-                },
-                events: {{data|raw}},
-                
-                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
-                timeZone: 'UTC',
-            });
-            calendar.render();
-        });
-    </script>
 
 
 <!-- formulaire de filtre pour les articles ---->
@@ -137,7 +84,8 @@
         <div class="card mb-4" >
             {% set photocrop %}/uploads/{{article.photo}}{% endset %}
 
-            <img src="{{photocrop|imagine_filter('cropArticle4')}}" class="card-img-top" alt="photo de l'article">
+            {# <img src="{{photocrop|imagine_filter('cropArticle4')}}" class="card-img-top" alt="photo de l'article"> #}
+            <img src="{{asset('uploads/' ~ article.photo)}}" class="card-img-top" alt="photo de l'article">
             <div class="card-body boby ">
                 <div class="d-flex">
                 {% for catégorie in article.categorie %}
@@ -182,14 +130,14 @@
         {% endif %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ferme</button>
+        <button type="button" class="btn bg-bleu" data-bs-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
 </div>
 
 <div class="modal fade " id="exampleModal{{article.id}}large" tabindex="-1" aria-labelledby="exampleModal{{article.id}}largeLabel" aria-hidden="true">
-  <div class="modal-dialog ">
+  <div class="modal-dialog modal-xl ">
     <div class="modal-content modalArticles">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
@@ -209,7 +157,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ferme</button>
+        <button type="button" class="btn bg-bleu text-light" data-bs-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Mail;
+use App\Entity\Newsletter;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,7 @@ class UserController extends AbstractController
         $notification = null ;
 
         $user = new User();
+        $newsletter = new Newsletter();
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -40,7 +42,10 @@ class UserController extends AbstractController
                     $password = $passwordHasher->hashPassword($user, $user->getPassword());
                     $user->setPassword($password);
 
+                    $newsletter->setEmail($user->getEmail());
+
                     $this->entityManager->persist($user);
+                    $this->entityManager->persist($newsletter);
                     $this->entityManager->flush();
 
                     $mail = new Mail();

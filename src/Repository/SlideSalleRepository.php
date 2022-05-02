@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\SlideAccueil;
+use App\Entity\SlideSalle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method SlideAccueil|null find($id, $lockMode = null, $lockVersion = null)
- * @method SlideAccueil|null findOneBy(array $criteria, array $orderBy = null)
- * @method SlideAccueil[]    findAll()
- * @method SlideAccueil[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method SlideSalle|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SlideSalle|null findOneBy(array $criteria, array $orderBy = null)
+ * @method SlideSalle[]    findAll()
+ * @method SlideSalle[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SlideAccueilRepository extends ServiceEntityRepository
+class SlideSalleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SlideAccueil::class);
+        parent::__construct($registry, SlideSalle::class);
     }
 
     // /**
-    //  * @return SlideAccueil[] Returns an array of SlideAccueil objects
+    //  * @return SlideSalle[] Returns an array of SlideSalle objects
     //  */
     
     public function findVisible()
@@ -36,7 +36,7 @@ class SlideAccueilRepository extends ServiceEntityRepository
     
 
     /*
-    public function findOneBySomeField($value): ?SlideAccueil
+    public function findOneBySomeField($value): ?SlideSalle
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

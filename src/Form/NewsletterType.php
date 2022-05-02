@@ -25,7 +25,7 @@ class NewsletterType extends AbstractType
             ]],
                 'second_options'=>['label'=>false,
                 'attr'=>[
-                    'placeholder'=>'Vérfiez votre adresse email'
+                    'placeholder'=>'Vérifiez votre adresse email'
                 ]]
 
                 ])

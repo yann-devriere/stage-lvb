@@ -6,7 +6,7 @@ use App\Entity\Album;
 use App\Entity\Article;
 use App\Entity\Booking;
 use App\Entity\Categorie;
-use App\Entity\SlideAccueil;
+use App\Entity\SlideSalle;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -45,7 +45,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud("Catégories d'article", 'fas fa-list', Categorie::class);
         yield MenuItem::linkToCrud("Articles", 'fas fa-list', Article::class);
-        yield MenuItem::linkToCrud("Diaporama accueil", 'fas fa-list', SlideAccueil::class);
+        yield MenuItem::linkToCrud("Diapo présentation salle", 'fas fa-list', SlideSalle::class);
         yield MenuItem::linkToRoute("Newsletter",'fas fa-list','admin_newsletter' );
         yield MenuItem::linkToCrud("Agenda",'fas fa-list',Booking::class );
     }

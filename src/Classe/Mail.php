@@ -17,7 +17,7 @@ public function send($to_email , $to_name, $subject, $content)
         'Messages' => [
             [
                 'From' => [
-                    'Email' => "sedzyk0@gmail.com",
+                    'Email' => "les.volants.berquinois@gmail.com",
                     'Name' => "Les Volants Berquinois"
                 ],
                 'To' => [
@@ -42,44 +42,38 @@ public function send($to_email , $to_name, $subject, $content)
 }
 
 
-public function sendMultiple($contacts , $subject, $content)
-{
 
-    foreach ($contacts as $contact){
+
+public function sendMultiple($to,$subject,$content)
+{
 
      $mj= new Client($_ENV['MJ_APIKEY_PUBLIC'], $_ENV['MJ_APIKEY_PRIVATE'],true,['version' => 'v3.1']); 
     $body = [
         'Messages' => [
             [
                 'From' => [
-                    'Email' => "sedzyk0@gmail.com",
+                    'Email' => "les.volants.berquinois@gmail.com",
                     'Name' => "Les Volants Berquinois"
                 ],
-
-                'To' => [
-                    
-                    [
-                        'Email' => $contact->getemail() ,
-                        'Name' => $contact->getemail()
-                    ],
-                    
-                    
-                ],
-                'TemplateID' => 3538596,
+                'To' => $to    ,
+                'TemplateID' => 3898269,
                 'TemplateLanguage' => true,
                 'Subject' => $subject,
                 'Variables' => [
-                    'content' => $content
+                    'sujet'=>$subject,
+                    'content' => $content,
                 ]
             ]
         ]
     ];
     $response = $mj->post(Resources::$Email, ['body' => $body]);
-    $response->success();
-}
+    $response->success()  ;
 }
 
+
 }
+
+
 
 
 ?>

@@ -2,6 +2,25 @@
 
 {% block title %}Infos pratiques{% endblock %}
 
+{% block stylesheets %}
+            {{ encore_entry_link_tags('app') }} 
+    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.css">
+    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.css">
+    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.css">
+
+{% endblock %}
+
+{% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.js"></script>
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/core/locales/fr.js"></script>
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.js"></script>
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.js"></script>
+    <script src="fullcalendar/fullcalendar-4.1.0/packages/interaction/main.min.js"></script>
+
+{% endblock %}
+
 {% block body %}
 
 
@@ -28,17 +47,19 @@
                                 <!----- carte js de la salle de vieux berquin -------->
 
                      <link rel="stylesheet" href="leaflet/leaflet.css"
-                            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+                            integrity=""
                             crossorigin="" />
+                            {# sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A== #}
 
                         <script src="leaflet/leaflet.js"
-                            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                            integrity=""
                             crossorigin=""></script> 
-
+{# sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA== #}
 
                             <div id="carte" style="width:100%; height:350px;">
                             
                             </div>
+
 
                     <script>
 
@@ -53,9 +74,9 @@
                             }).addTo(map);
 
                                     L.marker([50.6940180068877, 2.64108085743208]).addTo(map)
-                                        .bindPopup('La salle se trouve ici.')
+                                        .bindPopup('<a href="https://www.google.com/maps/place/Salle+De+Sports/@50.6940438,2.639165,17z/data=!3m1!4b1!4m5!3m4!1s0x47dcde34646a444b:0x84ae5e4f4da05c94!8m2!3d50.6941022!4d2.6413516" target="_blank">Voir plus</a>')
                                         .openPopup();
-
+    
                             const layerGroupMarker = L.layerGroup().addTo(map);
 
                             map.on('click', function (e) {
@@ -115,7 +136,7 @@
             </div>
 
             <div class="fondIP p-lg-2 mb-4 col-md-6 col-lg-12 horaires p-3 bg-light b-shadow" height="100px" id="horaires">
-                <h3>Les entrainements</h3> <br>
+                <h3>Les entraînements</h3> <br>
 
                 <h5>Les adultes</h5>
                 <p class="mt-3">Mercredi: 19h30 - 21h(ou plus)</p>
@@ -127,7 +148,7 @@
 
                 <div class="col-2"></div>
                  <div class="shop  col-8" >
-                             <a href="images/inscription.jpg" download="inscriptiondl">
+                             <a href="images/inscription.jpg" download="inscriptiondl" id="inscription">
                             <div class="shop-img">
                                 <img src="images/inscription.jpg" alt="" >
                             </div>
@@ -150,6 +171,45 @@
     </div>
 
 </div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <div id="calendar-holder" class="mb-5" ></div>
+    </div>
+    <div class="col-3"></div>
+      </div>
+  </div>
+
+<script type="text/javascript">
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                locale: 'fr',
+                editable: false,
+                header: {
+                    locales: 'fr',
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek',
+                },
+                events: {{data|raw}},
+                
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
+            calendar.render();
+        });
+    </script>
+
 
 
 

@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SlideAccueilRepository;
+use App\Repository\SlideSalleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SlideAccueilRepository::class)]
-class SlideAccueil
+#[ORM\Entity(repositoryClass: SlideSalleRepository::class)]
+class SlideSalle
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
