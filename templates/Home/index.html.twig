@@ -1,234 +1,477 @@
 {% extends "base.html.twig" %}
 
-{% block body %}
 
-  {# <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="3wM3JQcY"></script> #}
-
-<div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="XBMsnfta"></script>
-  
-
-
-<div class="text-center">
-<img src="images/group.jpg" alt="" width="70%" >
-</div>
-
-
-<div class="container-fluid">
-
-  <div class="row d-flex justify-content-between">
-
-
-    <div class="col-lg-8 pb-0 mb-0 m-3 ms-0 ms-lg-4 h-50 p-3 p-lg-0 ">
-      {# <div class="col-12 fondIP rounded mx-auto my-auto p-0"> #}
-      <div class="d-flex justify-content-center mb-3">
-      <div class="bg-bleu text-light btn rounded ">
-        <h3>Les volants Berquinois</h3>
-      </div>
-      </div>
-  
-      <div class="texteHome bg-light b-shadow">
-              <h3 class="text-center">Plus qu'un club</h3>
-
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam laboriosam vitae sapiente facilis officiis nesciunt debitis quos alias? Distinctio quibusdam commodi veniam. Tempore quidem voluptas labore veritatis illo ullam natus nam. Enim, odio commodi inventore ad quibusdam possimus voluptatibus veniam quas quam, ea qui cum nihil iste voluptates odit provident neque saepe illum blanditiis ex. Quos eius tempore quibusdam laboriosam voluptatibus exercitationem, temporibus commodi soluta maxime est, cupiditate vero dignissimos.
-      </div>
-
-<div id="carouselExampleControls" class="carousel slide carouselAccueil mx-auto" data-bs-ride="carousel">
-  <div class="carousel-inner">
-
-
-{% for key,article in articlesSlide %}
-  
-    <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %}>
-
-        <div class="card m-3 " >
-            {% set photocrop %}/uploads/{{article.photo}}{% endset %}
-
-            {# <img src="{{photocrop|imagine_filter('cropArticle4')}}" class="card-img-top" alt="photo de l'article"> #}
-            <img src="{{asset('uploads/' ~ article.photo)}}" class="card-img-top" alt="photo de l'article">
-            <div class="card-body boby ">
-                <div class="d-flex">
-                {% for catégorie in article.categorie %}
-                 <a href="{{path('actu',{'categories':catégorie.id})}}" class="me-2 font-weight-light bleu-elec" style="font-size:12px;"> {{catégorie}} </a>
-                {% endfor %}
-                <hr>
-                </div>
-                <b><p class="card-title ">{{article.nom|raw}}</p></b>
-                <p class="card-text">{{article.texte|striptags|slice(0,200)}}...</p>
-                <button type="button" class="btn bg-bleu-clair text-light b d-sm-none ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}">
-                  Lire plus
-                </button>     
-                  <button type="button" class="btn bg-bleu text-light b d-none d-sm-block ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}large">
-                  Lire plus
-                </button> 
-            </div>
-        </div>
-        <br>
-
-    </div>
-{% endfor %}
-
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-
-
-{% for article in articlesSlide %}
-
-
-
-<!-- Modal -->
-<div class="modal fade modal-fullscreen no-gutter " id="exampleModal{{article.id}}" tabindex="-1" aria-labelledby="exampleModal{{article.id}}Label" aria-hidden="true">
-  <div class="modal-dialog ">
-    <div class="modal-content modalArticles">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
-
-        <h2>{{article.nom|raw}}</h2><br>
-
-        {{article.texte|raw}} <br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ferme</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade " id="exampleModal{{article.id}}large" tabindex="-1" aria-labelledby="exampleModal{{article.id}}largeLabel" aria-hidden="true">
-  <div class="modal-dialog ">
-    <div class="modal-content modalArticles">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
-
-        <h2 class="p-3">{{article.nom|raw}}</h2><br>
-
-        <div class="p-3">{{article.texte|raw}}</div> <br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-  
-{% endfor %}
-      <div class="texteHome  bg-light  b-shadow mb-3">
-      <h3 class="text-center">Test</h3>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur architecto dignissimos perspiciatis animi laboriosam, neque, aut delectus exercitationem culpa ab dolorum dolores modi eos obcaecati quaerat ea dicta corporis ex aliquam, accusantium sit optio? Consequatur, vero architecto delectus sapiente id laudantium laboriosam veniam aspernatur deserunt doloremque animi at in adipisci quo optio eaque amet aliquam modi! Unde alias reiciendis minima?
-      </div>
-
-      
-
-
-    </div>
-    
-  
-
-<div class="col-lg-3 p-0 mt-3 mb-5 me-3 b-shadow bg-light p-2 h-75 fbcenter d-none d-lg-block ">
-      
-       <div id="fb-root"></div>
-
-
-       
-<div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a></blockquote></div>
-  
-      {# <div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-height="" data-width="500"data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore " ><a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a></blockquote></div>  #}
-<!-- fin script facebook ---->
-
-    <div class="bg-light b-shadow p-2 mt-5">
-    <h5 class="text-center bleu-elec">Newsletter</h3>
-    <p>Recevez les dernières informations à propos du club</p>
-
-{% for message in app.flashes('inscriptionNL') %}
-    <div class="flash-notice">
-        {{ message }}
-    </div>
-{% endfor %}
-
-{{form(formNewsletter)}}
-</div>
-
-  <div class="">
-    <ul class="nav flex-column text-end mt-3">
-        <li class="nav-item mx-3" >
-          <a class="nav-link {% if app.request.get('_route') == 'actu' %} active {% endif %} " aria-current="page" href="{{path('actu')}}">Actus du club</a>
-        </li>
-        <li class="nav-item mx-3">
-          <a class="nav-link" href="#">Qui sommes-nous ?</a>
-        </li>
-        <li class="nav-item mx-3">
-          <a class="nav-link" href="#">Galerie photo</a>
-        </li>
-        <li class="nav-item  mx-3 dropdown ">
-          <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Infos pratiques
-          </a>
-          <ul class="dropdown-menu mx-2" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item " href="#">La salle</a></li>
-            <li><a class="dropdown-item " href="#">Les entrainements</a></li>
-            <li><a class="dropdown-item " href="#">S'inscrire</a></li>      
-          </ul>
-        </li>
-      </ul>
-  </div>
-
-</div>
-</div>
-
- <div class=" justify-content-center  d-none d-sm-flex d-lg-none ">
-      
-
-      <div style="width:500px;">
-
-<div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a></blockquote></div>
-
-      {# <div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore " ><a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a></blockquote></div>
-       </div> #}
-    </div>
-
-    
-    {# <div class="d-flex d-lg-none d-flex justify-content-center " > #}
-      <div class="bg-light b-shadow p-2 pt-1 pb-1 mt-3 d-lg-none">
-      <h5 class="text-center bleu-elec">Newsletter</h3>
-      <p>Recevez les dernières informations à propos du club</p>
-
-  {% for message in app.flashes('inscriptionNL2') %}
-      <div class="flash-notice">
-          {{ message }}
-      </div>
-  {% endfor %}
-
-  {{form(formNewsletter2)}}
-
-</div>
-
-
-  {# </div> #}
-
-</div>
+{% block stylesheets %}
+	{{ encore_entry_link_tags('app') }}
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.css">
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.css">
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.css">
 
 {% endblock %}
 
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/core/locales/fr.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/interaction/main.min.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+	{# <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="3wM3JQcY"></script> #}
+
+	{# <div id="fb-root"></div> #}<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="XBMsnfta"> </script>
 
 
+	<div class="banner-carousel banner-carousel-1 mb-0">
+		<div class="banner-carousel-item" style="background-image:url(images/group2.jpg)">
+			<div class="slider-content">
+				<div class="container h-100">
+					<div class="row align-items-center h-100">
+						<div class="col-md-12 text-center">
+							<h2 class="slide-title" data-animation-in="slideInLeft" style="color:#ffb600;font-weight:bold;text-shadow:2px 2px 3px white;">La passion du Badminton</h2>
+							<h3 class="slide-sub-title" data-animation-in="slideInRight" style="color:#ffb600;text-shadow:2px 2px 3px white;">Pour tous</h3>
+							<p data-animation-in="slideInLeft" data-duration-in="1.2"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
+
+<section class="call-to-action-box no-padding">
+	<div class="container">
+		<div class="action-style-box">
+			<div class="row align-items-center">
+				<div class="col-md-8 text-center text-md-left">
+					<div class="call-to-action-text">
+						<h3 class="action-title">Vous souhaitez faire un essai ?</h3>
+					</div>
+				</div>
+				<!-- Col end -->
+				<div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
+					<div class="call-to-action-btn">
+						<a class="btn btn-dark" href="#">Contactez nous</a>
+					</div>
+				</div>
+				<!-- col end -->
+			</div>
+			<!-- row end -->
+		</div>
+		<!-- Action style box -->
+	</div><!-- Container end --></section><!-- Action end --><section id="ts-features" class="ts-features">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="ts-intro">
+					<h2 class="into-title bleuTitre">Les volants berquinois</h2>
+					<h3 class="into-sub-title bleuTitre">Qui sommes nous ?</h3>
+					<p>
+						Nous sommes une association de Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet minus perferendis atque cumque doloremque nemo odio tempore quia beatae debitis ipsa rem, neque sed excepturi accusantium. Sint nihil culpa praesentium!</p>
+				</div>
+				<!-- Intro box end -->
+
+				<div class="gap-20"></div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="ts-service-box">
+							<span class="ts-service-icon">
+								<i class="fas fa-trophy"></i>
+							</span>
+							<div class="ts-service-box-content">
+								<p class="service-box-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora quod eos dolor dignissimos minus rem!</p>
+							</div>
+						</div>
+						<!-- Service 1 end -->
+					</div>
+					<!-- col end -->
+
+					<div class="col-md-6">
+						<div class="ts-service-box">
+							<span class="ts-service-icon">
+								<i class="fas fa-sliders-h"></i>
+							</span>
+							<div class="ts-service-box-content">
+								<p class="service-box-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloremque repellendus nulla nihil. Dolore, impedit.</p>
+							</div>
+						</div>
+						<!-- Service 2 end -->
+					</div>
+					<!-- col end -->
+				</div>
+				<!-- Content row 1 end -->
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="ts-service-box">
+							<span class="ts-service-icon">
+								<i class="fas fa-thumbs-up"></i>
+							</span>
+							<div class="ts-service-box-content">
+								<p class="service-box-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque nihil quasi placeat, ad odio voluptate.</p>
+							</div>
+						</div>
+						<!-- Service 1 end -->
+					</div>
+					<!-- col end -->
+
+					<div class="col-md-6">
+						<div class="ts-service-box">
+							<span class="ts-service-icon">
+								<i class="fas fa-users"></i>
+							</span>
+							<div class="ts-service-box-content">
+								<p class="service-box-title">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi neque suscipit, impedit voluptatibus adipisci natus?</p>
+							</div>
+						</div>
+						<!-- Service 2 end -->
+					</div>
+					<!-- col end -->
+				</div>
+				<!-- Content row 1 end -->
+			</div>
+			<!-- Col end -->
+
+			<div class="col-lg-6  mt-4 mt-lg-0 text-end">
+				<div class="ts-intro mx-0">
+					<h2 class="into-title bleuTitre ">Retrouvez nous
+					</h2>
+					<h3 class="into-sub-title bleuTitre">
+						sur facebook</h3>
+					{# 			
+								<div id="fb-root"></div>
+					
+					
+											<div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+												<blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore">
+													<a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a>
+												</blockquote>
+											</div> #}
+				</div>
+				<!-- Col end -->
+			</div>
+			<!-- Row end -->
+		</div><!-- Container end --></section><!-- Feature are end --><section id="facts" class="facts-area dark-bg py-5">
+		<div class="container">
+			<div class="facts-wrapper">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 ts-facts">
+						<div class="ts-facts-img">
+							<img loading="lazy" src="images/icon-image/birthday.svg" height="60" alt="facts-img">
+						</div>
+						<div class="ts-facts-content">
+							<h2 class="ts-facts-num">
+								<span class="counterUp" data-count="9">0</span>
+							</h2>
+							<h3 class="ts-facts-title">Années d'existance</h3>
+						</div>
+					</div>
+					<!-- Col end -->
+
+					<div class="col-md-4 col-sm-4 ts-facts mt-5 mt-md-0">
+						<div class="ts-facts-img">
+							<img loading="lazy" src="images/icon-image/raquette.svg" height="60" alt="facts-img">
+						</div>
+						<div class="ts-facts-content">
+							<h2 class="ts-facts-num">
+								<span class="counterUp" data-count="180">0</span>
+							</h2>
+							<h3 class="ts-facts-title">Heures d'entrainement chaque année</h3>
+						</div>
+					</div>
+					<!-- Col end -->
+
+					<div class="col-md-4 col-sm-4 ts-facts mt-5 mt-sm-0">
+						<div class="ts-facts-img">
+							<img loading="lazy" src="images/icon-image/group.svg" height="60" alt="facts-img">
+						</div>
+						<div class="ts-facts-content">
+							<h2 class="ts-facts-num">
+								<span class="counterUp" data-count="21">0</span>
+							</h2>
+							<h3 class="ts-facts-title">Adhérents au club</h3>
+						</div>
+					</div>
+					<!-- Col end -->
+
+
+					<!-- Col end -->
+
+				</div>
+				<!-- Facts end -->
+			</div>
+			<!--/ Content row end -->
+		</div><!--/ Container end --></section><!-- Facts end --><!-- Service end --><section id="project-area" class="project-area solid-bg py-5">
+		<div class="container">
+			<div class="row text-center">
+				<div class="col-lg-12">
+
+					<h3 class="section-sub-title mb-5 ">Galerie Photos</h3>
+				</div>
+			</div><!--/ Title row end --><div class="row">
+				<div
+					class="col-12">
+
+					<!-- project filter end -->
+
+
+					<div class="row shuffle-wrapper">
+						<div class="col-1 shuffle-sizer"></div>
+
+
+						{% for photo in photos %}
+
+							<div class="col-lg-4 col-sm-6 shuffle-item" data-groups="[&quot;government&quot;,&quot;healthcare&quot;]">
+								<div class="project-img-container">
+									<a class="gallery-popup" href="galerie/{{photo.nom}}" aria-label="project-img">
+										<img class="img-fluid" src="galerie/{{photo.nom}}" alt="project-img">
+										<span class="gallery-icon">
+											<i class="fa fa-plus"></i>
+										</span>
+									</a>
+									<div class="project-item-info">
+										<div class="project-item-info-content">
+											<h3 class="project-item-title">
+												<a href="projects-single.html"></a>
+											</h3>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- shuffle item 1 end -->
+						{% endfor %}
+
+
+					</div>
+
+
+				</div>
+				<!-- shuffle end -->
+			</div>
+
+			<div class="col-12">
+				<div class="general-btn text-center">
+					<a class="btn btn-primary" href="{{path('galerie')}}">Voir tous les albums</a>
+				</div>
+			</div>
+		</div><!-- Content row end --></div><!--/ Container end --></section>
+
+
+<!-- Project area end -->
+<section class="content">
+	<div class="container">
+		<div class="row">
+
+
+			<div class="col-lg-6 mt-5 mt-lg-0">
+
+				<h3 class="column-title text-center bleuTitre">Planning de l'association</h3>
+
+				<div id="calendar-holder" class="mb-5"></div>
+
+
+				<script type="text/javascript">
+
+
+					document.addEventListener('DOMContentLoaded', () => {
+var calendarEl = document.getElementById('calendar-holder');
+
+var calendar = new FullCalendar.Calendar(calendarEl, {
+defaultView: 'dayGridMonth',
+locale: 'fr',
+editable: false,
+header: {
+locales: 'fr',
+// left: 'prev,next today',
+left: 'prev, today',
+center: 'title',
+// right: 'dayGridMonth,timeGridWeek',
+right: 'next'
+},
+events: {{ data|raw }},
+
+plugins: [
+'interaction', 'dayGrid', 'timeGrid'
+], // https://fullcalendar.io/docs/plugin-index
+timeZone: 'UTC'
+});
+calendar.render();
+});
+				</script>
+
+
+			</div>
+			<!-- Clients row end -->
+
+
+			<div class="col-lg-6 ">
+				<h3 class="column-title text-center bleuTitre">Les membres du bureau</h3>
+
+				<div id="testimonial-slide" class="testimonial-slide">
+					<div class="item">
+						<div class="quote-item">
+							<span class="quote-text">
+								Question ran over her cheek When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road.
+							</span>
+
+							<div class="quote-item-footer">
+								<img loading="lazy" class="testimonial-thumb" src="images/clients/testimonial1.png" alt="testimonial">
+								<div class="quote-item-info">
+									<h3 class="quote-author">Laurent Delannoy</h3>
+									<span class="quote-subtext">Président de l'association</span>
+								</div>
+							</div>
+						</div>
+						<!-- Quote item end -->
+					</div>
+					<!--/ Item 1 end -->
+
+					<div class="item">
+						<div class="quote-item">
+							<span class="quote-text">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitoa tion ullamco laboris nisi aliquip consequat.
+							</span>
+
+							<div class="quote-item-footer">
+								<img loading="lazy" class="testimonial-thumb" src="images/clients/testimonial2.png" alt="testimonial">
+								<div class="quote-item-info">
+									<h3 class="quote-author">Aline Sergent</h3>
+									<span class="quote-subtext">Secretaire de l'association</span>
+								</div>
+							</div>
+						</div>
+						<!-- Quote item end -->
+					</div>
+					<!--/ Item 2 end -->
+
+					<div class="item">
+						<div class="quote-item">
+							<span class="quote-text">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitoa tion ullamco laboris nisi ut commodo consequat.
+							</span>
+
+							<div class="quote-item-footer">
+								<img loading="lazy" class="testimonial-thumb" src="images/clients/testimonial3.png" alt="testimonial">
+								<div class="quote-item-info">
+									<h3 class="quote-author">Olivier Seys</h3>
+									<span class="quote-subtext">Tresorier de l'association</span>
+								</div>
+							</div>
+						</div>
+						<!-- Quote item end -->
+					</div>
+					<!--/ Item 3 end -->
+
+				</div>
+				<!--/ Testimonial carousel end-->
+			</div>
+			<!-- Col end -->
+		</div>
+		<!-- Col end -->
+	</div><!--/ Content row end --></div><!--/ Container end --></section><!-- Content end -->
+	
+	
+	<div class="row mx-0 px-0">
+		<div class="bg-jaune mx-0 px-0 col-12 row d-sm-none d-block text-center"> 
+			<h5 class=" mt-1 mb-1 bleuTitre">Newsletter</h5>
+			<p>Inscrivez-vous pour recevoir des informations par mail.</p>
+		</div>
+		<div class="col-sm-3 d-none d-sm-block bg-jaune text-light newsJaune  p-4  py-auto "><b>Newsletter</b>
+		</div>
+		<div class="col-sm-7 dark-bg px-auto pb-1 pt-3 mx-0 pe-0 col-9 "> {{form_start(formNewsletter)}} 
+			{{form_row(formNewsletter.email)}}
+		</div>
+		<div class="col-sm-2 col-3 dark-bg text-start m-0 p-0 divNewsletter" > 
+			<button type="submit" class="btnNewsletter text-light bg-jaune"> <p class=" text-light my-auto"> <span class="texteBtnNewsletter">s'inscrire</span> <i class="fa fa-paper-plane iconeBtnNewsletter mx-3"></i> </p> </button>
+		</div>
+		{{form_end(formNewsletter)}}
+	</div>
+
+{# 
+	<section class="subscribe no-padding"><div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="subscribe-call-to-acton text-start">
+				<h3>Nous contacter ?</h3>
+				<h4>
+					les.volants.berquinois@gmail.com</h4>
+			</div>
+		</div>
+		<!-- Col end -->
+	
+		<div class="col-md-8">
+			<div class="ts-newsletter row align-items-center">
+				<div class="col-md-5 newsletter-introtext">
+					<h4 class="text-white mb-0">Newsletter
+					</h4>
+					<p class="text-white">Les dernières infos du club</p>
+				</div>
+	
+				<div class="col-md-7 newsletter-form">
+					<form action="#" method="post">
+						<div class="form-group">
+							<label for="newsletter-email" class="content-hidden">Newsletter Email</label>
+							<input type="email" name="email" id="newsletter-email" class="form-control form-control-lg" placeholder=" Votre adresse email" autocomplete="off">
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- Newsletter end -->
+		</div>
+		<!-- Col end -->
+	</div><!-- Content row end --></div><!--/ Container end --></section> #}<!--/ subscribe end --><section id="news" class="news">
+<div class="container">
+	<div class="row text-center">
+		<div class="col-12">
+			<h2 class="section-title bleuTitre">Actualités du clubs</h2>
+			<h3 class="section-sub-title ">Derniers articles</h3>
+		</div>
+	</div><!--/ Title row end --><div class="row">
+		{% for article in articlesSlide %}
+
+			<div class="col-lg-4 col-md-6 mb-4">
+				<div class="latest-post">
+					<div class="latest-post-media">
+						<a href="{{path('article_unique',{nom:article.nom})}}" class="latest-post-img">
+							<img loading="lazy" class="img-fluid" src="uploads/{{article.photo}}" alt="img">
+						</a>
+					</div>
+					<div class="post-body">
+						{% for catégorie in article.categorie %}
+							<a href="{{path('actu',{'categories':catégorie.id})}}" class="me-2 bleuTitre font-weight-light text-decoration-underline" style="font-size:12px;">
+								{{catégorie}}
+							</a>
+						{% endfor %}
+						<h4 class="post-title">
+							<a href="{{path('article_unique',{nom:article.nom})}}" class="d-inline-block">
+								{{article.nom}}</a>
+						</h4>
+						<p class="mt-3">{{article.texte|striptags|slice(0,200)}}...</p>
+						<div class="latest-post-meta">
+
+							<span class="post-item-date">
+								<i class="fa fa-clock-o"></i>
+								Date Article
+							</span>
+						</div>
+					</div>
+				</div>
+				<!-- Latest post end -->
+			</div>
+			<!-- 1st post col end -->
+
+		{% endfor %}
+
+
+	</div><!--/ Content row end --><div class="general-btn text-center mt-4">
+		<a class="btn btn-primary" href="news-left-sidebar.html">voir tous les articles</a>
+	</div>
+</div><!--/ Container end --></section>{% endblock %}

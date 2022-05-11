@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qui sommes-nous ?{% endblock %}
+
+{% block body %}
+
+
+<section id="main-container" class="main-container">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+          <h3 class="column-title">Qui sommes-nous</h3>
+        {% for contenu in texte %}
+            {{contenu.texte|raw}}
+        {% endfor %}
+
+        </div><!-- Col end -->
+
+        <div class="col-lg-6 mt-5 mt-lg-0">
+          
+          <div id="page-slider" class="page-slider small-bg">
+
+    {% for photo in photos %}
+              <div class="item" style="background-image:url({{asset('uploads/' ~ photo.photo)}})">
+                <div class="container">
+                    <div class="box-slider-content">
+                      <div class="box-slider-text">
+                      </div>    
+                    </div>
+                </div>
+              </div><!-- Item 1 end -->
+    {% endfor %}
+
+            
+          </div><!-- Page slider end-->          
+        
+
+        </div><!-- Col end -->
+    </div><!-- Content row end -->
+
+  </div><!-- Container end -->
+</section><!-- Main container end -->
+
+
+
+
+
+
+
+{% endblock %}

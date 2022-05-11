@@ -1,221 +1,219 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Infos pratiques{% endblock %}
+{% block title %}Infos pratiques
+{% endblock %}
 
 {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }} 
-    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.css">
-    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.css">
-    <link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.css">
+	{{ encore_entry_link_tags('app') }}
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.css">
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.css">
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.css">
 
 {% endblock %}
 
 {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+	{{ encore_entry_script_tags('app') }}
 
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.js"></script>
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/core/locales/fr.js"></script>
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.js"></script>
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.js"></script>
-    <script src="fullcalendar/fullcalendar-4.1.0/packages/interaction/main.min.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/core/locales/fr.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.js"></script>
+	<script src="fullcalendar/fullcalendar-4.1.0/packages/interaction/main.min.js"></script>
 
 {% endblock %}
 
 {% block body %}
 
+	<h1 class='text-center bleuTitre my-4'>Les informations pratiques</h1>
 
-<ul class="nav d-flex d-lg-none">
-  <li class="nav-item">
-    <a class="nav-link" aria-current="page" href="#salle">La salle</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#horaires">Les horaires</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#contact">Nous contacter</a>
-  </li>
+	<ul class="nav d-flex d-lg-none">
+		<li class="nav-item">
+			<a class="nav-link" aria-current="page" href="#salle">La salle</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#horaires">Les horaires</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#contact">Nous contacter</a>
+		</li>
 
-</ul>
+	</ul>
 
-<div class="container container-fluid">
-
-
-    <div class="row">
-
-<div class="col-lg-6 mt-3" id="salle">
-            <div class="bg-light b-shadow p-4">
-                                <!----- carte js de la salle de vieux berquin -------->
-
-                     <link rel="stylesheet" href="leaflet/leaflet.css"
-                            integrity=""
-                            crossorigin="" />
-                            {# sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A== #}
-
-                        <script src="leaflet/leaflet.js"
-                            integrity=""
-                            crossorigin=""></script> 
-{# sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA== #}
-
-                            <div id="carte" style="width:100%; height:350px;">
-                            
-                            </div>
+	<div class="container ">
 
 
-                    <script>
+		<div class="row">
 
-                    initMap('carte');
+			<div class="col-lg-6 mt-3" id="salle">
+				<div
+					class="bg-light b-shadow p-4">
+					<!----- carte js de la salle de vieux berquin -------->
 
-                            function initMap(lat,lng){
+					<link
+					rel="stylesheet" href="leaflet/leaflet.css" integrity="" crossorigin=""/>
+					{# sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A== #}
 
-                            const map = L.map('carte').setView([50.6940180068877, 2.64108085743208], 15);
+					<script src="leaflet/leaflet.js" integrity="" crossorigin=""></script>
+					{# sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA== #}
 
-                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            }).addTo(map);
-
-                                    L.marker([50.6940180068877, 2.64108085743208]).addTo(map)
-                                        .bindPopup('<a href="https://www.google.com/maps/place/Salle+De+Sports/@50.6940438,2.639165,17z/data=!3m1!4b1!4m5!3m4!1s0x47dcde34646a444b:0x84ae5e4f4da05c94!8m2!3d50.6941022!4d2.6413516" target="_blank">Voir plus</a>')
-                                        .openPopup();
-    
-                            const layerGroupMarker = L.layerGroup().addTo(map);
-
-                            map.on('click', function (e) {
-                                map.setZoom(17);
-                                map.setView([e.latlng.lat,e.latlng.lng], 17);
-
-                            });
-                        }
-                        </script>  
-
-                <!-- fin de la map ------------------------------>
-
-                        <div>
-                            <h3 class="mt-3">La salle </h3>
-                            <p class="mt-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus facilis laborum est alias nobis quas dignissimos reiciendis, tempore, quo eius, laudantium dolores. Optio deleniti accusamus, illum voluptas odio quo sapiente quod architecto quibusdam ex, iste possimus consequatur dignissimos qui id ab aspernatur maxime quam a, culpa fuga quia aperiam? Rerum!</p>
-                        </div>
-
-                        <div class="d-none d-sm-block">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" >
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button> 
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            </div>
-                            <div class="carousel-inner">
+					<div id="carte" style="width:100%; height:350px;"></div>
 
 
-                            {% for key, photo in photoSlide %}
-                                    <div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active"{% endif %} >
-                                        <img src="/uploads/{{photo.photo}}" class="d-block my-auto mx-auto" alt"" > 
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                            </div>
-                            </div>
-                        </div>
+					<script>
+
+						initMap('carte');
+
+function initMap(lat, lng) {
+
+const map = L.map('carte').setView([
+50.6940180068877, 2.64108085743208
+], 15);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+
+L.marker([50.6940180068877, 2.64108085743208]).addTo(map).bindPopup('<a href="https://www.google.com/maps/place/Salle+De+Sports/@50.6940438,2.639165,17z/data=!3m1!4b1!4m5!3m4!1s0x47dcde34646a444b:0x84ae5e4f4da05c94!8m2!3d50.6941022!4d2.6413516" target="_blank">Voir plus</a>').openPopup();
+
+const layerGroupMarker = L.layerGroup().addTo(map);
+
+map.on('click', function (e) {
+map.setZoom(17);
+map.setView([
+e.latlng.lat, e.latlng.lng
+], 17);
+
+});
+}
+					</script>
+
+					<!-- fin de la map ------------------------------>
+
+					<div>
+						<h3 class="mt-3 bleuTitre">La salle
+						</h3>
+						<p class="mt-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus facilis laborum est alias nobis quas dignissimos reiciendis, tempore, quo eius, laudantium dolores. Optio deleniti accusamus, illum voluptas odio quo sapiente quod architecto quibusdam ex, iste possimus consequatur dignissimos qui id ab aspernatur maxime quam a, culpa fuga quia aperiam? Rerum!</p>
+					</div>
+
+					<div class="d-none d-sm-block">
+						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+							<div class="carousel-inner">
 
 
-            </div>
-
-        <div class="col-lg-6 mt-3 order-lg-first mx-auto h-50 row d-flex justify-content-between">
-
-            <div class="fondIP col-md-5 col-lg-12 p-lg-2 mb-4  p-3 bg-light b-shadow " id="contact">
-                <h3>Comment nous contacter ?</h3> 
-                <p  class="mt-4">Mail: exemple@gmail.com</p>
-                <p class="mt-3">Téléphone: XX-XX-XX-XX-XX</p>
-                <p class="mt-3"> <a href="https://www.facebook.com/lesvolantsberquinois/"> <img src="images/logoFB.svg" height="35px" alt="">Notre page Facebook</a> </p>
-
-            </div>
-
-            <div class="fondIP p-lg-2 mb-4 col-md-6 col-lg-12 horaires p-3 bg-light b-shadow" height="100px" id="horaires">
-                <h3>Les entraînements</h3> <br>
-
-                <h5>Les adultes</h5>
-                <p class="mt-3">Mercredi: 19h30 - 21h(ou plus)</p>
-                <p class="mt-3">Vendredi: 18h30 - 21h(ou plus)</p>
-                
-                <h5 class="mt-5">Les enfants</h5>
-                <p class="mt-3">Mercredi: 18h30 - 19h30 </p>
-            </div>
-
-                <div class="col-2"></div>
-                 <div class="shop  col-8" >
-                             <a href="images/inscription.jpg" download="inscriptiondl" id="inscription">
-                            <div class="shop-img">
-                                <img src="images/inscription.jpg" alt="" >
-                            </div>
-                            <div class="shop-body">
-                                <h2> Télécharger <br>
-                                la fiche <br> d'inscription</h2>
-                            </div>
-</a>
-                        </div>
-                    <div class="col-2"></div>
-            {# <div class="d-none d-lg-block">
-            <br><br><br><br><br><br><br><br><br><br><br><br>
-            </div> #}
-        </div>
-
-       
-        </div>
+								{% for key, photo in photoSlide %}
+									<div {% if key > 0 %} class="carousel-item" {% endif %} {% if key == 0 %} class="carousel-item active" {% endif %}>
+										<img src="/uploads/{{photo.photo}}" class="d-block my-auto mx-auto" alt"">
+									</div>
+								{% endfor %}
+							</div>
+							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Précédent</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Suivant</span>
+							</button>
+						</div>
+					</div>
+				</div>
 
 
-    </div>
+			</div>
+
+			<div class="col-lg-6 mt-3 order-lg-first mx-auto h-50 row d-flex justify-content-between">
+
+				<div class="fondIP col-md-5 col-lg-12 p-lg-2 mb-4  p-3 bg-light b-shadow " id="contact">
+					<h3 class="bleuTitre text-decoration-none">Nous contacter ?</h3>
+					<p class="mt-4">Mail: exemple@gmail.com</p>
+					<p class="mt-3">Téléphone: XX-XX-XX-XX-XX</p>
+					<p class="mt-3">
+						<a href="https://www.facebook.com/lesvolantsberquinois/">
+							<img src="images/logoFB.svg" height="25px" alt="">Notre page Facebook</a>
+					</p>
+
+				</div>
+
+				<div class="fondIP p-lg-2 mb-4 col-md-6 col-lg-12 horaires p-3 bg-light b-shadow" height="100px" id="horaires">
+					<h3 class="bleuTitre text-decoration-none">Les entraînements</h3>
+					<br>
+
+					<h5>Adultes</h5>
+					<p class="mt-3">Mercredi: 19h30 - 21h(ou plus)</p>
+					<p class="mt-3">Vendredi: 18h30 - 21h(ou plus)</p>
+
+					<h5 class="mt-5">Enfants</h5>
+					<p class="mt-3">Mercredi: 18h30 - 19h30
+					</p>
+				</div>
+
+				<div class="col-2"></div>
+				<div class="shop  col-8">
+					<a href="images/inscription.jpg" download="inscriptiondl" id="inscription">
+						<div class="shop-img">
+							<img src="images/inscription.jpg" alt="">
+						</div>
+						<div class="shop-body">
+							<h2>
+								Télécharger
+								<br>
+								la fiche
+								<br>
+								d'inscription</h2>
+						</div>
+					</a>
+				</div>
+				<div class="col-2"></div>
+				{# <div class="d-none d-lg-block">
+				            <br><br><br><br><br><br><br><br><br><br><br><br>
+				            </div> #}
+			</div>
+
+
+		</div>
+
+
+	</div>
 
 </div>
 
 
-
-<div class="container">
-  <div class="row">
-    <div class="col-3"></div>
-    <div class="col-6">
-      <div id="calendar-holder" class="mb-5" ></div>
-    </div>
-    <div class="col-3"></div>
-      </div>
-  </div>
-
-<script type="text/javascript">
+<div class="container-md">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div id="calendar-holder" class="mb-5"></div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
 
 
-
-        document.addEventListener('DOMContentLoaded', () => {
-            var calendarEl = document.getElementById('calendar-holder');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                defaultView: 'dayGridMonth',
-                locale: 'fr',
-                editable: false,
-                header: {
-                    locales: 'fr',
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek',
-                },
-                events: {{data|raw}},
-                
-                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
-                timeZone: 'UTC',
-            });
-            calendar.render();
-        });
-    </script>
+	<script type="text/javascript">
 
 
+		document.addEventListener('DOMContentLoaded', () => {
+var calendarEl = document.getElementById('calendar-holder');
+
+var calendar = new FullCalendar.Calendar(calendarEl, {
+defaultView: 'dayGridMonth',
+locale: 'fr',
+editable: false,
+header: {
+locales: 'fr',
+// left: 'prev,next today',
+left: 'prev, today',
+center: 'title',
+// right: 'dayGridMonth,timeGridWeek',
+right: 'next'
+},
+events: {{ data|raw }},
+
+plugins: [
+'interaction', 'dayGrid', 'timeGrid'
+], // https://fullcalendar.io/docs/plugin-index
+timeZone: 'UTC'
+});
+calendar.render();
+});
+	</script>
 
 
-
-
-
-
-
-{% endblock %}
+</div>{% endblock %}

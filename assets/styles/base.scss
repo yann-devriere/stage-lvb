@@ -1,14 +1,20 @@
+$BleuNuit:  rgb(40, 36, 80);
+$BleuTitre: rgb(89, 83, 162);
+
 .logoNav{
     height: 150px;
     width : auto;
 }
 
 .bleu{
-  color: rgb(16, 16, 129);
+  color: $BleuNuit;
+}
+.bleuTitre{
+  color: $BleuTitre;
 }
 
 .card{
-  box-shadow: 5px 5px 10px rgb(95, 93, 93);
+  box-shadow: 5px 5px 10px $BleuNuit;
   border-radius: 0.5rem;
   border:0px !important;
 }
@@ -19,7 +25,7 @@
 }
 
 .bleu-elec{
-  color: rgb(24, 24, 255);
+  color: $BleuNuit;
 }
 
 .no-gutter {
@@ -32,6 +38,8 @@
 
 body{
     box-shadow: inset -30px 4px 50px rgba(27, 36, 105, 0.473), inset 30px 4px 50px rgba(27, 36, 105, 0.473);
+    min-height: 100vh;
+    padding-bottom: 69px;
 }
 
 .b{
@@ -40,11 +48,11 @@ body{
 
 
 .bg-bleu {
-    background-color: rgb(40, 36, 80) !important;
+    background-color: $BleuNuit !important;
 }
 
 .bg-bleu-clair{
-  background-color: rgba(0, 0, 223, 0.827) !important;
+  background-color: $BleuNuit !important;
 }
 
  .ml-auto{
@@ -58,6 +66,7 @@ body{
 }
 .conteneur-footer{
   box-shadow: 0px 0px 40px inset rgb(10, 6, 26);
+  
 }
 
 .photoNav{
@@ -111,8 +120,17 @@ body{
     margin-bottom: 0px;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+  
+}
+
 .footer{
     height: 70px;
+    position: absolute;
+    bottom: 0;
+  width:100%;
 }
 
 .carousel-item{
@@ -375,9 +393,64 @@ body{
     text-transform: uppercase;
   }
 
-
-
-
 .carouselAccueil{
   width:70%;
 }
+
+.textFooter {
+  color: #FFF;
+  font-size: 14px!important;
+
+  @media (max-width : 850px) {
+    font-size: 12px !important;
+
+  }
+  @media (max-width : 750px) {
+    font-size: 10px !important;
+
+   }
+  @media (max-width : 400px) {
+    font-size: 9px !important;
+
+  }
+  @media (max-width : 350px) {
+    font-size: 8px !important;
+
+  }
+  @media (max-width : 315px) {
+    font-size: 7px !important;
+  }
+  // @media (max-width : 282px) {
+  //   font-size: 6px !important;
+  // }
+  
+}
+
+.textFooter2 {
+  color: #FFF;
+  font-size: 14px!important;
+
+  @media (max-width : 850px) {
+    font-size: 12px !important;
+
+  }
+  @media (max-width : 650px) {
+    font-size: 10px !important;
+
+   }
+  @media (max-width : 320px) {
+    font-size: 9px !important;
+
+   }
+  }
+
+  .navText {
+  
+    @media (max-width : 1070px) {
+      font-size: 17px !important;
+    }
+    
+    @media (max-width : 1007px) {
+      font-size: 16px !important;
+    }
+  }

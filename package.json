@@ -25,6 +25,7 @@
     "dependencies": {
         "bootstrap-fs-modal": "^0.3.6",
         "fullcalendar": "^5.11.0",
-        "hover.css": "^2.3.2"
+        "hover.css": "^2.3.2",
+        "popper.js": "^1.16.1"
     }
 }

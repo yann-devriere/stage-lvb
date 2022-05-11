@@ -1,127 +1,364 @@
 <!DOCTYPE html>
-<html>
-    <head>
-         <meta charset="UTF-8">
-        <title>{% block title %}Les volants berquinois{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+	<head>
+
+		<!-- Basic Page Needs
+================================================== -->
+		<meta charset="utf-8">
+		<title>
+			{% block title %}Les volants berquinois
+			{% endblock %}
+		</title>
+
+		<!-- Mobile Specific Metas
+================================================== -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{% block meta %}
+			<meta name="description" content="Le club de badminton de Vieux berquin">
+		{% endblock %}		<meta
+		name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+		<!-- Favicon
+================================================== -->
+		<link rel="icon" type="image/png" href="images/favicon.png">
+
+	{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+
+	</head>
+	<body>
+		<div class="body-inner">
+
+			<div id="top-bar" class="top-bar">
+				<div class="container text-center">
+					<div class="row ">
+						<div class="col-sm-8">
+							<ul class="top-info ">
+								<li class="" style="vertical-align:baseline;">
+									<i class="fas fa-map-marker-alt " style="font-size:15px; vertical-align:baseline;"></i>
+									<p class="info-text" style="vertical-align:baseline;">
+										<a href="" style="vertical-align:baseline;">
+											<small style="vertical-align:baseline;">Vieux Berquin</small>
+										</a>
+									</p>
+								</li>
+								<li>
+									<i class="fas fa-envelope " style="font-size:15px;"></i>
+									<p class=" info-text">
+										<a href="">
+											<small>
+												les.volants.berquinois@gmail.com</small>
+										</a>
+									</p>
+								</li>
+							</ul>
+						</div>
+						<!--/ Top info end -->
+
+						<div class=" col-sm-4 top-social text-center">
+							<ul class="top-info ">
+								<li class="">
+									<i class="fas fa-key " style="font-size:15px;"></i>
+									<p class=" info-text">
+										<a href="" class="m-0 p-0">
+											<small>
+												Connexion</small>
+										</a>
+									</p>
+
+								</li>
+
+								<li class="ps-2">
+									<i class="fas fa-user-plus " style="font-size:15px;"></i>
+									<p class=" info-text">
+										<a href="" class="m-0 p-0">
+											<small>
+												Inscription</small>
+										</a>
+									</p>
+
+								</li>
+							</ul>
+						</div>
+						<!--/ Top social end -->
+					</div>
+					<!--/ Content row end -->
+				</div>
+				<!--/ Container end -->
+			</body>
+		</html>
+	</body>
+</html></div><!--/ Topbar end -->
 
 
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }} 
+<!-- Header start -->
 
-        {% endblock %}
+<header id="header" class="header-one">
+<div class="bg-white">
+	<div class="container">
+		<div class="logo-area">
+			<div class="row align-items-center">
+				<div class=" col-lg-3 text-center text-lg-left mb-3 mb-md-2 mb-lg-0">
+					<a class="d-block" href="{{path('home')}}">
+						<img loading="lazy" src="{{asset('images/logobleu.png')}}" class="logoPC"  alt="logo.club" style="height: 5rem;">
+						<img loading="lazy" src="{{asset('images/logobleularge.png')}}" class="logoTel"  alt="logo.club" style="height: 4rem;">
+					</a>
+				</div>
+				<!-- logo end -->
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+				<div class="col-lg-9 d-flex justify-content-center d-lg-block header-right">
+					<ul class="top-info-box align-middle">
 
-    </head>
-   
-   <body>
-       
-    {# <nav class="navbar navbar-expand-lg navbar-light bg-bleu">
-  <div class="container-fluid row">
-    <div class="col-2">
-    <a class="navbar-brand" href="#"><img src="images/logoblanc.png" alt="gg" height="100px"></a>
-    </div>
-    <div class="col-4 pe-1">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    </div>
-    <div class="collapse navbar-collapse text-light " id="navbarNavDropdown">
-   
-<div class="col-2"><p class=" ml-auto ">Test</p></div>
-<div class="col-2"><p class=" ml-auto ">Test</p></div>
-<div class="col-2"><a class="nav-link dropdown-toggle ml-auto" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul></div>
-      
+						<li class="club">
+							<div class="info-box ">
+								<div class="info-box-content">
+									<p class="info-box-title">
+										Le club
+									</p>
+									<p class="info-box-subtitle ">
+										<a href="mailto:office@Constra.com">Les volants Berquinois</a>
+									</p>
+								</div>
+							</div>
+						</li>
 
+						<li class="header-get-a-quote my-auto">
+							<a class="btn btn-primary" href="{{path('infos-pratiques')}}#inscription">Nous rejoindre</a>
+						</li>
+					</ul>
+					<!-- Ul end -->
+				</div>
+				<!-- header right end -->
+			</div>
+			<!-- logo area end -->
+
+		</div>
+		<!-- Row end -->
+	</div>
+	<!-- Container end -->
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="site-navigation">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+              <nav class="navbar navbar-expand-lg navbar-dark p-0">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div id="navbar-collapse" class="collapse navbar-collapse ">
+                    <ul class="nav navbar-nav mr-auto">
+							<li class="nav-item  active">
+								<a href="#" class="nav-link " data-toggle="">Accueil
+
+								</a>
+
+							</li>
+
+							<li class="nav-item dropdown">
+								<a href="{{path('qui')}}" class="nav-link">Qui sommes-nous ?
+
+								</a>
+
+							</li>
+
+							<li class="nav-item dropdown">
+								<a href="{{path('actu')}}" class="nav-link" >News
+								</a>
+
+							</li>
+
+							<li class="nav-item dropdown">
+								<a href="{{path('galerie')}}" class="nav-link" >Photos
+
+								</a>
+
+							</li>
+
+							<li class="nav-item dropdown">
+								<a href="{{path('infos-pratiques')}}" class="nav-link" >Infos-pratiques
+
+								</a>
+
+							</li>
+
+							<li class="nav-item dropdown">
+								<a href="#" class="nav-link" >Espace Membre (caché)
+
+								</a>
+
+							</li>
+						</ul>              
+                      
+                </div>
+              </nav>
+          </div>
+          <!--/ Col end -->
         </div>
-  </div>
-</nav> #}
+        <!--/ Row end -->
 
+        {# <div class="nav-search">
+          <span id="search"><i class="fa fa-search"></i></span>
+        </div><!-- Search end --> #}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-bleu conteneur-nav">
-  <div class="container-fluid ">
-    <a class="navbar-brand" href="{{path('home')}}"><img src="{{asset("images/logoblanclarge.png")}}" alt="gg" class="photoNav"></a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon" height="60px"></span>
-    </button>
-    <div class="collapse navbar-collapse my-auto" id="navbarNavDropdown">
-      <ul class="navbar-nav text-light ml-auto ">
-        <li class="nav-item mx-3" >
-          <a class="nav-link {% if app.request.get('_route') == 'actu' %} active {% endif %} " aria-current="page" href="{{path('actu')}}">Actu du club</a>
-        </li>
-        <li class="nav-item mx-3">
-          <a class="nav-link" href="#">Qui sommes-nous ?</a>
-        </li>
-        <li class="nav-item mx-3">
-        <a class="nav-link {% if app.request.get('_route') == 'galerie' %} active {% endif %} {% if app.request.get('_route') == 'galerie_album' %} active {% endif %} " aria-current="page" href="{{path('galerie')}}" id="navGalerie">Galerie photos</a>
-        </li>
-        <li class="nav-item  mx-3 dropdown ">
-
-          <a class="nav-link dropdown-toggle  {% if app.request.get('_route') == 'infos-pratiques' %} active {% endif %}  " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Infos pratiques
-          </a>
-          <ul class="dropdown-menu mx-2" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item " href="{{path('infos-pratiques')}}#salle">La salle</a></li>
-            <li><a class="dropdown-item " href="{{path('infos-pratiques')}}#horaires">Les entraînements</a></li>
-            <li><a class="dropdown-item " href="{{path('infos-pratiques')}}#contact">Contacts</a></li>
-            <li><a class="dropdown-item " href="{{path('infos-pratiques')}}#inscription">S'inscrire</a></li>
-
-
-
-
-            
-          </ul>
-        </li>
-      </ul>
+        <div class="search-block" style="display: none;">
+          <label for="search-field" class="w-100 mb-0">
+            <input type="text" class="form-control" id="search-field" placeholder="Type what you want and enter">
+          </label>
+          <span class="search-close">&times;</span>
+        </div><!-- Site search end -->
     </div>
+    <!--/ Container end -->
+
   </div>
-</nav>
+  <!--/ Navigation end -->
 
 
 
 
-{# <li {% if app.request.get('_route') == 'home' %} class="ms-0 me-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('home')}}">Accueil </a></li>
-                        <li {% if app.request.get('_route') == 'catalogue' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('catalogue')}}" >Tous les produits</a></li>
-                        <li {% if app.request.get('_route') == 'Cartouches' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Cartouches')}}" >Cartouches</a></li>
-                        <li {% if app.request.get('_route') == 'Papeterie et Fournitures' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Papeterie et Fournitures')}}" >Papeterie & fournitures</a></li>
-                        <li {% if app.request.get('_route') == 'Activités' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Activités')}}" >Activités</a></li>
-                        <li {% if app.request.get('_route') == 'Peinture' %} class="mx-5 active" {% else %} class="mx-4"{% endif %} ><a href="{{path('Peinture')}}" >Peinture</a></li>
-                        <li {% if app.request.get('_route') == 'Fournitures Scolaires' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Fournitures Scolaires')}}" >Scolaire</a></li>
-                        <li {% if app.request.get('_route') == 'Mugs' %} class="mx-5 active" {% else %} class="ms-5 me-0"{% endif %} ><a href="{{path('Mugs')}}" >Mugs</a></li> #}
 
 
-    
-        {% block body %}{% endblock %}
-
-    <footer class="footer bg-bleu conteneur-footer">
-    
-        <div class="row justify-content-center text-center mx-auto my-auto pt-2 text-light">
-            <div class="col-3 my-auto"> <a href="https://www.facebook.com/lesvolantsberquinois/"><img src="{{asset('images/logoFB.svg')}}" alt="" height='50px'></div></a>
-            <div class="col-3 my-auto">
-                <a href="#" style="color:white;">Contact</a>
-                <div class="pt-2"style="font-size:10px;">2022 © Les volants berquinois</div>
-            </div>
-            <div class="col-3 my-auto ">
-            <a href="#top" class="my-auto" ><img src="{{asset('images/flechetop.png')}}" height="35px" alt=""></a>
-            <p style="font-size:10px;" class="my-auto">Haut de page</p> 
-           
-            </div>
-        </div>
-
-    </footer>
+</header><!--/ Header end -->
 
 
-    </body>
-</html>
+
+
+
+
+{% block body %}{% endblock %}
+
+
+
+
+<footer id="footer" class="footer bg-overlay"><div class="footer-main">
+<div class="container">
+	<div class="row justify-content-between">
+		<div class="col-lg-4 col-md-6 footer-widget footer-about">
+			<h3 class="widget-title">Qui sommes-nous</h3>
+			<img loading="lazy" width="200px" class="footer-logo" src="{{asset('images/logoblanclarge.png')}}" alt="Constra">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt u labore et dolore magna aliqua.</p>
+			<div class="footer-social">
+				<ul>
+					<li><a href="https://facebook.com/themefisher" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+					<li> <a href="mailto:les.volants.berquinois@gmail.com"><i class="fa fa-envelope"></i> </a> </li>
+				</ul>
+			</div>
+			<!-- Footer social end -->
+		</div>
+		<!-- Col end -->
+
+		<div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0">
+			<h3 class="widget-title">Horaires des entrainements</h3>
+			<div class="working-hours">
+				<p class="fw-bold">Section adulte:</p>
+				
+				Mercredi:
+				<span class="text-right">19:30 - 22:00 
+				</span>
+				<br>
+				Vendredi:
+				<span class="text-right">19:00 - 21:30</span>
+			</div>
+			<div class="working-hours mt-4">
+			<p class="fw-bold">Section enfant:</p>	
+				Mercredi:
+				<span class="text-right">19:30 - 22:00 
+				</span>
+				
+			</div>
+		</div>
+		<!-- Col end -->
+
+		<div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
+			<h3 class="widget-title">Pages</h3>
+			<ul class="list-arrow">
+				<li class="nav-item  ">
+					<a href="#"  >Accueil
+								</a>
+							</li>
+
+							<li class="nav-item ">
+								<a href="#">Qui sommes-nous ?
+
+								</a>
+
+							</li>
+
+							<li class="nav-item ">
+								<a href="{{path('actu')}}" >News
+								</a>
+
+							</li>
+
+							<li class="nav-item ">
+								<a href="{{path('galerie')}}" >Photos
+
+								</a>
+
+							</li>
+
+							<li class="nav-item ">
+								<a href="{{path('infos-pratiques')}}" >Infos-pratiques
+
+								</a>
+
+							</li>
+			</ul>
+		</div>
+		<!-- Col end -->
+	</div>
+	<!-- Row end -->
+</div><!-- Container end --></div><!-- Footer main end --><div class="copyright my-0 py-2">
+<div class="container">
+	<div class="row align-items-center">
+		<div class="col-md-6">
+			<div class="copyright-info text-center text-md-left">
+				<span>&copy;
+					<script>
+						document.write(new Date().getFullYear())
+					</script>, Les volants Berquinois
+
+				</span>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="footer-menu text-center text-md-right">
+				<ul class="list-unstyled my-auto">
+					<li>
+						<a href="https://www.facebook.com/lesvolantsberquinois/">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+					</li>
+					<li>
+						<a href="about.html">CGU</a>
+					</li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- Row end -->
+
+	<div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top position-fixed">
+		<button class="btn btn-primary mb-5" title="Back to Top" style="border :solid 1px #ffb600;">
+			<i class="fa fa-angle-double-up"></i>
+		</button>
+	</div>
+</div><!-- Container end --></div><!-- Copyright end --></footer><!-- Footer end --></div><!-- Body inner end --></body></html>

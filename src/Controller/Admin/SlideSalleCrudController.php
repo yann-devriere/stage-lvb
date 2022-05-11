@@ -3,10 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\SlideSalle;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class SlideSalleCrudController extends AbstractCrudController
 {
@@ -15,6 +16,12 @@ class SlideSalleCrudController extends AbstractCrudController
         return SlideSalle::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->showEntityActionsInlined()
+        ;
+    }
     
     public function configureFields(string $pageName): iterable
     {

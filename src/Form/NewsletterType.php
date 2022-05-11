@@ -15,25 +15,22 @@ class NewsletterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', RepeatedType::class , [
-                'type'=> EmailType::class,
-                'invalid_message'=>'Les adresses doivent être identiques',
+            ->add('email', EmailType::class , [
                 'required'=>true,
-                'first_options'=>['label'=>false,
+                    'label'=>false,
             'attr'=>[
-                'placeholder'=>'Votre adresse email'
-            ]],
-                'second_options'=>['label'=>false,
-                'attr'=>[
-                    'placeholder'=>'Vérifiez votre adresse email'
-                ]]
+                'placeholder'=>'Votre adresse email',
+                'class' => 'ps-3  m-0 ',
+
+            ],
 
                 ])
 
-            ->add('submit', SubmitType::class, ['label'=>"S'inscrire",
-                'attr'=> ['placeholde'=>"S'inscrire à la newsletter",
-                'class'=>'bg-bleu text-light']
-            ])
+        //     ->add('submit', SubmitType::class, ['label'=>"S'inscrire",
+        //         'attr'=> ['placeholde'=>"S'inscrire à la newsletter",
+        //         'class'=>'text-light   m-0 btn my-auto py-0 '],
+        //         'row_attr'=> ['class'=>'m-0 p-0'],
+        // ])
 
         ;
     }

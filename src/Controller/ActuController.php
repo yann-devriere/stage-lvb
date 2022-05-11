@@ -23,20 +23,20 @@ class ActuController extends AbstractController
     }
 
     #[Route('/actualite-du-club', name: 'actu')]
-    
-    
+
+
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
 
-        
+
         $search = new Search;
         $formFiltres = $this->createForm(SearchType::class, $search);
 
         $formFiltres->handleRequest($request);
 
-        if($formFiltres->isSubmitted() && $formFiltres->isValid()){
+        if ($formFiltres->isSubmitted() && $formFiltres->isValid()) {
             $articles = $this->entityManager->getRepository(Article::class)->findWithSearch($search);
-        } else{
+        } else {
             $articles = $this->entityManager->getRepository(Article::class)->findAll();
         }
 
@@ -48,10 +48,9 @@ class ActuController extends AbstractController
 
         $formFiltres2->handleRequest($request);
 
-        if($formFiltres2->isSubmitted() && $formFiltres2->isValid()){
+        if ($formFiltres2->isSubmitted() && $formFiltres2->isValid()) {
             $articles = $this->entityManager->getRepository(Article::class)->findWithSearch($search2);
-        
-        } else{
+        } else {
             $articles = $this->entityManager->getRepository(Article::class)->findAll();
         }
 
@@ -63,16 +62,15 @@ class ActuController extends AbstractController
         );
 
 
-      
 
 
 
-        return $this->render('actu/index.html.twig',[
-            'formFiltres'=>$formFiltres->createView(),
-            'formFiltres2'=>$formFiltres2->createView(),
+
+        return $this->render('actu/index.html.twig', [
+            'formFiltres' => $formFiltres->createView(),
+            'formFiltres2' => $formFiltres2->createView(),
             'articles' => $articles,
 
         ]);
     }
 }
-

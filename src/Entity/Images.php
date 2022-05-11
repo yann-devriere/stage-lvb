@@ -20,6 +20,7 @@ class Images
     #[ORM\JoinColumn(nullable: false)]
     private $album;
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,5 +54,6 @@ public function __toString()
 {
     return $this->getNom();
 }
+
 
 }

@@ -26,13 +26,25 @@ class GalerieController extends AbstractController
     public function index(): Response
     {
 
-        $albums = $this->entityManager->getRepository(Album::class)->findAll();
+       
+        if ($this->getUser()==null or $this->getUser()->getMembre() == false ){
 
-        $photo = [];
-        foreach ($albums as $album){
-        $photos[]= $this->entityManager->getRepository(Images::class)->findOneByAlbum($album->getId()); 
-        }
-// dd($photos);
+            $albums = $this->entityManager->getRepository(Album::class)->findByPublic(true);
+
+            $photo = [];
+            foreach ($albums as $album){
+            $photos[]= $this->entityManager->getRepository(Images::class)->findOneByAlbum($album->getId()); 
+            }
+
+
+        }else{
+            $albums = $this->entityManager->getRepository(Album::class)->findAll();
+
+            $photo = [];
+            foreach ($albums as $album){
+            $photos[]= $this->entityManager->getRepository(Images::class)->findOneByAlbum($album->getId()); 
+            }
+            }
 
         return $this->render('galerie/index.html.twig', [
             'controller_name' => 'GalerieController',
@@ -46,7 +58,9 @@ class GalerieController extends AbstractController
     #[Route('/galerie/{id}', name: 'galerie_album')]
     public function album(PaginatorInterface $paginator,$id,Request $request): Response
     {
-        $photos = $this->entityManager->getRepository(Images::class)->findByAlbum($id); 
+        $album = $this->entityManager->getRepository(Album::class)->findOneById($id);
+        if($album->getPublic()==true){
+            $photos = $this->entityManager->getRepository(Images::class)->findByAlbum($id); 
         // dd($photos);
         $photos = $paginator->paginate(
             $photos, /* query NOT result */
@@ -54,8 +68,27 @@ class GalerieController extends AbstractController
             9
         );
 
+        }else{
+            if ($this->getUser()==null or $this->getUser()->getMembre() == false ){
+                $this->addFlash('danger', "Vous devez être connecté à un compte verrifié par l'administrateur pour accéder à cette partie du site.");
+                return $this->redirectToRoute('galerie');
+            }else{
+                
+                    $photos = $this->entityManager->getRepository(Images::class)->findByAlbum($id); 
+                // dd($photos);
+                $photos = $paginator->paginate(
+                    $photos, /* query NOT result */
+                    $request->query->getInt('page', 1),
+                    9
+                );
+            }
+        }
+
+        
+
         return $this->render('galerie/album.html.twig', [
             'photos'=>$photos,
+            'album'=>$album
         ]);
     }
 

@@ -6,13 +6,34 @@
 
 {% if notification %}
 <div class="alert alert-danger">{{notification}}</div>
+{% endif %}
 
+{% if utilisateurCo != null %}
+<div class="alert alert-warning alert-dismissible fade show h5" role="alert">
+                Vous êtes déjà connecté avec l'adresse {{utilisateurCo}}.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 {% endif %}
     <div class="container ">
         <h1 class="h3 mb-3 font-weight-normal text-center dore mt-5 ">Inscrivez-vous</h1>
         <div class="col-sm-6 mx-auto text-dark">
-            {{form(form)}} 
-        </div>     
+            {# {{form(form)}}  #}
+        {{ form_start(form) }}
+
+    {{ form_row(form.prenom) }} 
+    {{ form_row(form.nom) }} 
+    {{ form_row(form.email) }} 
+    {{ form_row(form.password) }} 
+    {{ form_row(form.recaptcha) }} 
+    {# must be the same name of this put on the FormBuilder #}
+
+    {{ form_errors(form.recaptcha) }}
+    {# That will display the error of the captcha to user #}
+
+{{ form_end(form) }}
     </div>
+
+        </div>     
+
 
 {% endblock %}

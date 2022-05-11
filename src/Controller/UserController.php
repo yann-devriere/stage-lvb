@@ -28,6 +28,13 @@ class UserController extends AbstractController
     {
         $notification = null ;
 
+        if(!$this->getUser()==null){
+            $utilisateurCo=$this->getUser()->getEmail();
+        }else{
+            $utilisateurCo=null;
+        }
+        
+
         $user = new User();
         $newsletter = new Newsletter();
 
@@ -41,6 +48,7 @@ class UserController extends AbstractController
                 if(!$search_email){
                     $password = $passwordHasher->hashPassword($user, $user->getPassword());
                     $user->setPassword($password);
+                    $user->setMembre(false);
 
                     $newsletter->setEmail($user->getEmail());
 
@@ -54,7 +62,6 @@ class UserController extends AbstractController
                     $mail->send($user->getEmail(), $user->getPrenom(), 'Bienvenue chez les Volants Berquinois', $content);
 
                     $this->addFlash('success', 'Votre inscription a bien été prise en compte. Vous pouvez déjà vous connecter.');
-
                     return $this->redirectToRoute('connexion');
                     //ici ce sera le mail
                 }else{
@@ -65,7 +72,8 @@ class UserController extends AbstractController
 
         return $this->render('user/index.html.twig',[
             'form' => $form->createView(),
-            'notification' => $notification
+            'notification' => $notification,
+            'utilisateurCo'=> $utilisateurCo,
             
         ]);
     }

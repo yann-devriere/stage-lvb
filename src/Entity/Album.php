@@ -21,6 +21,9 @@ class Album
     #[ORM\OneToMany(mappedBy: 'album', targetEntity: Images::class, orphanRemoval: true, cascade: ["persist"] )]
     private $images;
 
+    #[ORM\Column(type: 'boolean')]
+    private $public;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -69,6 +72,18 @@ class Album
                 $image->setAlbum(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPublic(): ?bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): self
+    {
+        $this->public = $public;
 
         return $this;
     }

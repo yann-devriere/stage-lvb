@@ -35,7 +35,31 @@
 
 
 .b-shadow{
-    box-shadow: 5px 5px 10px rgb(95, 93, 93);
+    box-shadow: 5px 5px 10px rgb(40, 36, 80);
     border-radius: 0.5rem;
   
+}
+
+
+.b-shadowLight{
+    border: 0 5px 5px 5px solid white;
+    border-radius: 0.5rem;
+  
+}
+.b-shadowBlue{
+    box-shadow: 0 5px 5px 5px solid rgb(127, 135, 243) !important;
+    border-radius: 0.5rem;
+  
+}
+
+.b-shadowNews{
+    border-radius: 0.5rem;
+  
+}
+
+ul.dropdown-menu{
+    background-color: rgb(40, 36, 80);
+    border-radius: 0.5em;
+    border: solid white 1px;
+
 }

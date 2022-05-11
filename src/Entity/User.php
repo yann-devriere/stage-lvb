@@ -33,6 +33,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $newsletter;
 
+    #[ORM\Column(type: 'boolean')]
+    private $membre;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +157,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNewsletter(bool $newsletter): self
     {
         $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    public function getMembre(): ?bool
+    {
+        return $this->membre;
+    }
+
+    public function setMembre(bool $membre): self
+    {
+        $this->membre = $membre;
 
         return $this;
     }

@@ -1,8 +1,21 @@
 @import "~bootstrap/scss/bootstrap";
-@import "actualite.scss";
-@import 'base.scss';
-@import 'infospratiques.scss';
-@import 'home.scss';
-@import "~hover.css/css/hover-min.css";
+// @import "actualite.scss";
+// @import 'base.scss';
+// @import 'infospratiques.scss';
+// @import 'home.scss';
+// @import "~hover.css/css/hover-min.css";
 // @import "~bootstrap-fs-modal/dist/css/fs-modal.min.css";
-@import "galerie.scss";
+// @import "galerie.scss";
+// @import "album.scss";
+// @import "../constra/css/style.css";
+
+
+@import "../constra/plugins/animate-css/animate.css";
+@import "../constra/plugins/colorbox/colorbox.css";
+@import "../constra/plugins/fontawesome/css/all.min.css";
+@import "../constra/plugins/slick/slick-theme.css";
+@import "../constra/plugins/slick/slick.css";
+
+@import "../constra/scss/style.scss";
+
+@import "../constra/plugins/bootstrap/bootstrap.min.css";

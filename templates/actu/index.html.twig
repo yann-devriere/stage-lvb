@@ -1,192 +1,137 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ActuController!{% endblock %}
-
+{% block title %}Hello ActuController!
+{% endblock %}
 
 
 {% block body %}
 
 
+	<!-- formulaire de filtre pour les articles ---->
+
+	<div class="container">
+		{{form_start(formFiltres)}}
+		<div class=" d-none d-sm-block mt-2 mb-2">
+			<h1 class="text-center bleuTitre my-4">Les dernières actualités du club</h1>
+			<h5 class="text-center">
+				Rechercher un article ?</h5>
+			<div class=" row d-flex justify-content-center">
+				<div class="col-3 ">{{form_row(formFiltres.string)}}
+				</div>
+				<div class="col-3 my-auto">{{form_row(formFiltres.categories)}}
+				</div>
+				<div class="col-3 col-sm-3 text-center">
+					<button type="submit" class="btn dark-bg text-light btn-sm my-auto "><img src="images/volant.png" alt="volant" height="15px" class="me-1 hvr-buzz-out">Filtrer<img src="images/volant.png" alt="volant" height="15px" class="ms-1"></button>
+					<br>
+					<a href="{{path('actu')}}" class="bleu-elec text-decoration-none col-3 align-self-top btn-sm">Réinitialiser</a>
+				</div>
+				<div class=""></div>
+			</div>
+		</div>
+
+		<!-- Button trigger modal -->
 
 
-
-<!-- formulaire de filtre pour les articles ---->
-
-    
-{{form_start(formFiltres)}}
-<div class="container d-none d-sm-flex mt-2 mb-2" >
-    <div class=" row d-flex justify-content-center">
-      <div class="col-3 ">{{form_row(formFiltres.string)}}</div>
-      <div class="col-3">{{form_row(formFiltres.categories)}}</div>
-      <div class="col-3"><button type="submit" class="btn bg-bleu-clair text-light btn-sm my-auto "><img src="images/volant.png" alt="volant" height="15px" class="me-1 hvr-buzz-out">Filtrer<img src="images/volant.png" alt="volant" height="15px"class="ms-1"></button></div>
-      
-      <a href="{{path('actu')}}" class="bleu-elec text-decoration-none col-3 align-self-top btn-sm">Réinitialiser</a>
-    </div>
-</div>
-
-<!-- Button trigger modal -->
+		{{form_end(formFiltres)}}
 
 
-    {{form_end(formFiltres)}}
-
- 
-{{form_start(formFiltres2)}}
+		{{form_start(formFiltres2)}}
 
 
-<div class="d-sm-none">
-  <button type="button" class="btn mt-2 ms-4 text-decoration-underline bleu-elec" data-bs-toggle="modal" data-bs-target="#filtres">
-    Filtrer les resultats &#8595;
-  </button>
-</div>
-  <!-- Modal -->
-<div class="container ">
-  <div class="modal fade" id="filtres" tabindex="-1" aria-labelledby="filtresLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-      <div class="modal-content mt-4 ">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Filtrer les resultats</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-4">{{form_row(formFiltres2.string)}}</div>
-        <div class="mb-4">{{form_row(formFiltres2.categories)}}</div>
-        </div>
-        <div class="modal-footer">
-            <a href="{{path('actu')}}" class="bleu-elec text-decoration-none">Réinitialiser</a>
-      <button type="submit" class="btn bg-bleu-clair text-light btn-sm "><img src="images/volant.png" alt="volant" height="15px" class="me-1">Filtrer<img src="images/volant.png" alt="volant" height="15px"class="ms-1"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+		<div class="d-sm-none">
+			<button type="button" class="btn dark-bg mt-2 ms-4 text-decoration-underline text-light" data-bs-toggle="modal" data-bs-target="#filtres">
+				Rechercher un article
+			</button>
+		</div>
+		<!-- Modal -->
+		<div class="container ">
+			<div class="modal fade" id="filtres" tabindex="-1" aria-labelledby="filtresLabel" aria-hidden="true">
+				<div class="modal-dialog ">
+					<div class="modal-content mt-4 ">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Filtrer les resultats</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-4">{{form_row(formFiltres2.string)}}</div>
+							<div class="mb-4">{{form_row(formFiltres2.categories)}}</div>
+						</div>
+						<div class="modal-footer">
+							<a href="{{path('actu')}}" class="bleu-elec text-decoration-none">Réinitialiser</a>
+							<button type="submit" class="btn bg-bleu-clair text-light btn-sm "><img src="images/volant.png" alt="volant" height="15px" class="me-1">Filtrer<img src="images/volant.png" alt="volant" height="15px" class="ms-1"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    {{form_end(formFiltres2)}} 
+		{{form_end(formFiltres2)}}
 
-
-     <hr width="80%" class="mx-auto mt-0 p-0">
- 
-
-<!-- fin form filtres ---->
+		<br>
+		{# <hr width="80%" class="mx-auto mt-0 p-0"> #}
 
 
+		<!-- fin form filtres ---->
 
 
-
-<!-- Affichage des articles ---->
-<div class="container">
-<div class="row">
- 
-
-{% for article in articles %}
+		<!-- Affichage des articles ---->
 
 
-    <div class="d-flex  justify-content-center col-md-6 ">
-        <div class="card mb-4" >
-            {% set photocrop %}/uploads/{{article.photo}}{% endset %}
+			<div class="container"> <div class="row">
 
-            {# <img src="{{photocrop|imagine_filter('cropArticle4')}}" class="card-img-top" alt="photo de l'article"> #}
-            <img src="{{asset('uploads/' ~ article.photo)}}" class="card-img-top" alt="photo de l'article">
-            <div class="card-body boby ">
-                <div class="d-flex">
-                {% for catégorie in article.categorie %}
-                 <a href="{{path('actu',{'categories':catégorie.id})}}" class="me-2 font-weight-light bleu-elec" style="font-size:12px;"> {{catégorie}} </a>
-                {% endfor %}
-                <hr>
-                </div>
-                <b><p class="card-title ">{{article.nom|raw}}</p></b>
-                <p class="card-text">{{article.texte|striptags|slice(0,200)}}...</p>
-                <button type="button" class="btn bg-bleu-clair text-light b d-sm-none ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}">
-                  Lire plus
-                </button>     
-                  <button type="button" class="btn bg-bleu-clair text-light b d-none d-sm-block ms-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{article.id}}large">
-                  Lire plus
-                </button> 
-            </div>
-        </div>
-        <br>
-    </div> 
-  
-        
+				{% if articles is empty %}
+					<h5>Aucun article n'a été trouvé.</h5>
+				{% endif %}
 
 
-<!-- Modal -->
-<div class="modal fade modal-fullscreen no-gutter " id="exampleModal{{article.id}}" tabindex="-1" aria-labelledby="exampleModal{{article.id}}Label" aria-hidden="true">
-  <div class="modal-dialog ">
-    <div class="modal-content modalArticles">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
-
-        <h2>{{article.nom|raw}}</h2><br>
-
-        {{article.texte|raw}} <br>
-
-             {% if article.pieceJointe %}
-        <div class="d-flex justify-content-end"><a href="piecesjointes/{{article.pieceJointe}}" download="{{article.pieceJointe}}">Télécharger la pièce jointe</a></div>
-        {% endif %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn bg-bleu" data-bs-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade " id="exampleModal{{article.id}}large" tabindex="-1" aria-labelledby="exampleModal{{article.id}}largeLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl ">
-    <div class="modal-content modalArticles">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal{{article.id}}Label">{{article.nom}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <img src="/uploads/{{article.photo}}" class="photoModal" alt="photo de l'article"><br>
-
-        <h2 class="p-3">{{article.nom|raw}}</h2><br>
-
-        <div class="p-3">{{article.texte|raw}}</div> <br>
-
-        {% if article.pieceJointe %}
-        <div class="d-flex justify-content-end"><a href="piecesjointes/{{article.pieceJointe}}" download="{{article.pieceJointe}}">Télécharger la pièce jointe</a></div>
-        {% endif %}
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn bg-bleu text-light" data-bs-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
+				{% for article in articles %}
 
 
+					<div class="d-flex  justify-content-center col-md-6 ">
+						<div class="card mb-4">
+
+							<a href="{{path('article_unique',{nom:article.nom})}}">
+								<img src="{{asset('uploads/' ~ article.photo)}}" class="card-img-top" alt="photo de l'article">
+							</a>
+							<div class="card-body boby ">
+								<div class="d-flex mb-2">
+									{% for catégorie in article.categorie %}
+										<a href="{{path('actu',{'categories':catégorie.id})}}" class="me-2 font-weight-light bleuTitre " style="font-size:12px;">
+											{{catégorie}}
+										</a>
+									{% endfor %}
+								</div>
+								<b>
+									<p class="card-title bleuTitre ">{{article.nom|raw}}</p>
+								</b>
+								<p class="card-text">{{article.texte|striptags|slice(0,200)}}...</p>
+							
 
 
-
-{% endfor %}
-
-</div> <!-- fin de la row des articles ---->
-
-<div class="navigation d-flex justify-content-center">
-    {{ knp_pagination_render(articles, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
-</div>
-</div>
-
- <!-- fin affichage articles ---->
-
- 
+								<a href="{{path('article_unique',{nom:article.nom})}}" class="btn dark-bg">Voir plus</a>
+							</div>
+						</div>
+						<br>
+					</div>
 
 
+				{% endfor %}
+
+			</div>
+			<!-- fin de la row des articles ---->
+
+			<div class="navigation d-flex justify-content-center">
+				{{ knp_pagination_render(articles, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+			</div>
+		</div>
+
+		<!-- fin affichage articles ---->
 
 
-<!-- inscription Newsletter ------>
+	<!-- inscription Newsletter ------>
 
-<!-- fin inscription Newsletter ---->
+		<!-- fin inscription Newsletter ---->
 
 
-
+	</div>
 {% endblock %}
