@@ -20,40 +20,48 @@
 
 		<!-- Favicon
 ================================================== -->
-		<link rel="icon" type="image/png" href="images/favicon.png">
+		<link rel="icon" type="image/png" href="{{asset('images/volantFavi.png')}}">
+ 
+		<script src="https://kit.fontawesome.com/12adcfd46b.js" crossorigin="anonymous"></script>
 
 	{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 		{% endblock %}
 
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
+			
 		{% endblock %}
+
 
 	</head>
 	<body>
 		<div class="body-inner">
 
+{% if app.user is null %}	
 			<div id="top-bar" class="top-bar">
 				<div class="container text-center">
 					<div class="row ">
 						<div class="col-sm-8">
-							<ul class="top-info ">
-								<li class="" style="vertical-align:baseline;">
+							<ul class="top-info text-lg-start">
+								<li class="grow" style="vertical-align:baseline;">
 									<i class="fas fa-map-marker-alt " style="font-size:15px; vertical-align:baseline;"></i>
 									<p class="info-text" style="vertical-align:baseline;">
-										<a href="" style="vertical-align:baseline;">
+										<a href="https://www.google.com/search?gs_ssp=eJzj4tLP1TcwLkzLSUkzYPQSK8vMyUlVSElVKMtMLa1QSEotKizNzAMA0-cMTQ&q=ville+de+vieux+berquin&rlz=1C1CHBF_frFR856FR856&oq=ville+de+bieux&aqs=chrome.2.69i57j46i13l2j0i13l5j46i13.4121j0j9&sourceid=chrome&ie=UTF-8" style="vertical-align:baseline;">
 											<small style="vertical-align:baseline;">Vieux Berquin</small>
 										</a>
 									</p>
 								</li>
-								<li>
+									
+								<li class="grow">
 									<i class="fas fa-envelope " style="font-size:15px;"></i>
 									<p class=" info-text">
-										<a href="">
+										<a href="mailto:{{ render(controller('App\\Controller\\EmailController::index',)) }}">
 											<small>
-												les.volants.berquinois@gmail.com</small>
+											{{ render(controller('App\\Controller\\EmailController::index',)) }}	
+											</small>
 										</a>
 									</p>
 								</li>
@@ -62,11 +70,11 @@
 						<!--/ Top info end -->
 
 						<div class=" col-sm-4 top-social text-center">
-							<ul class="top-info ">
-								<li class="">
+							<ul class="top-info text-lg-end ">
+								<li class="grow">
 									<i class="fas fa-key " style="font-size:15px;"></i>
 									<p class=" info-text">
-										<a href="" class="m-0 p-0">
+										<a href="{{path('connexion')}}" class="m-0 p-0">
 											<small>
 												Connexion</small>
 										</a>
@@ -74,22 +82,25 @@
 
 								</li>
 
-								<li class="ps-2">
-									<i class="fas fa-user-plus " style="font-size:15px;"></i>
-									<p class=" info-text">
-										<a href="" class="m-0 p-0">
+								<li class="ps-2 grow">
+									<i class="fa fa-user-plus " style="font-size:15px;"></i>
+
+									<p class=" info-text ">
+										<a href="{{path('inscription')}}" class="m-0 p-0">
 											<small>
-												Inscription</small>
+												Créer un compte</small>
 										</a>
 									</p>
 
 								</li>
+								
 							</ul>
 						</div>
 						<!--/ Top social end -->
 					</div>
 					<!--/ Content row end -->
 				</div>
+				{% endif %}
 				<!--/ Container end -->
 			</body>
 		</html>
@@ -106,8 +117,8 @@
 			<div class="row align-items-center">
 				<div class=" col-lg-3 text-center text-lg-left mb-3 mb-md-2 mb-lg-0">
 					<a class="d-block" href="{{path('home')}}">
-						<img loading="lazy" src="{{asset('images/logobleu.png')}}" class="logoPC"  alt="logo.club" style="height: 5rem;">
-						<img loading="lazy" src="{{asset('images/logobleularge.png')}}" class="logoTel"  alt="logo.club" style="height: 4rem;">
+						<img loading="lazy" src="{{asset('images/logobleu.png')}}" class="logoPC grow"  alt="logo.club" style="height: 5rem;">
+						<img loading="lazy" src="{{asset('images/logobleularge.png')}}" class="logoTel"  alt="logo.club" >
 					</a>
 				</div>
 				<!-- logo end -->
@@ -122,14 +133,14 @@
 										Le club
 									</p>
 									<p class="info-box-subtitle ">
-										<a href="mailto:office@Constra.com">Les volants Berquinois</a>
+										<a href="mailto:{{ render(controller('App\\Controller\\EmailController::index',)) }}">Les volants Berquinois</a>
 									</p>
 								</div>
 							</div>
 						</li>
 
 						<li class="header-get-a-quote my-auto">
-							<a class="btn btn-primary" href="{{path('infos-pratiques')}}#inscription">Nous rejoindre</a>
+							<a class="btn btn-primary" href="{{path('inscription_club')}}">Nous rejoindre</a>
 						</li>
 					</ul>
 					<!-- Ul end -->
@@ -158,52 +169,105 @@
         <div class="row">
           <div class="col-lg-12">
               <nav class="navbar navbar-expand-lg navbar-dark p-0">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler ms-auto" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
-                <div id="navbar-collapse" class="collapse navbar-collapse ">
-                    <ul class="nav navbar-nav mr-auto">
-							<li class="nav-item  active">
-								<a href="#" class="nav-link " data-toggle="">Accueil
+                <div id="navbar-collapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav mr-auto float-right">
+							<li {% if app.request.get('_route') == 'home' %}class="active nav-item text-right" {% else %} class="nav-item text-right" {% endif %}>
+								<a href="{{path('home')}}"   class="nav-link"  data-toggle="">Accueil
 
 								</a>
 
 							</li>
 
-							<li class="nav-item dropdown">
+							<li {% if app.request.get('_route') == 'qui' %}class="active nav-item text-right" {% else %} class="nav-item text-right" {% endif %}>
+
 								<a href="{{path('qui')}}" class="nav-link">Qui sommes-nous ?
 
 								</a>
 
 							</li>
 
-							<li class="nav-item dropdown">
+							<li {% if app.request.get('_route') == 'actu' or app.request.get('_route') == 'article_unique' %}class="active nav-item text-right"  {% else %} class="nav-item text-right" {% endif %}>
+
 								<a href="{{path('actu')}}" class="nav-link" >News
 								</a>
 
 							</li>
 
-							<li class="nav-item dropdown">
+							<li {% if app.request.get('_route') == 'galerie' or  app.request.get('_route') == 'galerie_album'  %}class="active nav-item text-right" {% else %} class="nav-item text-right" {% endif %}>
+
 								<a href="{{path('galerie')}}" class="nav-link" >Photos
 
 								</a>
 
 							</li>
 
-							<li class="nav-item dropdown">
-								<a href="{{path('infos-pratiques')}}" class="nav-link" >Infos-pratiques
+							<li {% if app.request.get('_route') == 'infos-pratiques' %}class="active nav-item text-right" {% else %} class="nav-item text-right" {% endif %}>
+								<a href="{{path('infos-pratiques')}}" class="nav-link" >Contacts
+
+								</a>
+
+							</li>
+							<li {% if app.request.get('_route') == 'inscription_club' %}class="active nav-item text-right" {% else %} class="nav-item text-right" {% endif %}>
+								<a href="{{path('inscription_club')}}" class="nav-link" >Inscription
 
 								</a>
 
 							</li>
 
-							<li class="nav-item dropdown">
-								<a href="#" class="nav-link" >Espace Membre (caché)
+
+								{% if app.user is not null %}
+							<li  class="nav-item text-end d-flex align-items-center justify-content-end d-lg-none" >
+							<div class="text-end">
+								<a href="{{path('deconnexion')}}" class="nav-link  btn bg-jaune my-auto text-light me-0" > Déconnexion
 
 								</a>
+							</div>
 
 							</li>
+							{% endif %}
+
+							
+								{% if is_granted ('ROLE_ADMIN') %}
+							<li  class="nav-item text-end d-flex align-items-center justify-content-end mt-3 mt-lg-0 d-lg-none" >
+							<div class="text-end">
+								<a href="{{path('admin')}}" class="nav-link  btn bg-jaune my-auto text-light me-0" > Administration
+
+								</a>
+							</div>
+
+							</li>
+							{% endif %}
+
+						</ul>	
+						<ul class="nav navbar-nav ml-auto float-right d-none d-lg-flex">
+						
+							{% if app.user is not null %}
+							<li  class="nav-item text-end d-flex align-items-center justify-content-end" >
+							<div class="text-end">
+								<a href="{{path('deconnexion')}}" class="nav-link  btn bg-jaune my-auto text-light me-0" > Déconnexion
+
+								</a>
+							</div>
+
+							</li>
+							{% endif %}
+
+							
+								{% if is_granted ('ROLE_ADMIN') %}
+							<li  class="nav-item text-end d-flex align-items-center justify-content-end mt-3 mt-lg-0" >
+							<div class="text-end">
+								<a href="{{path('admin')}}" class="nav-link  btn bg-jaune my-auto text-light me-0" > Administration
+
+								</a>
+							</div>
+
+							</li>
+							{% endif %}
+						
 						</ul>              
                       
                 </div>
@@ -252,49 +316,37 @@
 		<div class="col-lg-4 col-md-6 footer-widget footer-about">
 			<h3 class="widget-title">Qui sommes-nous</h3>
 			<img loading="lazy" width="200px" class="footer-logo" src="{{asset('images/logoblanclarge.png')}}" alt="Constra">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done idunt u labore et dolore magna aliqua.</p>
+			<p>Nous sommes un club de badminton local fondé en 2013 et regroupant des membres de tous horizons. Nous nous entraînons deux fois par semaine et organisons souvent des événements.</p>
 			<div class="footer-social">
 				<ul>
-					<li><a href="https://facebook.com/themefisher" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-					<li> <a href="mailto:les.volants.berquinois@gmail.com"><i class="fa fa-envelope"></i> </a> </li>
+					<li><a href="https://facebook.com/lesvolantsberquinois" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+					<li> <a href="mailto:{{ render(controller('App\\Controller\\EmailController::index',)) }}"><i class="fa fa-envelope"></i> </a> </li>
 				</ul>
 			</div>
 			<!-- Footer social end -->
 		</div>
 		<!-- Col end -->
 
-		<div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0">
-			<h3 class="widget-title">Horaires des entrainements</h3>
-			<div class="working-hours">
-				<p class="fw-bold">Section adulte:</p>
-				
-				Mercredi:
-				<span class="text-right">19:30 - 22:00 
-				</span>
-				<br>
-				Vendredi:
-				<span class="text-right">19:00 - 21:30</span>
-			</div>
-			<div class="working-hours mt-4">
-			<p class="fw-bold">Section enfant:</p>	
-				Mercredi:
-				<span class="text-right">19:30 - 22:00 
-				</span>
-				
-			</div>
-		</div>
+
+		<!-- Contoller necessaire pour afficher les horaires de manière dynamique -->
+
+		 {{ render(controller(
+        'App\\Controller\\HorairesController::index',
+    )) }}
+
+		
 		<!-- Col end -->
 
 		<div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
 			<h3 class="widget-title">Pages</h3>
 			<ul class="list-arrow">
 				<li class="nav-item  ">
-					<a href="#"  >Accueil
+					<a href="{{path('home')}}"  >Accueil
 								</a>
 							</li>
 
 							<li class="nav-item ">
-								<a href="#">Qui sommes-nous ?
+								<a href="{{path('qui')}}">Qui sommes-nous ?
 
 								</a>
 
@@ -315,6 +367,12 @@
 
 							<li class="nav-item ">
 								<a href="{{path('infos-pratiques')}}" >Infos-pratiques
+
+								</a>
+
+							</li>
+							<li class="nav-item ">
+								<a href="{{path('inscription_club')}}" >Inscription
 
 								</a>
 
@@ -347,7 +405,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="about.html">CGU</a>
+						<a href="{{path("cgu")}}">CGU</a>
 					</li>
 				
 				</ul>

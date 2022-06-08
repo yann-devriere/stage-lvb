@@ -25,9 +25,21 @@ class ArticleUniqueController extends AbstractController
 
         $article = $this->em->getRepository(Article::class)->findOneByNom($nom);
 
+        if ($article == null){
+            $this->addFlash('noarticle',"L'article que vous cherchez à lire n'existe pas");
+            return $this->redirectToRoute('actu');
+        }
+
+        //affichage conditionnel dans le twig en fonction du resultat de la query
         $AllCategories = $this->em->getRepository(Categorie::class)->findAll();
 
+
+
         $articles = $this->em->getRepository(Article::class)->findAll();
+        if ($articles == null){
+            $this->addFlash('noarticles',"Aucun article n'a encore été publié.");
+            return $this->redirectToRoute('home');
+        }
 
         rsort($articles);
         

@@ -28,6 +28,8 @@ class TexteQuiSommesNousCrudController extends AbstractCrudController
     {
         return $crud
             ->showEntityActionsInlined()
+            ->setEntityLabelInSingular('Texte de la page')
+        ->setEntityLabelInPlural('Texte de la page')
         ;
     }
     

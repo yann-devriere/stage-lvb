@@ -50,10 +50,17 @@ class UserController extends AbstractController
                     $user->setPassword($password);
                     $user->setMembre(false);
 
-                    $newsletter->setEmail($user->getEmail());
+                    if($user->getNewsletter()==true){
+                        $searchNews = $this->entityManager->getRepository(Newsletter::class)->findOneByEmail($user->getEmail());
+                        if(!$searchNews){
+                             $newsletter->setEmail($user->getEmail());
+                             $this->entityManager->persist($newsletter);
+                                        }
+                    }
+                   
 
                     $this->entityManager->persist($user);
-                    $this->entityManager->persist($newsletter);
+                    
                     $this->entityManager->flush();
 
                     $mail = new Mail();
@@ -65,7 +72,7 @@ class UserController extends AbstractController
                     return $this->redirectToRoute('connexion');
                     //ici ce sera le mail
                 }else{
-                    $notification = "L'email que vous avez renseigné existe déjà.";
+                    $notification = "L'email que vous avez renseigné est déjà utilisé par un compte existant.";
                 }
 
         }

@@ -28,7 +28,7 @@ public function send($to_email , $to_name, $subject, $content)
                     
                     
                 ],
-                'TemplateID' => 3538596,
+                'TemplateID' => 3937500,
                 'TemplateLanguage' => true,
                 'Subject' => $subject,
                 'Variables' => [
@@ -56,7 +56,7 @@ public function sendMultiple($to,$subject,$content)
                     'Name' => "Les Volants Berquinois"
                 ],
                 'To' => $to    ,
-                'TemplateID' => 3898269,
+                'TemplateID' => 3937500,
                 'TemplateLanguage' => true,
                 'Subject' => $subject,
                 'Variables' => [

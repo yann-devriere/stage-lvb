@@ -10,34 +10,3 @@ when@prod:
     framework:
         router:
             strict_requirements: null
-
-liip_imagine:
- # configure resolvers
-    resolvers:
-
-        # setup the default resolver
-        default:
-
-            # use the default web path
-            web_path: ~
-
-    # your filter sets are defined here
-    filter_sets:
-
-     # name our filter set "my_crop_filter"
-        cropArticle4:
-            filters:
-
-                # use and setup the "crop" filter
-                crop:
-
-                    # set the size of the cropping area
-                    size: [ 640, 300 ]
-
-                    # set the starting coordinates of the crop
-                    start: [ 0, 0 ]
-
-        # use the default cache configuration
-        cache: ~
-
-    # resource: "@LiipImagineBundle/Resources/config/routing.yaml"

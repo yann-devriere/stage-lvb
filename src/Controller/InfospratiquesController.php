@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Booking;
+use App\Entity\Contact;
+use App\Entity\Horaires;
 use App\Entity\SlideSalle;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,44 +19,14 @@ class InfospratiquesController extends AbstractController
 
 
 
-        $events = $entityManager->getRepository(Booking::class)->findAll();
-
-
-        $evenements = [];
-        foreach ($events as $event) {
-
-            $end = ($event->getEndAt()) ? date_format($event->getEndAt(), 'Y-m-d') : null;
-
-            $evenements[] = [
-                'title' => $event->getTitle(),
-                'start' => date_format($event->getBeginAt(), 'Y-m-d'),
-                'end' => $end,
-
-            ];
-        }
-        $evenements[] = [
-            'title' => 'Entraînement',
-            'startTime' => '19-00-000',
-            'endTime' => '22-30-000',
-            'daysOfWeek' => '3',
-        ];
-
-        $evenements[] = [
-            'title' => 'Entraînement',
-            'startTime' => '19-30-000',
-            'endTime' => '22-30-000',
-            'daysOfWeek' => '5',
-        ];
-        $data = json_encode($evenements);
-
-
         $photoSlide = $entityManager->getRepository(SlideSalle::class)->findVisible();
+        $contact = $entityManager->getRepository(Contact::class)->findOneById(1);
+
         return $this->render(
             'infospratiques/index.html.twig',
             [
                 'photoSlide' => $photoSlide,
-                'data' => $data,
-
+                'contact'=>$contact,
             ]
         );
     }

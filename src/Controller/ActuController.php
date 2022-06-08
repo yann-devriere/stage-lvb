@@ -29,6 +29,8 @@ class ActuController extends AbstractController
     {
 
 
+        // formulaire de recherche visible en ecran large
+
         $search = new Search;
         $formFiltres = $this->createForm(SearchType::class, $search);
 
@@ -36,11 +38,13 @@ class ActuController extends AbstractController
 
         if ($formFiltres->isSubmitted() && $formFiltres->isValid()) {
             $articles = $this->entityManager->getRepository(Article::class)->findWithSearch($search);
-        } else {
+        } 
+        else {
             $articles = $this->entityManager->getRepository(Article::class)->findAll();
         }
 
 
+        //formulaire de recherche visible en modal pour les petits écrans
 
         $search2 = new Search;
 
@@ -54,6 +58,8 @@ class ActuController extends AbstractController
             $articles = $this->entityManager->getRepository(Article::class)->findAll();
         }
 
+
+        //pagination des articles
 
         $articles = $paginator->paginate(
             $articles, /* query NOT result */

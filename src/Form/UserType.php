@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 use Symfony\Component\Validator\Constraints\Length;
@@ -29,8 +30,10 @@ class UserType extends AbstractType
                 'match' => false,
                     'message' => 'Seules les lettres sont autorisées',
                 ]),
+                'required' => true,
                 'attr' => [
-                    'placeholder'=> 'Merci de saisir votre prénom'
+                    'placeholder'=> 'Merci de saisir votre prénom',
+                    'class'=>'form-control',
                 ]
             ])
             ->add('nom', TextType::class,[
@@ -41,8 +44,9 @@ class UserType extends AbstractType
                     'match' => false,
                     'message' => 'Seules les lettres sont autorisées',
                 ]),
-
+                'required' => true,
                 'attr' => [
+                    'class'=>'form-control',
                     'placeholder' =>'Merci de saisir votre nom'
                 ]
             ])
@@ -51,9 +55,12 @@ class UserType extends AbstractType
 
             ->add('email', EmailType::class, [
                 'label' => 'Email',
-                'constraints' => [new Length(null, 2, 55)],
-                               
+                'constraints' => [new Length(null, 2, 55), new Email([
+                    'message' => 'Le mail "{{ value }}" est invalide.',
+                ])],
+                'required' => true,
                 'attr' => [
+                    'class'=>'form-control',
                     'placeholder' => 'Merci de saisir votre adresse email'
                 ]
             ])
@@ -68,10 +75,14 @@ class UserType extends AbstractType
                     'label' => 'Mot de passe',
                     'constraints' => new Length(null, 8, 55),
                     'constraints' => new Regex([
-                    'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}$/',
-                    'message' => 'Doit contenir au moins 8 caractères dont une majuscule et un symbole parmi cette liste : #?!@$%^&-= ',
+                    'pattern' => '/^(?=.*?[A-Z])(?=.*?[0-9]).{8,}$/',
+
+
+                    'message' => 'Doit contenir au moins 8 caractères dont une majuscule et un chiffre' ,
                     ]),
+
                     'attr' => [
+                        'class'=>'form-control',
                         'placeholder' => 'Merci de saisir un mot de passe'
                         ]
                 ],
@@ -79,9 +90,11 @@ class UserType extends AbstractType
                     'label' => 'Confirmez le mot de passe',
                     'constraints' => new Length(null, 8, 55),
                     'constraints' => new Regex([
-                        'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}$/',
+                        'pattern' => '/^(?=.*?[A-Z])(?=.*?[0-9]).{8,}$/',
                         ]),
+                        'required' => true,
                 'attr' => [
+                    'class'=>'form-control',
                     'placeholder' => 'Merci confirmer votre mot de passe'
                 ]
                 ],
@@ -91,14 +104,27 @@ class UserType extends AbstractType
                 'label'=> "Souaitez-vous recvoir des informations régulières concernant le club ?",   
                 'required'=>false             
             ])
-            ->add('recaptcha', ReCaptchaType::class)
-
-            ->add('submit', SubmitType::class, [
-                'label' => "S'inscrire",
-                'attr' => [
-                    'class'=>'btn btn-connexion btn-centre' 
+            ->add('cgu', CheckboxType::class , [
+                'label'=> "J'accepte les conditions d'utilisations",   
+                'required'=>true   
+            ])
+            ->add('recaptcha', ReCaptchaType::class,[
+                'attr'=>[ 
+                    'class'=>'text-center',
+                    
                 ]
             ])
+
+            // ->add('submit', SubmitType::class, [
+            //     'label' => "S'inscrire",
+            //     'row_attr'=>['class'=>'text-center mb-3' ,], 
+            //     'attr' => [
+            //         'class'=>'btn bg-jaune text-center',
+            //         'onClick'=> "this.form.submit(); this.disabled=true;",
+                    
+            //     ]
+
+            // ])
 
             
 

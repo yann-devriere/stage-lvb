@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InscriptionController!{% endblock %}
+
+{% block body %}
+<div class="text-center my-3 bleuTitre"><h3 class="bleuTitre">Inscription au club</h3></div>
+
+<div class="container">
+    <div class="row mt-5">
+
+        {% if dossier == null %}
+        <div class="col-md-6 d-flex justify-content-center ">
+                <div class="shop shadow animate__animated animate__fadeInLeft mt-0 "  >
+                        <a href="images/inscription.jpg" download="inscriptionLVB" id="inscription">
+                            <div class="shop-img" >
+                                <img src="{{'images/inscription.jpg'|imagine_filter('documentInscription')}}"  alt="">
+                            </div>
+                            <div class="shop-body">
+                                <h2>
+                                    Télécharger
+                                    <br>
+                                    la fiche
+                                    <br>
+                                    d'inscription</h2>
+                            </div>
+                        </a>
+                    </div>
+        </div>
+        {% else %}
+             <div class="col-md-6 d-flex justify-content-center h-75">
+                <div class="shop shadow animate__animated animate__fadeInLeft mt-0 "  >
+                        <a href="uploads/{{dossier.fichier}}" download="inscriptionLVB" id="inscription">
+                            <div class="shop-img" >
+                                {% set photocrop %}/uploads/{{dossier.fichier}}{% endset %}
+                                <img src="{{photocrop|imagine_filter('documentInscription')}}"  alt="">
+                            </div>
+                            <div class="shop-body">
+                                <h2>
+                                    Télécharger
+                                    <br>
+                                    la fiche
+                                    <br>
+                                    d'inscription</h2>
+                            </div>
+                        </a>
+                    </div>
+        </div>
+        {% endif %}
+        <div class="col-md-6 mb-5"> Vous trouverez ci-joint la fiche d'inscription au club "Les Volants Berquinois". <br><br> Pour valider votre inscription, <div class="text-decoration-underline d-inline">vous seront demandés, entre autres, les documents suivants :</div> <br><br>
+        <ul>
+            <li>La fiche d'inscription préalablement remplie.</li>
+            <li>Une photo d'identité pour les nouveaux adhérents</li>
+            <li>Un certificat médical d'aptitude à la pratique d'activités physiques et sportives.</li>
+        </ul> <br>
+        {% if dossier != null %}
+        Toute les informations concernant l'inscription sont contenues dans le <a href="uploads/{{dossier.fichier}}" download="inscriptiondLVB"><b>dossier d'inscription</b></a>. <br> <br>
+        {% endif %}
+
+        La cottisation annuelle est inféieure <b>45€</b> afin de permettre au plus grand nombre de pratiquer le badminton.
+
+
+        <br> <br>
+
+            {% if horaires != null %}
+
+        	<h4 class=" bleuTitre">Les horaires</h4>
+
+					{% if horaires.enfantsEntrainementExiste %}
+					<p class="h5 text-decoration-underline">Section adultes :</p>
+					{% endif %}
+					<p class="h5 d-inline me-3">{{horaires.jourPremierEntrainement}} :</p> {{horaires.debutPremierEntrainement|format_time("short")}} - {{horaires.finPremierEntrainement|format_time("short")}} <br>
+
+
+					{% if horaires.deuxiemeEntrainementExiste %}
+					<p class="h5 d-inline me-3">{{horaires.jourDeuxiemeEntrainement}} :</p> {{horaires.debutDeuxiemeEntrainement|format_time("short")}} - {{horaires.finDeuxiemeEntrainement|format_time("short")}}
+					{% endif %}
+					{% if horaires.enfantsEntrainementExiste %}
+					<br><br><p class="h5 text-decoration-underline">Section enfants :</p>
+					<p class="h5 d-inline me-3">{{horaires.jourEnfantsEntrainement}} :</p> {{horaires.debutEnfantsEntrainement|format_time("short")}} - {{horaires.finEnfantsEntrainement|format_time("short")}}
+					{% endif %}
+            {% endif %}
+
+        <br> <br>
+        Vous avez des questions ? <br>
+        Contactez nous <a href="{{path('infos-pratiques')}}#contacter" class="text-decoration-underline">ICI</a> ou par mail à l'adresse {% if email is null %}<a href="mailto:les.volants.berquinois@gmail.com">les.volants.berquinois@gmail.com</a>{% else %}<a href="mailto:{{email}}" class="text-decoration-underline">{{email}}</a>{% endif %}.
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

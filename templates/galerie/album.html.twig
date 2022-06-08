@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Album
+{% block title %}{{album.nom}}
+{% endblock %}
+
+{% block meta %}
+			<meta name="description" content="Album photo: {{album.nom}}">
 {% endblock %}
 
 {% block body %}
@@ -14,7 +18,7 @@
     <div class="row">
 
 
-      <div class="col-12">
+      <div class="col-12 animate__animated animate__fadeInRight">
 
 
         <div class="row shuffle-wrapper">
@@ -22,8 +26,11 @@
 	{% for photo in photos %}
           <div class="col-lg-4 col-md-6 shuffle-item" data-groups="[&quot;government&quot;,&quot;healthcare&quot;]">
             <div class="project-img-container">
-              <a class="gallery-popup" href="{{asset('galerie/' ~ photo.nom)}}">
-                <img class="img-fluid" src="{{asset('galerie/' ~ photo.nom)}}" alt="photo-galerie">
+              <a class="gallery-popup" href="{{asset('uploadsgalerie/' ~ photo.nom)}}">
+
+					{% set photocrop %}uploadsgalerie/{{photo.nom}}{% endset %}
+
+                <img class="img-fluid" src="{{photocrop|imagine_filter('photoAlbum')}}" alt="photo-galerie">
                 <span class="gallery-icon"><i class="fa fa-plus"></i></span>
               </a>
               <div class="project-item-info">
@@ -39,7 +46,7 @@
 
       <div class="col-12">
         <div class="general-btn text-center">
-          <a class="btn btn-primary" href="{{path('galerie')}}">Voir les albums</a>
+          <a class="btn btn-primary" href="{{path('galerie')}}">Voir tous les albums</a>
         </div>
       </div>
 

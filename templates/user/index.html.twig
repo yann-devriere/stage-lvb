@@ -10,7 +10,7 @@
 
 {% if utilisateurCo != null %}
 <div class="alert alert-warning alert-dismissible fade show h5" role="alert">
-                Vous êtes déjà connecté avec l'adresse {{utilisateurCo}}.
+                Vous êtes déjà connecté avec l'adresse {{utilisateurCo}}.  <a href="{{path('deconnexion')}}"class="btn bg-jaune ms-2"> Se deconnecter</a>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 {% endif %}
@@ -25,12 +25,50 @@
     {{ form_row(form.email) }} 
     {{ form_row(form.password) }} 
     {{ form_row(form.recaptcha) }} 
+    {{ form_row(form.newsletter) }} 
+  <div class="d-flex">{{ form_row(form.cgu) }}<a href="{{path('cgu')}}" class="text-decoration-underline ms-1 primary">Lire les CGU ici</a> </div>  
+
     {# must be the same name of this put on the FormBuilder #}
 
     {{ form_errors(form.recaptcha) }}
     {# That will display the error of the captcha to user #}
+    <div class="text-center">
+    <button type="submit" id="submitBtn" class="bg-jaune btn mb-5" onClick="signin();" >S'inscrire</button>
+    </div>
+
 
 {{ form_end(form) }}
+
+<script>
+    const i1 = document.getElementById('user_password_first');
+    const i2 = document.getElementById('user_password_second');
+
+    i2.addEventListener('keyup',function(){
+        console.log('coucou')
+        if(i1.value == i2.value){
+            i1.setAttribute('class','shadowGreen form-control')
+            i2.setAttribute('class','shadowGreen form-control')
+            
+        }else{
+               i1.setAttribute('class','form-control')
+               i2.setAttribute('class','shadowRed form-control')
+        }
+    })
+</script>
+
+<script>
+const submitbtn = document.getElementById('submitBtn');
+
+function undisabled(){submitbtn.removeAttribute('disabled')}
+function disabled(){
+    submitbtn.setAttribute('disabled', '')
+}
+function signin(){
+    setTimeout(disabled, 50)
+    setTimeout(undisabled, 5000)
+}
+</script>
+
     </div>
 
         </div>     

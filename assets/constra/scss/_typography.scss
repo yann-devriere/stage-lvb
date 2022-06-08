@@ -10,7 +10,7 @@ body {
 
 body,
 p {
-  font-family: $font-primary;
+  font-family: $font-primary !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased !important;
   line-height: 26px;

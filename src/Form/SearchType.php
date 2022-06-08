@@ -37,9 +37,9 @@ class SearchType extends AbstractType
                 'required'=> false,
                 'constraints' => new Length(null, 2, 30),
                 'constraints' => new Regex([
-                    'pattern' => '/\d/',
+                    'pattern' => '/[^a-zA-Z0-9]$/',
                     'match' => false,
-                    'message' => 'Vous ne pouvez faire de recherche avec un chiffre',
+                    'message' => 'Vous ne pouvez faire de recherche avec des caractères autres que des chiffres ou des lettres.',
                 ]),
                 'attr'=>[
                 'placeholder'=>'Votre recherche...',

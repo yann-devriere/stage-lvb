@@ -23,16 +23,16 @@
 ================================================== */
 /*-- Main slide --*/
 .banner-carousel .banner-carousel-item {
-  height: 700px;
+  height: 350px;
   color: #fff;
   background-position: 50% 50%;
   background-size: cover;
-  @include desktop {
-    height: 550px;
-  }
-  @include mobile {
-    height: 450px;
-  }
+  // @include desktop {
+  //   height: 550px;
+  // }
+  // @include mobile {
+  //   height: 450px;
+  // }
 }
 
 .slider-content {
@@ -298,6 +298,8 @@
   background: $color-primary;
   padding: 30px;
 }
+
+
 
 .action-title {
   color: #fff;
@@ -2225,7 +2227,7 @@ label {
     margin: 0;
     a {
       color: #303030;
-      display: inline-block;
+      // display: inline-block;
       &:hover {
         color: $color-primary;
       }

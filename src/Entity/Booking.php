@@ -56,7 +56,7 @@ class Booking
         return $this->endAt;
     }
 
-    public function setEndAt(\DateTimeInterface $endAt): self
+    public function setEndAt(\DateTimeInterface $endAt = null): self
     {
         $this->endAt = $endAt;
 

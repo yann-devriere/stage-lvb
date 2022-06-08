@@ -21,14 +21,14 @@
 						</td>
 						<td>
 							<a href="{{path('galerie_album',{'id':album.id})}}">
-								<div class="btn bg-bleu text-light">
+								<div class="btn bg-jaune ">
 									<img src="{{asset('images/oeil.png' )}}" class="logoBlanc" height="25" alt="">
 									voir</div>
 							</a>
 						</td>
 						<td>
 							<a href="{{ path('album_edit', {'id': album.id}) }}">
-								<div class="btn bg-bleu text-light">
+								<div class="btn bg-jaune ">
 									<img src="{{asset('images/edit.png' )}}" class="logoBlanc" height="25" alt="">
 									modifier</div>
 							</a>
@@ -43,7 +43,7 @@
 		</table>
 
 		<a href="{{ path('album_new') }}">
-			<div class="btn bg-bleu text-light">
+			<div class="btn bg-jaune mb-3 text-light">
 				<img src="{{asset('images/plus.png' )}}" class="logoBlanc me-1" height="25" alt="">
 				Créer un nouvel album</div>
 		</a>

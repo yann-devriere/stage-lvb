@@ -3,4 +3,56 @@ liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
 
+    filter_sets:
+        photoArticle:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [ 640, 300 ]
+                    mode: outbound
 
+        thumbArticleUnique:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [ 450, 350 ]
+                    mode: outbound
+
+        photoArticleHome:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [ 640, 360 ]
+                    mode: outbound
+        photoAlbum:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [ 640, 360 ]
+                    mode: outbound
+        banner:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [ 1500, 350 ]
+                    mode: outbound
+        carouselSalle:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [ 640, 360 ]
+                    mode: outbound
+        documentInscription:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [ 420, 594 ]
+                    mode: outbound
+        thumbMot:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [ 420, 420 ]
+                    mode: outbound
+
+    cache: ~

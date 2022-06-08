@@ -22,6 +22,13 @@ class ArticleCrudController extends AbstractCrudController
         return Article::class;
     }
 
+    
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->showEntityActionsInlined()
+        ;
+    }
 
     
     

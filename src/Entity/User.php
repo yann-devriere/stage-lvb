@@ -36,6 +36,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $membre;
 
+    #[ORM\Column(type: 'boolean')]
+    private $cgu;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -169,6 +172,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMembre(bool $membre): self
     {
         $this->membre = $membre;
+
+        return $this;
+    }
+
+    public function getCgu(): ?bool
+    {
+        return $this->cgu;
+    }
+
+    public function setCgu(bool $cgu): self
+    {
+        $this->cgu = $cgu;
 
         return $this;
     }

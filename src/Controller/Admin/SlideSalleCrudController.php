@@ -20,6 +20,8 @@ class SlideSalleCrudController extends AbstractCrudController
     {
         return $crud
             ->showEntityActionsInlined()
+            ->setEntityLabelInSingular('Photo du diaporama concernant la salle')
+        ->setEntityLabelInPlural('Photos du diaporama concernant la salle')
         ;
     }
     

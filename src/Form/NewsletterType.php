@@ -4,11 +4,14 @@ namespace App\Form;
 
 use App\Entity\Newsletter;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class NewsletterType extends AbstractType
 {
@@ -18,6 +21,9 @@ class NewsletterType extends AbstractType
             ->add('email', EmailType::class , [
                 'required'=>true,
                     'label'=>false,
+                    'constraints' => [new Length(null, 2, 55), new Email([
+                        'message' => 'Le mail "{{ value }}" est invalide.',
+                    ]) ],
             'attr'=>[
                 'placeholder'=>'Votre adresse email',
                 'class' => 'ps-3  m-0 ',
@@ -26,11 +32,7 @@ class NewsletterType extends AbstractType
 
                 ])
 
-        //     ->add('submit', SubmitType::class, ['label'=>"S'inscrire",
-        //         'attr'=> ['placeholde'=>"S'inscrire à la newsletter",
-        //         'class'=>'text-light   m-0 btn my-auto py-0 '],
-        //         'row_attr'=> ['class'=>'m-0 p-0'],
-        // ])
+  
 
         ;
     }

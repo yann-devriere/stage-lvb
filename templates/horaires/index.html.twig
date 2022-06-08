@@ -1,0 +1,37 @@
+{% block body %}
+{% if horaires != null %}
+<div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0">
+			<h3 class="widget-title">Horaires des entrainements</h3>
+			<div class="working-hours">
+				<p class="fw-bold">Entraînements hébdomadaires:</p>
+				
+				{{horaires.jourPremierEntrainement}}:
+				<span class="text-right">{{horaires.debutPremierEntrainement|format_time('short')}} - {{horaires.finPremierEntrainement|format_time('short')}}
+				</span>
+				<br>
+                {% if horaires.deuxiemeEntrainementExiste == true %}
+				{{horaires.jourDeuxiemeEntrainement}}:
+				<span class="text-right">{{horaires.debutDeuxiemeEntrainement|format_time('short')}} - {{horaires.finDeuxiemeEntrainement|format_time('short')}}</span>
+                {% endif %}
+			</div>
+            {% if horaires.enfantsEntrainementExiste == true %}
+			<div class="working-hours mt-4">
+			<p class="fw-bold">Section enfant:</p>	
+				{{horaires.jourEnfantsEntrainement}}:
+				<span class="text-right">{{horaires.debutEnfantsEntrainement|format_time('short')}} - {{horaires.finEnfantsEntrainement|format_time('short')}}
+				</span>
+				
+			</div>
+            {% endif %}
+		</div>
+{% else %}
+	
+
+<div class="col-lg-4 col-md-6 footer-widget mt-5 mt-md-0">
+			<h3 class="widget-title">Horaires des entrainements</h3>
+			<div class="working-hours">
+				<p class="fw-bold">Les horaires ne sont pas établie ces temps-ci, pour en savoir plus <a href="{{path('infos-pratiques')}}#contacter" class="text-decoration-underline text-light">contactez nous ICI</a> .</p>
+			</div>
+</div>			
+{% endif %}
+{% endblock %}
