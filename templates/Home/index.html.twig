@@ -1,1 +1,477 @@
-<p>Hello</p>
+{% extends "base.html.twig" %}
+
+{% block title %}Les Volants Berquinois
+{% endblock %}
+
+{% block meta %}
+	<meta name="description" content="Le club de badminton de Bieux Berquin vous accueille.">
+{% endblock %}
+
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('app') }}
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.css">
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.css">
+	<link rel="stylesheet" href="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.css">
+	<style>
+		#slick-slide-control00 {
+			display: none;
+		}
+	</style>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+
+{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('noarticles') %}
+		<div class="flash-notice">
+			<div class="alert alert-warning alert-dismissible fade show h5" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
+	{% endfor %}
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v13.0&appId=494236972246176&autoLogAppEvents=1" nonce="XBMsnfta"> </script>
+
+
+	<div class="banner-carousel banner-carousel-1 mb-0">
+		<div class="banner-carousel-item" style="background-image:url(images/badminton-banner.jpg)">
+			<div class="slider-content">
+				<div class="container h-100">
+					<div class="row align-items-center h-100">
+						<div class="col-md-12 text-center">
+							<h2 class="slide-title" data-animation-in="slideInLeft" style="color:#ffb600;font-weight:bold;text-shadow:2px 2px 3px #0a2034;">La passion du Badminton</h2>
+							<h3 class="slide-sub-title" data-animation-in="slideInRight" style="color:#ffb600;text-shadow:2px 2px 3px #0a2034;">Pour tous</h3>
+							<p data-animation-in="slideInLeft" data-duration-in="1.2"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<section class="call-to-action-box no-padding">
+	<div class="container">
+		<div class="action-style-box">
+			<div class="row align-items-center">
+				<div class="col-md-8 text-center text-md-left">
+					<div class="call-to-action-text">
+						<h3 class="action-title">Vous souhaitez faire un essai ?</h3>
+					</div>
+				</div>
+				<!-- Col end -->
+				<div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
+					<div class="call-to-action-btn">
+						<a class="btn btn-dark" href="{{path('infos-pratiques')}}#contacter">Contactez nous</a>
+					</div>
+				</div>
+				<!-- col end -->
+			</div>
+			<!-- row end -->
+		</div>
+		<!-- Action style box -->
+	</div><!-- Container end --></section><!-- Action end --><section id="ts-features" class="ts-features">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="ts-intro">
+					<h2 class="into-title bleuTitre">Les volants berquinois</h2>
+					<h3 class="into-sub-title bleuTitre">Qui sommes-nous ?</h3>
+					<p>
+						Nous sommes un club de badminton local fondé en 2013 et regroupant des membres de tous horizons. Nous nous entraînons deux fois par semaine et organisons souvent des événements.
+					</p>
+				</div>
+				<!-- Intro box end -->
+
+				<div class="gap-20"></div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="ts-service-box">
+							<span class="ts-service-icon">
+								<i class="fas fa-trophy"></i>
+							</span>
+							<div class="ts-service-box-content">
+								<p class="service-box-title">Tournois amicaux réguliers avec les clubs des alentours.</p>
+							</div>
+						</div>
+						<!-- Service 1 end -->
+					</div>
+					<!-- col end -->
+
+					<div class="col-md-6">
+						<div class="ts-service-box">
+							<span class="ts-service-icon">
+								<i class="fas fa-users"></i>
+							</span>
+							<div class="ts-service-box-content">
+								<p class="service-box-title">Un club pour tous ! <small>(équipe bienveillante, cotisations abordables...)</small></p>
+							</div>
+						</div>
+						<!-- Service 2 end -->
+					</div>
+
+
+
+
+				
+				</div>
+				<!-- Content row 1 end -->
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="ts-service-box">
+							<span class="ts-service-icon">
+							 <i class="fa fa-house"></i>
+							</span>
+							<div class="ts-service-box-content">
+								<p class="service-box-title">Une salle moderne et facile d'accès ainsi qu'un parking.</p>
+							</div>
+						</div>
+						<!-- Service 1 end -->
+					</div>
+					<!-- col end -->
+
+				
+
+					<!-- col end -->
+				</div>
+				<!-- Content row 1 end -->
+
+			{% if horaires != null %}
+				<div class="ts-intro mb-5">
+					<h3 class="into-sub-title bleuTitre">Les horaires</h3>
+
+					{% if horaires.enfantsEntrainementExiste %}
+					<p class="h5 text-decoration-underline">Section adultes:</p>
+					{% endif %}
+					<p class="h5 d-inline me-3">{{horaires.jourPremierEntrainement}}:</p> {{horaires.debutPremierEntrainement|format_time("short")}} - {{horaires.finPremierEntrainement|format_time("short")}} <br>
+
+
+					{% if horaires.deuxiemeEntrainementExiste %}
+					<p class="h5 d-inline me-3">{{horaires.jourDeuxiemeEntrainement}}:</p> {{horaires.debutDeuxiemeEntrainement|format_time("short")}} - {{horaires.finDeuxiemeEntrainement|format_time("short")}}
+					{% endif %}
+					{% if horaires.enfantsEntrainementExiste %}
+					<br><br><p class="h5 text-decoration-underline">Section enfants:</p>
+					<p class="h5 d-inline me-3">{{horaires.jourEnfantsEntrainement}}:</p> {{horaires.debutEnfantsEntrainement|format_time("short")}} - {{horaires.finEnfantsEntrainement|format_time("short")}}
+					{% endif %}
+					
+				</div>
+			{% endif %}
+
+
+			</div>
+			<!-- Col end -->
+
+			<div class="col-lg-6  mt-4 mt-lg-0 text-end">
+				<div class="ts-intro mx-0">
+					<h2 class="into-title bleuTitre ">Retrouvez nous
+					</h2>
+					<h3 class="into-sub-title bleuTitre">
+						sur facebook</h3>
+
+					<div id="fb-root"></div>
+
+
+					<div class="fb-page" data-href="https://www.facebook.com/lesvolantsberquinois/" data-tabs="timeline" data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+						<blockquote cite="https://www.facebook.com/lesvolantsberquinois/" class="fb-xfbml-parse-ignore">
+							<a href="https://www.facebook.com/lesvolantsberquinois/">Les Volants Berquinois</a>
+						</blockquote>
+					</div>
+				</div>
+				<!-- Col end -->
+			</div>
+			<!-- Row end -->
+		</div><!-- Container end --></section><!-- Feature are end --><section id="facts" class="facts-area dark-bg py-5">
+		<div class="container">
+			<div class="facts-wrapper">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 ts-facts">
+						<div class="ts-facts-img">
+							<img loading="lazy" src="images/icon-image/birthday.svg" height="60" alt="facts-img">
+						</div>
+						<div class="ts-facts-content">
+							<h2 class="ts-facts-num">
+						
+								<span class="counterUp" data-count="{{existence}}">0</span>
+							</h2>
+							<h3 class="ts-facts-title">Années d'existence</h3>
+						</div>
+					</div>
+					<!-- Col end -->
+
+					<div class="col-md-4 col-sm-4 ts-facts mt-5 mt-md-0">
+						<div class="ts-facts-img">
+							<img loading="lazy" src="images/icon-image/raquette.svg" height="60" alt="facts-img">
+						</div>
+						<div class="ts-facts-content">
+							<h2 class="ts-facts-num">
+								<span class="counterUp" data-count="180">0</span>
+							</h2>
+							<h3 class="ts-facts-title">Heures d'entrainement chaque année</h3>
+						</div>
+					</div>
+					<!-- Col end -->
+
+					<div class="col-md-4 col-sm-4 ts-facts mt-5 mt-sm-0">
+						<div class="ts-facts-img">
+							<img loading="lazy" src="images/icon-image/group.svg" height="60" alt="facts-img">
+						</div>
+						<div class="ts-facts-content">
+							<h2 class="ts-facts-num">
+								<span class="counterUp" data-count="21">0</span>
+							</h2>
+							<h3 class="ts-facts-title">Adhérents au club</h3>
+						</div>
+					</div>
+					<!-- Col end -->
+
+
+					<!-- Col end -->
+
+				</div>
+				<!-- Facts end -->
+			</div>
+			<!--/ Content row end -->
+		</div><!--/ Container end --></section><!-- Facts end --><!-- Service end -->
+
+		{% if photos != null %}
+		<section id="project-area" class="project-area solid-bg py-5">
+		<div class="container">
+			<div class="row text-center">
+				<div class="col-lg-12">
+
+				
+
+					<h3 class="section-sub-title mb-5 ">Galerie Photos</h3>
+				</div>
+			</div><!--/ Title row end --><div class="row">
+				<div
+					class="col-12">
+
+					<!-- project filter end -->
+
+
+					<div class="row shuffle-wrapper">
+						<div class="col-1 shuffle-sizer"></div>
+
+
+						{% for photo in photos %}
+
+							<div class="col-lg-4 col-sm-6 shuffle-item" data-groups="[&quot;government&quot;,&quot;healthcare&quot;]">
+								<div class="project-img-container">
+									<a class="gallery-popup" href="uploadsgalerie/{{photo.nom}}" aria-label="project-img">
+										{% set photocrop %}uploadsgalerie/{{photo.nom}}{% endset %}
+										<img class="img-fluid" src="{{photocrop|imagine_filter('photoAlbum')}}" alt="project-img">
+										<span class="gallery-icon">
+											<i class="fa fa-plus"></i>
+										</span>
+									</a>
+									<div class="project-item-info">
+										<div class="project-item-info-content">
+											<h3 class="project-item-title">
+												<a href="projects-single.html"></a>
+											</h3>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- shuffle item 1 end -->
+						{% endfor %}
+
+
+					</div>
+
+
+				</div>
+				<!-- shuffle end -->
+			</div>
+
+			<div class="col-12">
+				<div class="general-btn text-center">
+					<a class="btn btn-primary" href="{{path('galerie')}}">Voir tous les albums</a>
+				</div>
+			</div>
+		</div><!-- Content row end --></div><!--/ Container end --></section>
+				
+				{% endif %}
+
+
+<!-- Project area end -->
+<section class="content">
+	<div class="container">
+		<div class="row">
+
+
+			<div class="col-lg-6 mt-5 mt-lg-0">
+
+				<h3 class="column-title text-center bleuTitre">Planning de l'association</h3>
+
+				<div id="calendar-holder" class="mb-5"></div>
+
+
+				<script src="fullcalendar/fullcalendar-4.1.0/packages/core/main.min.js"></script>
+				<script src="fullcalendar/fullcalendar-4.1.0/packages/core/locales/fr.js"></script>
+				<script src="fullcalendar/fullcalendar-4.1.0/packages/daygrid/main.min.js"></script>
+				<script src="fullcalendar/fullcalendar-4.1.0/packages/timegrid/main.min.js"></script>
+				<script src="fullcalendar/fullcalendar-4.1.0/packages/interaction/main.min.js"></script>
+
+				<script type="text/javascript">
+
+
+					document.addEventListener('DOMContentLoaded', () => {
+var calendarEl = document.getElementById('calendar-holder');
+
+var calendar = new FullCalendar.Calendar(calendarEl, {
+defaultView: 'dayGridMonth',
+locale: 'fr',
+editable: false,
+header: {
+locales: 'fr',
+// left: 'prev,next today',
+left: 'prev, today',
+center: 'title',
+// right: 'dayGridMonth,timeGridWeek',
+right: 'next'
+},
+events: {{ data|raw }},
+
+plugins: [
+'interaction', 'dayGrid', 'timeGrid'
+], // https://fullcalendar.io/docs/plugin-index
+timeZone: 'UTC'
+});
+calendar.render();
+});
+				</script>
+
+
+			</div>
+			<!-- Clients row end -->
+
+			{% if mots != null %}
+			<div class="col-lg-6 ">	
+				<h3 class="column-title text-center bleuTitre">Les membres du bureau</h3>
+
+				<div id="testimonial-slide" class="testimonial-slide">
+
+					{% for mot in mots %}
+
+						<div class="item">
+							<div class="quote-item">
+								<span class="quote-text">
+									{{mot.texte|raw}}
+								</span>
+
+								<div class="quote-item-footer">
+									{% set photocrop %}/uploads/{{mot.photo}}{% endset %}
+									<img loading="lazy" class="testimonial-thumb" src="{{photocrop|imagine_filter('thumbMot')}}" alt="testimonial">
+									<div class="quote-item-info">
+										<h3 class="quote-author">{{mot.nom}}</h3>
+										<span class="quote-subtext">{{mot.role}}</span>
+									</div>
+								</div>
+							</div>
+							<!-- Quote item end -->
+						</div>
+						<!--/ Item 1 end -->
+					{% endfor %}
+
+				</div>
+				<!--/ Testimonial carousel end-->
+			</div>
+			{% endif %}
+			<!-- Col end -->
+		</div>
+		<!-- Col end -->
+	</div><!--/ Content row end --></div><!--/ Container end --></section><!-- Content end --><div class="row mx-0 px-0">
+<div class="bg-jaune mx-0 px-0 col-12 row d-sm-none d-block text-center">
+	<h5 class=" mt-1 mb-1 bleuTitre">Newsletter</h5>
+	<p>Inscrivez-vous pour recevoir des informations par mail.</p>
+</div>
+<div class="col-sm-3 d-none d-sm-block bg-jaune text-light newsJaune text-center  p-4  py-auto ">
+	<b class="fs-5">Newsletter</b>
+</div>
+<div class="col-sm-7 dark-bg px-auto pb-1 pt-3 mx-0 pe-0 col-9 ">
+	{{form_start(formNewsletter)}}
+	{{form_row(formNewsletter.email)}}
+</div>
+<div class="col-sm-2 col-3 dark-bg text-start m-0 p-0 divNewsletter">
+	<button type="submit" class="btnNewsletter btn bg-jaune text-light " id="submitBtn" onClick="signin()"   >
+		<p class=" text-light my-auto">
+			<span class="texteBtnNewsletter">s'inscrire</span>
+			<i class="fa fa-paper-plane iconeBtnNewsletter mx-3"></i>
+		</p>
+	</button>
+</div>
+{{form_end(formNewsletter)}}</div><!--/ subscribe end -->
+
+{% if articlesSlide != null %}
+<section id="news" class="news">
+<div class="container">
+	<div class="row text-center">
+		<div class="col-12">
+			<h2 class="section-title bleuTitre">Actualités du clubs</h2>
+			<h3 class="section-sub-title ">Derniers articles</h3>
+		</div>
+	</div><!--/ Title row end --><div class="row">
+		{% for article in articlesSlide %}
+
+			<div class="col-lg-4 col-md-6 mb-4">
+				<div class="latest-post grow">
+					<div class="latest-post-media">
+						<a href="{{path('article_unique',{nom:article.nom})}}" class="latest-post-img">
+							{% set photocrop %}/uploads/{{article.photo}}{% endset %}
+							<img loading="lazy" class="img-fluid" src="{{photocrop|imagine_filter('photoArticleHome')}}" alt="img">
+						</a>
+					</div>
+					<div class="post-body">
+						{% for catégorie in article.categorie %}
+							<a href="{{path('actu',{'categories':catégorie.id})}}" class="me-2 bleuTitre font-weight-light text-decoration-underline" style="font-size:12px;">
+								{{catégorie}}
+							</a>
+						{% endfor %}
+						<h4 class="post-title">
+							<a href="{{path('article_unique',{nom:article.nom})}}" class="d-inline-block">
+								{{article.nom}}</a>
+						</h4>
+						<p class="mt-3">{{article.texte|striptags|slice(0,200)}}...</p>
+						<div class="latest-post-meta"></div>
+					</div>
+				</div>
+				<!-- Latest post end -->
+			</div>
+			<!-- 1st post col end -->
+
+		{% endfor %}
+
+
+	</div><!--/ Content row end --><div class="general-btn text-center mt-4">
+		<a class="btn btn-primary" href="news-left-sidebar.html">voir tous les articles</a>
+	</div>
+</div><!--/ Container end --></section>
+
+{% endif %}
+<script>
+const submitbtn = document.getElementById('submitBtn');
+
+function undisabled(){submitbtn.removeAttribute('disabled')}
+function disabled(){
+    submitbtn.setAttribute('disabled', '')
+}
+function signin(){
+    setTimeout(disabled, 50)
+    setTimeout(undisabled, 3000)
+}
+</script>
+
+{% endblock %}

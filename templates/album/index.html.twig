@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Album index
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center bleuTitre mt-3 mb-4">Les albums photos</h1>
+
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for album in albums %}
+					<tr>
+						<td>
+							<b>{{ album.nom }}</b>
+						</td>
+						<td>
+							<a href="{{path('galerie_album',{'id':album.id})}}">
+								<div class="btn bg-jaune ">
+									<img src="{{asset('images/oeil.png' )}}" class="logoBlanc" height="25" alt="">
+									voir</div>
+							</a>
+						</td>
+						<td>
+							<a href="{{ path('album_edit', {'id': album.id}) }}">
+								<div class="btn bg-jaune ">
+									<img src="{{asset('images/edit.png' )}}" class="logoBlanc" height="25" alt="">
+									modifier</div>
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3">Il n'existe aucun album pour l'instant.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('album_new') }}">
+			<div class="btn bg-jaune mb-3 text-light">
+				<img src="{{asset('images/plus.png' )}}" class="logoBlanc me-1" height="25" alt="">
+				Créer un nouvel album</div>
+		</a>
+	</div>
+{% endblock %}

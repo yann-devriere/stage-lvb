@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{album.nom}}
+{% endblock %}
+
+{% block meta %}
+			<meta name="description" content="Album photo: {{album.nom}}">
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="text-center mt-3"><h2 class="bleuTitre">{{album.nom}}</h2></div>
+
+<section id="main-container" class="main-container">
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-12 animate__animated animate__fadeInRight">
+
+
+        <div class="row shuffle-wrapper">
+          <div class="col-1 shuffle-sizer"></div>
+	{% for photo in photos %}
+          <div class="col-lg-4 col-md-6 shuffle-item" data-groups="[&quot;government&quot;,&quot;healthcare&quot;]">
+            <div class="project-img-container">
+              <a class="gallery-popup" href="{{asset('uploadsgalerie/' ~ photo.nom)}}">
+
+					{% set photocrop %}uploadsgalerie/{{photo.nom}}{% endset %}
+
+                <img class="img-fluid" src="{{photocrop|imagine_filter('photoAlbum')}}" alt="photo-galerie">
+                <span class="gallery-icon"><i class="fa fa-plus"></i></span>
+              </a>
+              <div class="project-item-info">
+                <div class="project-item-info-content">
+                </div>
+              </div>
+            </div>
+          </div><!-- shuffle item 1 end -->
+	{% endfor %}
+
+        </div><!-- shuffle end -->
+      </div>
+
+      <div class="col-12">
+        <div class="general-btn text-center">
+          <a class="btn btn-primary" href="{{path('galerie')}}">Voir tous les albums</a>
+        </div>
+      </div>
+
+    </div><!-- Content row end -->
+
+  </div><!-- Conatiner end -->
+</section><!-- Main container end -->
+
+
+
+
+
+
+
+
+
+	{# <div class="container-fluid">
+		<div class="row mt-4 mb-5">
+			<div class="col-2 text-center">
+				<a href="{{path('galerie')}}" class="text-decoration-none">
+					<button class="btn bg-bleu d-flex text-light ">
+						<img src="{{asset('images/volant.png')}}" alt="" class="my-auto" height="15" style="transform: rotate(45deg);">
+						<p class="my-auto ms-2 text-light text-decoration-none">Retour</p>
+					</button>
+				</a>
+
+			</div>
+			<div class="col-8 text-center">
+				<h1 class="bleuTitre my-4">
+					<p class="bleuTitre">{{album.nom}}</p>
+				</h1>
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
+
+
+	<div class="container fluid">
+		<div class="row  ">
+			{% for photo in photos %}
+				<div class="col-lg-4 col-md-6 p-0 row mb-3 mt-3 d-flex justify-content-center mx-0">
+					<div class="col-1 p-0"></div>
+					<div class="col-10 p-0 ">
+						<div class="photoGalerie p-1 shadow">
+							<a href="#" data-bs-toggle="modal" data-bs-target="#modalPhoto" class=" repere test" data-id={{photo.id}}>
+								<img src="{{asset('galerie/' ~ photo.nom)}}" alt="" class="photoGalerie ">
+							</a>
+						</div>
+					</div>
+					<div class="col-1 p-0"></div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="navigation d-flex justify-content-center">
+		{{ knp_pagination_render(photos, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+	</div>
+
+
+	<div class="modal  fade  " id="modalPhoto" tabindex="-1" aria-labelledby="modalPhotoLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl modal-fullscreen-lg-down ">
+			<div class="modal-content ">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+
+					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-inner">
+
+
+							{% for photo in photos %}
+
+								<div class="carousel-item" id="{{photo.id}}">
+									<div class="d-flex justify-content-center">
+										<img src="{{asset('galerie/' ~ photo.nom)}}" class="d-block h-75" alt="...">
+									</div>
+								</div>
+							{% endfor %}
+
+
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+
+
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		{# create check function 
+let items = document.getElementsByClassName('test');
+
+
+function check(param1) {
+
+let all = document.getElementsByClassName('carousel-item active')
+console.log(all)
+
+for (const tout of all) {
+tout.removeAttribute("class")
+tout.setAttribute("class", "carousel-item")
+}
+
+
+let b = document.getElementById(param1)
+//    console.log(b)
+b.setAttribute("class", "carousel-item active")
+
+};
+
+for (const item of items) {
+
+item.addEventListener('click', function () {
+check(item.dataset.id)
+});
+}
+	</script>
+
+#}
+{% endblock %} 

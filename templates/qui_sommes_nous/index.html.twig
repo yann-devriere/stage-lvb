@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qui sommes-nous ?{% endblock %}
+{% block meta %}
+			<meta name="description" content="Présentation de notre club">
+{% endblock %}
+
+{% block body %}
+
+
+<section id="main-container" class="main-container">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-6 animate__animated animate__fadeInUp ">
+          <h3 class="column-title bleuTitre">Qui sommes-nous</h3>
+          {% if texte != null %}
+            {% for contenu in texte %}
+                {{contenu.texte|raw}}
+            {% endfor %}
+          {% else %}
+Depuis 2013, le club <b>"Les Volants Berquinois"</b>  participe à faire vivre le milieu associatif local et participons à <div class="d-inline text-decoration-underline">  l'inclusion dans les pratiques sportive de tous les publics sans distinctions</div>.
+<br><br>
+Nous pensons que le sport permet un meilleur vivre-ensemble et c'est pour cela que nous souhaitons faire de notre club un espace de partage et de solidarité.
+<br> <br>
+L'amélioration récente des infrastructures ainsi que l'expansion de la ville de Vieux-Berquin permet au club de se projeter sur le long terme et  d'anvisager un avenir comprenant de multiples activités.
+           {% endif %}
+
+        </div><!-- Col end -->
+
+        <div class="col-lg-6 mt-5 mt-lg-0">
+          
+          <div id="page-slider" class=" animate__animated animate__fadeInUp  page-slider small-bg">
+
+    {% if photos != null %}
+      {% for photo in photos %}
+                <div class="item" style="background-image:url({{asset('uploads/' ~ photo.photo)}})">
+                  <div class="container">
+                      <div class="box-slider-content">
+                        <div class="box-slider-text">
+                        </div>    
+                      </div>
+                  </div>
+                </div><!-- Item 1 end -->
+      {% endfor %}
+    {% else %}
+      <div class="item" style="background-image:url({{asset('images/photoQui1.jpg')}})">
+                  <div class="container">
+                      <div class="box-slider-content">
+                        <div class="box-slider-text">
+                        </div>    
+                      </div>
+                  </div>
+                </div><!-- Item 1 end -->
+      <div class="item" style="background-image:url({{asset('images/photoQui2.jpg')}})">
+                  <div class="container">
+                      <div class="box-slider-content">
+                        <div class="box-slider-text">
+                        </div>    
+                      </div>
+                  </div>
+                </div><!-- Item 1 end -->
+      <div class="item" style="background-image:url({{asset('images/photoQui3.jpg')}})">
+                  <div class="container">
+                      <div class="box-slider-content">
+                        <div class="box-slider-text">
+                        </div>    
+                      </div>
+                  </div>
+                </div><!-- Item 1 end -->
+    {% endif %}
+
+            
+          </div><!-- Page slider end-->          
+        
+
+        </div><!-- Col end -->
+    </div><!-- Content row end -->
+
+  </div><!-- Container end -->
+</section><!-- Main container end -->
+
+
+
+
+
+
+
+{% endblock %}

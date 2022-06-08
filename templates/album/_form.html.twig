@@ -1,0 +1,52 @@
+<div class="container">
+	{{ form_start(form) }}
+	<div class="col-lg-6 col-md-8 col-sm-12 mb-3">
+		<h3>{{form_label(form.nom)}}</h3>
+		{{ form_widget(form.nom) }}
+	</div>
+
+	<div class="col-lg-6 col-md-8 col-sm-12 mb-3">
+		<h3>{{form_label(form.images)}}</h3>
+		{% if app.request.get('_route') =='album_edit' %}
+		{{ form_widget(form.images,{'required':false}) }}
+		{% else %}
+					{{ form_widget(form.images) }}
+
+		{% endif %}
+	</div>
+	<div class="col-lg-6 col-md-8 col-sm-12 mb-3">
+		<h3>{{form_label(form.public)}}</h3>
+		{{ form_widget(form.public) }}
+	</div>
+	{# Si la route est 'album_edit' on affiche les images #}
+
+	{% if app.request.get('_route') =='album_edit' %}
+		<h2>Images</h2>
+		<div class="row">
+			{% for image in album.images %}
+
+
+				<div class="col-lg-4 col-md-6 p-0 row mb-3 mt-3 d-flex justify-content-center mx-0">
+					<div class="col-1 p-0"></div>
+					<div class="col-10 p-0 text-center">
+						<div class="photoGalerie p-1 shadow">
+							<img src="{{asset('uploadsgalerie/' ~ image.nom)}}" alt="" class="photoGalerie ">
+						</div>
+						<a href="{{path('supprimer_image',{id:image.id})}}" class="btn text-light  btn-sm bg-jaune" data-delete data-token="{{csrf_token('delete' ~ image.id)}}">
+							<img src="{{asset('images/trash.png')}}" height="13" class="logoBlanc  my-auto" alt="">
+						</a>
+					</div>
+					<div class="col-1 p-0"></div>
+				</div>
+				{# <img src="{{asset('/galerie/' ~ image.nom) }}" alt="image" width="150">
+				            <a href="{{path('supprimer_image',{'id':image.id} ) }}"  data-delete data-token="{{csrf_token('delete' ~ image.id)}}" >Supprimer</a> #}
+
+			{% endfor %}
+		</div>
+	{% endif %}
+
+	<button class="btn bg-jaune">{{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}
+
+
+</div>

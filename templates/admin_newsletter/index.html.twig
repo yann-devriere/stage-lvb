@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Newsletter administrateur
+{% endblock %}
+
+{% block meta %}
+{% endblock %}
+
+{% block body %}
+
+	{% for message in app.flashes('envoi') %}
+		<div class="alert alert-warning" role="alert">
+			{{ message }}
+		</div>
+	{% endfor %}
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class=" mb-5">
+				{{form(formContenuMail)}}
+				<a href="{{path('admin')}}" class=" btn-sm btn-danger ">Retour/Annuler</a>
+			</div>
+		</div>
+	</div>
+	{% endblock %}

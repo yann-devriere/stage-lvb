@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{article.nom}}{% endblock %}
+
+{% block meta %}
+			<meta name="description" content="{{article.nom}}">
+{% endblock %}
+
+{% block body %}
+
+
+<body>
+  <div class="body-inner">
+
+</header>
+<!--/ Header end -->
+
+
+<section id="main-container" class="main-container">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-8 mb-5 mb-lg-0 animate__animated animate__fadeInUp">
+
+        <div class="post-content post-single">
+          <div class="post-media post-image">
+          
+            <img loading="lazy" src="{{asset('uploads/' ~ article.photo)}}" class="img-fluid" alt="post-image">
+          </div>
+
+          <div class="post-body">
+            <div class="entry-header">
+              <div class="post-meta">
+                
+                <span class="post-meta-date"><i class="far fa-calendar"></i> June 14, 2016</span>                 
+              </div>
+              <h2 class="entry-title">
+					{{article.nom}}
+              </h2>
+            </div><!-- header end -->
+
+            <div class="entry-content">
+				{{article.texte|raw}}
+            </div>
+
+            <div class="tags-area d-flex align-items-center justify-content-between">
+              <div class="post-tags">
+			  {% for categorie in article.categorie %}
+                <a href="{{path('actu',{categories: categorie.id})}}">{{categorie}}</a>
+			  {% endfor %}
+                
+              </div>
+            
+            </div>
+
+          </div><!-- post-body end -->
+        </div><!-- post content end -->
+
+
+
+
+      </div><!-- Content Col end -->
+
+      <div class="col-lg-4 animate__animated animate__fadeInRight">
+
+        <div class="sidebar sidebar-right">
+          <div class="widget recent-posts">
+            <h3 class="widget-title">Dernières actu</h3>
+            <ul class="list-unstyled">
+
+{% for article in articlesPreview %}
+
+              <li class=" thumbNews align-items-center">
+                <div class="posts-thumb me-sm-2 mb-2">
+                  {# <a href="{{path('article_unique',{nom:article.nom})}}"> #}
+                  	{% set photocrop %}{{asset('uploads/' ~ article.photo)}}{% endset %}
+                    <img loading="lazy" alt="img" src="{{photocrop|imagine_filter('thumbArticleUnique')}}" class="img-fluid">
+                  </a>
+                </div> 
+                <div class="post-info">
+                  <h4 class="entry-title">
+                    <a href="{{path('article_unique',{nom:article.nom})}}"> {{article.nom}}</a>
+                  </h4>
+                </div>
+              </li><!-- 1st post end-->
+{% endfor %}
+
+
+            </ul>
+
+          </div><!-- Recent post end -->
+
+{% if AllCategories is not null %}
+          <div class="widget">
+            <h3 class="widget-title">Catégories</h3>
+            <ul class="arrow nav nav-tabs">
+			{% for categorie in AllCategories %}
+              <li><a href="{{path('actu',{categories: categorie.id})}}">{{categorie}}</a></li>
+			{% endfor %}
+              
+            </ul>
+          </div><!-- Categories end -->
+{% endif %}
+
+
+        </div><!-- Sidebar end -->
+      </div><!-- Sidebar Col end -->
+
+    </div><!-- Main row end -->
+
+  </div><!-- Conatiner end -->
+</section><!-- Main container end -->
+
+  
+
+
+  </div><!-- Body inner end -->
+  </body>
+
+
+
+{% endblock %}

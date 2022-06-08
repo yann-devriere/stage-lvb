@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les news du club
+{% endblock %}
+
+{% block meta %}
+			<meta name="description" content="Les dernières actualités du Badminton à Vieux-Berquin">
+{% endblock %}
+
+
+{% block body %}
+
+{% for message in app.flashes('erreur') %}
+		<div class="flash-notice">
+			<div class="alert alert-warning alert-dismissible fade show h5" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
+	{% endfor %}
+{% for message in app.flashes('pasarticles') %}
+		<div class="flash-notice">
+			<div class="alert alert-warning alert-dismissible fade show h5" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
+	{% endfor %}
+
+	{% for message in app.flashes('noarticle') %}
+		<div class="flash-notice">
+			<div class="alert alert-warning alert-dismissible fade show h5" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
+	{% endfor %}
+	
+ <!--de filtre pour les articles ---->
+
+	<div class="container">
+		{{form_start(formFiltres)}}
+		<div class=" d-none d-sm-block mt-2 mb-2 ">
+			<h1 class="text-center bleuTitre my-4">Les dernières actualités du club</h1>
+			<h5 class="text-center">
+				Rechercher un article ?</h5>
+			<div class=" row d-flex justify-content-center">
+				<div class="col-3 ">{{form_row(formFiltres.string)}}
+				</div>
+				<div class="col-3 my-auto">{{form_row(formFiltres.categories)}}
+				</div>
+				<div class="col-3 col-sm-3 text-center">
+					<button type="submit" class="btn dark-bg text-light btn-sm my-auto grow"><img src="images/volant.png" alt="volant" height="15px" class="me-1">Filtrer<img src="images/volant.png" alt="volant" height="15px" class="ms-1"></button>
+					<br>
+					<a href="{{path('actu')}}" class="bleu-elec text-decoration-none col-3 align-self-top btn-sm">Réinitialiser</a>
+				</div>
+				<div class=""></div>
+			</div>
+		</div>
+
+		<!-- Button trigger modal -->
+
+
+		{{form_end(formFiltres)}}
+
+
+		{{form_start(formFiltres2)}}
+
+
+		<div class="d-sm-none">
+			<button type="button" class="btn dark-bg mt-2 ms-4 text-decoration-underline text-light" data-bs-toggle="modal" data-bs-target="#filtres">
+				Rechercher un article
+			</button>
+		</div>
+		<!-- Modal -->
+		<div class="container ">
+			<div class="modal fade" id="filtres" tabindex="-1" aria-labelledby="filtresLabel" aria-hidden="true">
+				<div class="modal-dialog ">
+					<div class="modal-content mt-4 ">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Filtrer les resultats</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-4">{{form_row(formFiltres2.string)}}</div>
+							<div class="mb-4">{{form_row(formFiltres2.categories)}}</div>
+						</div>
+						<div class="modal-footer">
+							<a href="{{path('actu')}}" class="bleu-elec text-decoration-none">Réinitialiser</a>
+							<button type="submit" class="btn dark-bg text-light btn-sm "><img src="images/volant.png" alt="volant" height="15px" class="me-1">Filtrer<img src="images/volant.png" alt="volant" height="15px" class="ms-1"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{{form_end(formFiltres2)}}
+
+		<br>
+		{# <hr width="80%" class="mx-auto mt-0 p-0"> #}
+
+
+		<!-- fin form filtres ---->
+
+
+		<!-- Affichage des articles ---->
+
+
+			<div class="container"> <div class="row">
+
+				{% if articles is empty %}
+				<div class="text-center mb-5"><h5>Aucun article n'a été trouvé.</h5></div>	
+				{% endif %}
+
+
+				{% for article in articles %}
+
+
+					<div class="d-flex animate__animated animate__fadeInUp justify-content-center col-md-6 ">
+						<div class="card  mb-4">
+
+							<a href="{{path('article_unique',{nom:article.nom})}}">
+
+							{% set photocrop %}/uploads/{{article.photo}}{% endset %}
+							<img src="{{photocrop|imagine_filter('photoArticle')}}" class="card-img-top" alt="photo de l'article"> 
+								{# <img src="{{asset('uploads/' ~ article.photo)}}" class="card-img-top" alt="photo de l'article"> #}
+							</a>
+							<div class="card-body boby ">
+								<div class="d-flex mb-2">
+									{% for catégorie in article.categorie %}
+										<a href="{{path('actu',{'categories':catégorie.id})}}" class="me-2 font-weight-light bleuTitre " style="font-size:12px;">
+											{{catégorie}}
+										</a>
+									{% endfor %}
+								</div>
+								<b>
+									<a href="{{path('article_unique',{nom:article.nom})}}">
+									<p class="card-title bleuTitre ">{{article.nom|raw}}</p>
+									</a>
+								</b>
+								<p class="card-text">{{article.texte|striptags|slice(0,200)}}...</p>
+							
+
+
+								<a href="{{path('article_unique',{nom:article.nom})}}" class="btn articleBtn dark-bg">Voir plus</a>
+							</div>
+						</div>
+						<br>
+					</div>
+
+
+
+
+				{% endfor %}
+
+			</div>
+			<!-- fin de la row des articles ---->
+
+			<div class="navigation d-flex justify-content-center">
+				{{ knp_pagination_render(articles, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+			</div>
+		</div>
+
+		<!-- fin affichage articles ---->
+
+
+	<!-- inscription Newsletter ------>
+
+		<!-- fin inscription Newsletter ---->
+
+
+	</div>
+{% endblock %}

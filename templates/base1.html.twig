@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{% block meta %}
+			<meta name="description" content="Le club de badminton de Vieux berquin">
+		{% endblock %}
+		<title>
+			{% block title %}Les volants berquinois
+			{% endblock %}
+		</title>
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+
+	</head>
+
+	<body>
+
+		{# <nav class="navbar navbar-expand-lg navbar-light bg-bleu">
+		<div class="container-fluid row">
+		<div class="col-2">
+		<a class="navbar-brand" href="#"><img src="images/logoblanc.png" alt="gg" height="100px"></a>
+		</div>
+		<div class="col-4 pe-1">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		</div>
+		<div class="collapse navbar-collapse text-light " id="navbarNavDropdown">
+		
+		<div class="col-2"><p class=" ml-auto ">Test</p></div>
+		<div class="col-2"><p class=" ml-auto ">Test</p></div>
+		<div class="col-2"><a class="nav-link dropdown-toggle ml-auto" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				Dropdown link
+				</a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<li><a class="dropdown-item" href="#">Action</a></li>
+				<li><a class="dropdown-item" href="#">Another action</a></li>
+				<li><a class="dropdown-item" href="#">Something else here</a></li>
+				</ul></div>
+			
+		
+			</div>
+		</div>
+		</nav> #}
+
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-bleu conteneur-nav">
+			<div class="container-fluid ">
+				<a class="navbar-brand" href="{{path('home')}}"><img src="{{asset("images/logoblanclarge.png")}}" alt="gg" class="photoNav"></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon" height="60px"></span>
+				</button>
+				<div class="collapse navbar-collapse my-auto" id="navbarNavDropdown">
+					<ul class="navbar-nav text-light ml-auto ">
+						<li class="nav-item mx-3">
+							<a class="nav-link navText {% if app.request.get('_route') == 'actu' %} active {% endif %} " aria-current="page" href="{{path('actu')}}">Actu du club</a>
+						</li>
+						<li class="nav-item mx-3">
+							<a class="nav-link navText" href="#">Qui sommes-nous ?</a>
+						</li>
+						<li class="nav-item mx-3">
+							<a class="nav-link navText {% if app.request.get('_route') == 'galerie' %} active {% endif %} {% if app.request.get('_route') == 'galerie_album' %} active {% endif %} " aria-current="page" href="{{path('galerie')}}" id="navGalerie">Galerie photos</a>
+						</li>
+						<li class="nav-item  mx-3 dropdown ">
+
+							<a class="nav-link dropdown-toggle navText {% if app.request.get('_route') == 'infos-pratiques' %} active {% endif %}  " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Infos pratiques
+							</a>
+							<ul class="dropdown-menu mx-2" aria-labelledby="navbarDropdownMenuLink">
+								<li>
+									<a class="dropdown-item text-light" href="{{path('infos-pratiques')}}#salle">La salle</a>
+								</li>
+								<li>
+									<a class="dropdown-item text-light" href="{{path('infos-pratiques')}}#horaires">Entraînements</a>
+								</li>
+								<li>
+									<a class="dropdown-item text-light" href="{{path('infos-pratiques')}}#contact">Contacts</a>
+								</li>
+								<li>
+									<a class="dropdown-item text-light" href="{{path('infos-pratiques')}}#inscription">S'inscrire</a>
+								</li>
+
+
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+
+		{# <li {% if app.request.get('_route') == 'home' %} class="ms-0 me-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('home')}}">Accueil </a></li>
+																												                        <li {% if app.request.get('_route') == 'catalogue' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('catalogue')}}" >Tous les produits</a></li>
+																												                        <li {% if app.request.get('_route') == 'Cartouches' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Cartouches')}}" >Cartouches</a></li>
+																												                        <li {% if app.request.get('_route') == 'Papeterie et Fournitures' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Papeterie et Fournitures')}}" >Papeterie & fournitures</a></li>
+																												                        <li {% if app.request.get('_route') == 'Activités' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Activités')}}" >Activités</a></li>
+																												                        <li {% if app.request.get('_route') == 'Peinture' %} class="mx-5 active" {% else %} class="mx-4"{% endif %} ><a href="{{path('Peinture')}}" >Peinture</a></li>
+																												                        <li {% if app.request.get('_route') == 'Fournitures Scolaires' %} class="mx-5 active" {% else %} class="mx-5"{% endif %} ><a href="{{path('Fournitures Scolaires')}}" >Scolaire</a></li>
+																												                        <li {% if app.request.get('_route') == 'Mugs' %} class="mx-5 active" {% else %} class="ms-5 me-0"{% endif %} ><a href="{{path('Mugs')}}" >Mugs</a></li> #}
+
+
+		{% block body %}{% endblock %}
+
+		<footer class="footer bg-bleu conteneur-footer mt-5 ">
+
+			<div class="row justify-content-center text-center mx-auto my-auto pt-2 text-light">
+				<div class="col-3 my-auto">
+					<a href="https://www.facebook.com/lesvolantsberquinois/"><img src="{{asset('images/logoFB.svg')}}" alt="" height='50px'></div>
+				</a>
+				<div class="col-5 my-0">
+					<a href="#" style="color:white;">Contact</a>
+					<div class="pt-0">
+						<small class="textFooter">2022© Les volants berquinois</small>
+					</div>
+				</div>
+				<div class="col-3 my-auto ">
+					<a href="#top" class="my-auto"><img src="{{asset('images/flechetop.png')}}" height="35px" alt=""></a>
+					<p class="my-auto textFooter2">
+						<small>Haut de page</small>
+					</p>
+
+				</div>
+			</div>
+
+		</footer>
+
+
+	</body>
+</html>

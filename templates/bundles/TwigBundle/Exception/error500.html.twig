@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+
+<section id="main-container" class="main-container">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-12">
+        <div class="error-page text-center">
+          <div class="error-code">
+            <h2><strong>500</strong></h2>
+          </div>
+          <div class="error-message">
+            <h3>Erreur du serveur, nous ne parvenons pas à vous fournir cette page. Veuillez nous excuser.
+            </h3>
+          </div>
+          <div class="error-body">
+            Essayez ce bouton pour revenir à l'accueil<br>
+            <a href="{{path('home')}}" class="btn btn-primary">Retour au site</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- Content row -->
+  </div><!-- Conatiner end -->
+</section><!-- Main container end -->
+
+
+{% endblock %}
